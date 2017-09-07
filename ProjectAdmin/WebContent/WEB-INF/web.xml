@@ -353,6 +353,14 @@
 		<url-pattern>/Member/FindZone.do</url-pattern>
 		</servlet-mapping>
 		
+		<servlet>	
+		<servlet-name>SEARCHZONE</servlet-name>
+		<servlet-class>zone.controller.SearchZoneController</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		<servlet-name>SEARCHZONE</servlet-name>
+		<url-pattern>/Member/FindZone.do</url-pattern>
+		</servlet-mapping>
 		
 		
 		

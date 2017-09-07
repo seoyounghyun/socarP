@@ -149,5 +149,34 @@ public class ZoneDAO implements ZoneService{
 		if(psmt!=null) psmt.close();
 		if(rs!=null) rs.close();
 	}
+
+	@Override
+	public List<ZoneDTO> searchZoneList(String val, String where) throws Exception {
+
+		List<ZoneDTO> list = new Vector<ZoneDTO>();
+		String sql = "SELECT S.*,(SELECT COUNT(*) FROM CAR_ISSUE C WHERE C.SOZ_CODE=S.SOZ_CODE AND (SELECT COUNT(*) FROM CAR_WASTE CW WHERE CW.CAR_I_CODE=C.CAR_I_CODE)=0) AS COUNT AND ?=? FROM SO_ZONE S ORDER BY SOZ_CODE DESC";
+		try{
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, where);
+			psmt.setString(2, val);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()){
+				ZoneDTO dto = new ZoneDTO();
+				dto.setSoz_code(rs.getString(1));
+				dto.setSoz_name(rs.getString(2));
+				dto.setSoz_loc(rs.getString(3));
+				dto.setSoz_maxcar(rs.getString(4));
+				dto.setSoz_date(rs.getDate(5));
+				dto.setSoz_latitude(rs.getString(6));
+				dto.setSoz_longitude(rs.getString(7));
+				dto.setSoz_i_car(rs.getString(8));
+				list.add(dto);
+			}
+		
+		
+		return list;
+	}
 	
 }

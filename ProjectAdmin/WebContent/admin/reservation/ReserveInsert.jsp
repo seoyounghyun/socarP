@@ -116,8 +116,6 @@
 					      	  		<td>
 					      	  			<div class="col-xs-5">
 									        <input type="text" disabled="disabled" id="zone" name="zone" />
-<!-- 									        <input type="hidden" id="soc_zone" name="soc_zone" /> -->
-				     
 								     	</div>
 											<button type="button" onclick="findzone()" class="btn btn-info">검색</button>
 								    </td>

@@ -11,4 +11,7 @@ public interface ZoneService {
 	public int edit(ZoneDTO dto) throws Exception;
 	public int delete(String soz_code) throws Exception;
 	public void close() throws Exception;
+	
+	//존 검색 메소드
+	public List<ZoneDTO> searchZoneList(String val , String where) throws Exception;
 }

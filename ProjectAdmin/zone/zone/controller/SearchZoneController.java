@@ -8,21 +8,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import zone.service.ZoneDTO;
 import zone.service.impl.ZoneDAO;
 
-public class ListController extends HttpServlet{
-	
+public class SearchZoneController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ZoneDAO dao = new ZoneDAO(req.getServletContext());
+	
 		
-		//DAO로 전체 리스트 받아오기
-		List list = null;
-		try {list = dao.selectList();}
-		catch (Exception e) {e.printStackTrace();}
+		ZoneDTO dto = new ZoneDTO();
+		List<ZoneDTO> list = null;
+		ZoneDAO dao = new ZoneDAO(req.getServletContext());
+		try {
+			list = dao.searchZoneList(req.getParameter("val"), req.getParameter("where"));
+		} catch (Exception e) {	e.printStackTrace();}
+		
 		req.setAttribute("list", list);
 		
-		//뷰 선택해서 뿌려주기
-		req.getRequestDispatcher("/admin/zone/ZoneList.jsp").forward(req, resp);
-	}/////////////////////doGet()
+		req.getRequestDispatcher("/admin/member/IdFind.jsp").forward(req, resp);
+			
+	
+	}
 }
