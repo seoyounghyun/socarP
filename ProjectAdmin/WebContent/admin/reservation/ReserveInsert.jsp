@@ -80,8 +80,8 @@
 			window.open("<c:url value='/Zone/FindZone.do'/>","get","height=500,width=1200,resizable=no");
 		}
 		function findcar() {
-			if(document.getElementById("soz_id").value != "none"){
-				window.open("<c:url value='/Car/FindCar.do'/>?soz_id="+document.getElementById("soz_id").value,"get","height=500,width=1200,resizable=no");
+			if(document.getElementById("soz_code").value != "none"){
+				window.open("<c:url value='/Car/FindCar.do'/>?soz_code="+document.getElementById("soz_id").value,"get","height=500,width=1200,resizable=no");
 			}
 			else{alert("우선 쏘카존을 선택하세요");}
 			
@@ -123,7 +123,7 @@
 					      	  		<td>
 					      	  			<div class="col-xs-5">
 									        <input type="text" disabled="disabled" id="zone" name="zone" />
- 									        <input type="hidden" value="none" id="soz_id" name="soz_id" />
+ 									        <input type="hidden" value="none" id="soz_code" name="soz_code" />
 				     
 								     	</div>
 											<button type="button" onclick="findzone()" class="btn btn-info">검색</button>

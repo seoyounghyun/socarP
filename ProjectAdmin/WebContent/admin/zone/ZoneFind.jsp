@@ -58,7 +58,7 @@
 		function pushparent(id,name) {
 			
 			opener.document.getElementById("zone").value = name;
-			opener.document.getElementById("soz_id").value = id;
+			opener.document.getElementById("soz_code").value = id;
 			window.close();
 		}
 	</script>

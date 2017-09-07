@@ -67,7 +67,7 @@
    
    		<div class="container">
           <h2 id="tables-contextual-classes">
-            	SO 회원관리
+            	차량 검색
           </h2><br/><br/>
  
 
@@ -92,7 +92,7 @@
               <tbody>
                 
 				<c:if test="${empty list}" var="listSimpleMem">
-						<tr><td colspan="5">등록된 회원이 없습니다.</td></tr>
+						<tr><td colspan="9">등록된 차량이 없습니다.</td></tr>
 				</c:if>
                 <c:if test="${not listSimpleMem}">
                 		<c:forEach items="${list}" var="item">
@@ -107,8 +107,6 @@
 					                <td>${item.car_nick}</td>
 	                		
 	                		
-	                				<td><a href="javascript:pushparent('${item.smem_id}')">${item.smem_id }</a></td>
-	                				
 	                		</tr>
                 		</c:forEach>
                 </c:if>
