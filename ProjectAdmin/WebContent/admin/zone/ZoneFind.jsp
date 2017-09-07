@@ -53,7 +53,7 @@
 		}	
 		function search() {
 			var menu = document.getElementById("menu");
-			location.href="<c:url value='/Zone/ZoneSearch.do'/>?where="+menu.value+"&val="+document.getElementById("searchtext").value;
+			location.href="<c:url value='/Member/CardSearch.do'/>?where="+menu.value+"&mem="+document.getElementById("searchtext").value;
 		}
 		function pushparent(id) {
 			

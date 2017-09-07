@@ -18,8 +18,8 @@ public class ListController extends HttpServlet{
 		
 		//DAO로 전체 리스트 받아오기
 		List list = null;
-		try {list = dao.selectList();}
-		catch (Exception e) {e.printStackTrace();}
+		try {list = dao.selectList();
+		} catch (Exception e) {e.printStackTrace();}
 		req.setAttribute("list", list);
 		
 		//뷰 선택해서 뿌려주기

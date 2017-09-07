@@ -10,7 +10,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/member"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/admin"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/reservation"/>
-        <property name="context-root" value="ProjectAdmin"/>
         <property name="java-output-path" value="/ProjectAdmin/build/classes"/>
+        <property name="context-root" value="ProjectAdmin2_BACKUP"/>
     </wb-module>
 </project-modules>
