@@ -42,23 +42,22 @@
 	<script>
 		function find(sel) {
 			var menu = document.getElementById("menu");
-			if(sel=="name"){
-				menu.innerHTML = "쏘카존검색<span class='fa fa-caret-down'></span>";
-				menu.value="soz_name";
+			if(sel=="id"){
+				menu.innerHTML = "아이디검색<span class='fa fa-caret-down'></span>";
+				menu.value="smem_id";
 			}
-			else if(sel=="loc"){
-				menu.innerHTML = "위치검색<span class='fa fa-caret-down'></span>";
-				menu.value="soz_loc";
+			else if(sel=="name"){
+				menu.innerHTML = "이름검색<span class='fa fa-caret-down'></span>";
+				menu.value="smem_name";
 			}	
 		}	
 		function search() {
 			var menu = document.getElementById("menu");
-			location.href="<c:url value='/Member/CardSearch.do'/>?where="+menu.value+"&mem="+document.getElementById("searchtext").value;
+			location.href="<c:url value='/Member/IdSearch.do'/>?where="+menu.value+"&mem="+document.getElementById("searchtext").value;
 		}
-		function pushparent(id,name) {
-			
-			opener.document.getElementById("zone").value = name;
-			opener.document.getElementById("soz_id").value = id;
+		function pushparent(id) {
+			opener.document.getElementById("smem_id").value = id;
+			opener.document.getElementById("smem").value = id;
 			window.close();
 		}
 	</script>
@@ -68,7 +67,7 @@
    
    		<div class="container">
           <h2 id="tables-contextual-classes">
-            	쏘카존명 검색
+            	SO 회원관리
           </h2><br/><br/>
  
 
@@ -78,30 +77,38 @@
               <thead>
 
                 <tr>
-                   <th style="text-align: center; width: 10%">쏘카존명</th>
-                  <th style="text-align: center; width: 35%">위치</th>
-                  <th style="text-align: center; width: 15%">차량수</th>
-                  <th style="text-align: center; width: 10%">쏘카존등록일</th>
-                  <th style="text-align: center; width: 15%">위도</th>
-                  <th style="text-align: center; width: 15%">경도</th>
+                  <th style="text-align: center; width: 10%">차량보유코드</th>
+                  <th style="text-align: center; width: 10%">차량명코드</th>
+                  <th style="text-align: center; width: 10%">쏘카존코드</th>
+                  <th style="text-align: center; width: 10%">차량발급일</th>
+                  <th style="text-align: center; width: 10%">차량번호</th>
+                  <th style="text-align: center; width: 20%">차량안전옵션</th>
+                  <th style="text-align: center; width: 10%">차량부가옵션</th>
+                  <th style="text-align: center; width: 10%">차량별칭</th>
+                  <th style="text-align: center; width: 10%">차량폐기</th>
                 </tr>
 
               </thead>
               <tbody>
                 
 				<c:if test="${empty list}" var="listSimpleMem">
-						<tr><td colspan="5">등록된 쏘카존이 없습니다.</td></tr>
+						<tr><td colspan="5">등록된 회원이 없습니다.</td></tr>
 				</c:if>
                 <c:if test="${not listSimpleMem}">
                 		<c:forEach items="${list}" var="item">
 	                		<tr>
-	                				<td>${item.soz_name}</td>
-	                				<td><a href="javascript:pushparent('${item.soz_code}','${item.soz_name}')">${item.soz_loc}</a></td>
-	                				<td>${item.soz_i_car}/${item.soz_maxcar}</td>
-						            <td>${item.soz_date}</td>
-						            <td>${item.soz_latitude}</td>
-						            <td>${item.soz_longitude}</td>
+	                				<td>${item.car_i_code}</td>	           	                					
+					                <td>${item.car_name_code}</td>
+					                <td>${item.soz_code}</td>
+					                <td>${item.car_i_date}</td>
+					                <td>${item.car_i_num}</td>
+					                <td>${item.car_i_safe_option}</td>
+					                <td>${item.car_i_add_option}</td>
+					                <td>${item.car_nick}</td>
 	                		
+	                		
+	                				<td><a href="javascript:pushparent('${item.smem_id}')">${item.smem_id }</a></td>
+	                				
 	                		</tr>
                 		</c:forEach>
                 </c:if>
@@ -115,10 +122,10 @@
  	    <div class="box-body">
              <div class="input-group margin">
                  <div class="input-group-btn">
-                     <button type="button" class="btn btn-info dropdown-toggle" value="soz_name" id="menu" data-toggle="dropdown">쏘카존검색<span class="fa fa-caret-down"></span></button>
+                     <button type="button" class="btn btn-info dropdown-toggle" value="smem_id" id="menu" data-toggle="dropdown">아이디검색<span class="fa fa-caret-down"></span></button>
                      <ul class="dropdown-menu">
-                         <li><a onclick="find('name')">쏘카존검색</a></li>
-                         <li><a onclick="find('loc')">위치검색</a></li>
+                         <li><a onclick="find('id')">아이디검색</a></li>
+                         <li><a onclick="find('name')">이름검색</a></li>
                      </ul>
                  </div><!-- /btn-group -->
                  <input type="text" class="form-control" id="searchtext" style="color: black;" />

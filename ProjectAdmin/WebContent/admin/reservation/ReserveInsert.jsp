@@ -77,7 +77,14 @@
 			window.open("<c:url value='/Member/FindId.do'/>","get","height=500,width=1200,resizable=no");
 		}
 		function findzone() {
-			window.open("<c:url value='/Member/FindZone.do'/>","get","height=500,width=1200,resizable=no");
+			window.open("<c:url value='/Zone/FindZone.do'/>","get","height=500,width=1200,resizable=no");
+		}
+		function findcar() {
+			if(document.getElementById("soz_id").value != "none"){
+				window.open("<c:url value='/Car/FindCar.do'/>?soz_id="+document.getElementById("soz_id").value,"get","height=500,width=1200,resizable=no");
+			}
+			else{alert("우선 쏘카존을 선택하세요");}
+			
 		}
 	</script>
 	
@@ -116,7 +123,7 @@
 					      	  		<td>
 					      	  			<div class="col-xs-5">
 									        <input type="text" disabled="disabled" id="zone" name="zone" />
-<!-- 									        <input type="hidden" id="soc_zone" name="soc_zone" /> -->
+ 									        <input type="hidden" value="none" id="soz_id" name="soz_id" />
 				     
 								     	</div>
 											<button type="button" onclick="findzone()" class="btn btn-info">검색</button>
@@ -126,10 +133,13 @@
 					      	  		<td><label>차량 선택</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        	<select name="car_i_code" id="car_i_code">
-								        		
-								        	</select>		
+								        	
+									        <input type="text" disabled="disabled" id="car_i" name="car_i" />
+ 									        <input type="hidden" id="car_i_code" name="car_i_code" />
+				     
+								     	
 								        </div>
+											<button type="button" onclick="findcar()" class="btn btn-info">검색</button>		
 					      	  		</td>
 					      	  </tr>
 					      	  <tr>

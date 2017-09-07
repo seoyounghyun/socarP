@@ -350,7 +350,7 @@
 		</servlet>
 		<servlet-mapping>
 		<servlet-name>FINDZONE</servlet-name>
-		<url-pattern>/Member/FindZone.do</url-pattern>
+		<url-pattern>/Zone/FindZone.do</url-pattern>
 		</servlet-mapping>
 		
 		
@@ -462,6 +462,15 @@
 		<servlet-mapping>
 		<servlet-name>CarIssueViewController</servlet-name>
 		<url-pattern>/CAR/CarIssueView.do</url-pattern>
+		</servlet-mapping>
+		
+		<servlet>
+		<servlet-name>FINDCAR</servlet-name>
+		<servlet-class>car.controller.FindCarController</servlet-class>
+		</servlet>		
+		<servlet-mapping>
+		<servlet-name>FINDCAR</servlet-name>
+		<url-pattern>/Car/FindCar.do</url-pattern>
 		</servlet-mapping>
 		
 <!-- 폐기 차량 관련 서블릿 -->

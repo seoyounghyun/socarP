@@ -302,8 +302,9 @@ public class CarDAO implements CarService{
 			dto.setCar_w_reason(rs.getString(3));
 		}
 		return dto;
-	};
-	
+	}
+
+
 	
 	
 	
