@@ -44,6 +44,59 @@
 		location.href="<c:url value='/CAR/CarList.do'/>";
 	}
 	</script>
+	
+	<script>
+	
+function goInsert(){
+		
+		if(document.getElementById("car_type_code_id").value == ""){
+			alert("차량 코드를 입력해주세요");
+			document.getElementById("car_type_code_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_type_code_id").value.length > 15){
+			alert("차량 코드를 15자이내로 적어주세요");
+			document.getElementById("car_type_code_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_type_id").value == ""){
+			alert("차량 타입을 입력해주세요");
+			document.getElementById("car_type_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_type_id").value.length > 15){
+			alert("차량 타입은 15자이내로 적어주세요");
+			document.getElementById("car_code_id").focus();
+			return false;
+		}
+		else if(document.getElementById("insurance_hour_id").value == ""){
+			alert("타입1 1시간기준을 입력해주세요");
+			document.getElementById("insurance_hour_id").focus();
+			return false;
+		}
+		else if(document.getElementById("insurance_one_day").value == ""){
+			alert("타입1 1일 기준을 입력해주세요");
+			document.getElementById("insurance_one_day").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("type_two_hour").value == ""){
+			alert("타입2 1시간기준을 입력해주세요");
+			document.getElementById("type_two_hour").focus();
+			return false;
+		}
+		else if(document.getElementById("type_two_day").value == ""){
+			alert("타입2 1일 기준을 입력해주세요");
+			document.getElementById("type_two_day").focus();
+			return false;
+		}
+		
+}
+	
+	
+	</script>
+	
+	
   </head>
 
   <body>
@@ -69,7 +122,7 @@
 					      	  		<td><label>차량타입 코드</label></td>
 					      	  		<td>
 								      	<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="car_type_code"/>
+								        <input type="text" class="form-control"  name="car_type_code" id="car_type_code_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -77,7 +130,7 @@
 					      	  		<td><label>차량타입</label></td>
 					      	  		<td>
 								      	<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="car_type"/>
+								        <input type="text" class="form-control"  name="car_type" id="car_type_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -86,7 +139,7 @@
 					      	  		<td><label>타입1 _1시간 기준</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="car_insurance_one_hour"/>
+								        <input type="text" class="form-control"  name="car_insurance_one_hour" id="insurance_hour_id"/>
 								     	</div><p class="col-xs-1">원</p>
 					      	  		</td>
 					      	  </tr>
@@ -94,7 +147,7 @@
 					      	  		<td><label>타입1 _1일 기준</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control" name="car_insurance_one_day"/>
+								        <input type="text" class="form-control" name="car_insurance_one_day" id="insurance_one_day"/>
 								     	</div>
 								     	<p class="col-xs-1">원</p>
 					      	  		</td>
@@ -104,7 +157,7 @@
 					      	  		<td><label>타입2 _1시간 기준</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="car_insurance_two_hour"/>
+								        <input type="text" class="form-control"  name="car_insurance_two_hour" id="type_two_hour"/>
 								     	</div>
 								     	<p class="col-xs-1">원</p>
 					      	  		</td>
@@ -113,7 +166,7 @@
 					      	  		<td><label>타입2 _1일 기준</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="car_insurance_two_day"/>
+								        <input type="text" class="form-control"  name="car_insurance_two_day" id="type_two_day"/>
 								     	</div>
 								     	<p class="col-xs-1">원</p>
 					      	  		</td>
@@ -124,7 +177,7 @@
 					    
 					       </table>
 				    
-				      <button type="submit" class="btn btn-info">등록하기</button>
+				      <button type="submit" class="btn btn-info" onclick="return goInsert()">등록하기</button>
 				      <button type="button" class="btn btn-info" onclick="goList()">리스트 보기</button>
 			
 				    </form>

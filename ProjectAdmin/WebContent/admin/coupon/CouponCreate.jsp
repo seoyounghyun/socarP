@@ -70,6 +70,47 @@
 		};
 	</script>
 	
+	<script>
+function goCouponInsert(){
+	
+		
+		
+		if(document.getElementById("cou_start").value == ""){
+			alert("쿠폰 발급가능 시간을 입력해주세요");
+			document.getElementById("cou_start").focus();
+			return false;
+		}       
+		else if(document.getElementById("cou_start").value > 24 || document.getElementById("cou_start").value < 0){
+			alert("쿠폰 발급가능시간을 제대로 입력해주세요.");
+			document.getElementById("cou_start").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("cou_end").value == ""){
+			alert("쿠폰 발급 끝시간을 입력해주세요");
+			document.getElementById("cou_end").focus();
+			return false;
+		}
+		else if(document.getElementById("cou_end").value < 0 || document.getElementById("cou_end").value > 24){
+			alert("쿠폰 발급 끝시간을 제대로 입력해주세요");
+			document.getElementById("cou_end").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("cou_count").value == ""){
+			alert("쿠폰 개수 설정을 입력해주세요");
+			document.getElementById("cou_count").focus();
+			return false;
+		}
+		else if(document.getElementById("cou_count").value < 0){
+			alert("쿠폰 개수 설정을 제대로 입력해주세요.");
+			document.getElementById("cou_count").focus();
+			return false;
+		}
+}
+	</script>
+	
+	
   </head>
 
   <body>
@@ -94,7 +135,7 @@
 					      	  		<td><label>쿠폰명</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-					      	  			<select name="cou_code" class="form-control" style="color: black;">
+					      	  			<select name="cou_code" class="form-control" style="color: black;" id="cou_code_id">
 					      	  					<option value="null"> </option>
 					      	  				<c:forEach items="${list}" var="item">
 						      	  				<option value="${item.cou_code}">${item.cou_code} - ${item.cou_name}</option>
@@ -128,7 +169,7 @@
 					      	  		<td><label>쿠폰발급가능시간</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_c_t_start"/>
+								        <input type="text" class="form-control"  name="cou_c_t_start" id="cou_start"/>
 								     	</div>
 								     	<p class="col-xs-1">시</p>
 					      	  		</td>
@@ -137,7 +178,7 @@
 					      	  		<td><label>쿠폰발급끝시간</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_c_t_end"/>
+								        <input type="text" class="form-control"  name="cou_c_t_end" id="cou_end"/>
 								     	</div>
 								     	<p class="col-xs-1">시</p>
 					      	  		</td>
@@ -146,7 +187,7 @@
 					      	  		<td><label>쿠폰 개수 설정</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_c_count"/>
+								        <input type="text" class="form-control"  name="cou_c_count" id="cou_count"/>
 								     	</div>
 								     	<p class="col-xs-1">개</p>
 					      	  		</td>
@@ -157,7 +198,7 @@
 					    
 					       </table>
 				    	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-				      <button type="submit" class="btn btn-info">입력하기</button>
+				      <button type="submit" class="btn btn-info" onclick="return goCouponInsert()">입력하기</button>
 				      <button type="button" class="btn btn-info" onclick="goCouponList()">리스트 보기</button>
 				     
 				    </form>

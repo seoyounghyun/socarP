@@ -69,6 +69,29 @@
 		history.back();
 	}
 	</script>
+	
+	<script>
+	
+function goadmin(){
+		
+		if(document.getElementById("car_reason_id").value == ""){
+			alert("차량 폐차 사유를 입력해주세요");
+			document.getElementById("car_reason_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_reason_id").value > 500){
+			alert("차량 폐차 사유를 500자이내로 적어주세요");
+			document.getElementById("car_reason_id").focus();
+			return false;
+		}
+		
+		
+}
+	
+	
+	
+	</script>
+	
   </head>
 
   <body>
@@ -124,7 +147,7 @@
 					      	  <tr>
 					      	  		<td><label>차량폐차사유</label></td>
 					      	  		<td>  	  			
-								     	<textarea rows="7" cols="80" class="form-control" name="car_w_reason"></textarea>
+								     	<textarea rows="7" cols="80" class="form-control" name="car_w_reason" id="car_reason_id"></textarea>
 					      	  		</td>
 					      	  </tr>
 					      	  
@@ -133,7 +156,7 @@
 					    
 					       </table>
 				    
-				      <button type="submit" class="btn btn-info">폐차하기</button>
+				      <button type="submit" class="btn btn-info" onclick="return goadmin()">폐차하기</button>
 				      <button type="button" class="btn btn-info" onclick="goback()">취소</button>
 			
 				    </form>

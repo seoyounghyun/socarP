@@ -52,6 +52,54 @@
 		
 	</script>
 	
+	<script>
+	
+	
+	function goInsert(){
+
+		
+		if(document.getElementById("admin_id").value == ""){
+			alert("아이디을 입력해주세요.");
+			document.getElementById("admin_id").focus();
+			return false;
+		}
+		if(document.getElementById("admin_id").value.length > 15){
+			alert("아이디를 15자내로 입려개주세요.");
+			document.getElementById("admin_id").focus();
+			return false;
+		}
+		/* else if(document.getElementById("dept_id").value == "부서가 없습니다."){
+			alert("부서를 선택해주세요.");
+			document.getElementById("dept_id").focus();
+			return false;
+		} */
+		else if(document.getElementById("name_id").value == ""){
+			alert("이름을 입력해주세요.");
+			document.getElementById("name_id").focus();
+			return false;
+		}
+		else if(document.getElementById("name_id").value.length > 10){
+			alert("이름을 10자내로 입력해주세요.");
+			document.getElementById("name_id").focus();
+			return false;
+		}
+		else if(document.getElementById("pwd_id").value == ""){
+			alert("비밀번호를 입력해주세요.");
+			document.getElementById("pwd_id").focus();
+			return false;
+		}
+		else if(document.getElementById("pwd_id").value.length > 15){
+			alert("비밀번호를 15자내로 입력해주세요");
+			document.getElementById("pwd_id").focus();
+			return false;
+		}
+		
+	}
+	
+	
+	
+	</script>
+	
   </head>
 
   <body>
@@ -76,14 +124,14 @@
 					      	  		<td><label>아이디 입력</label></td>
 					      	  		<td>
 								      	<div class="col-xs-5">
-								        <input type="text" class="form-control" name="ad_id"/>
+								        <input type="text" class="form-control" name="ad_id" id="admin_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
 					      	  <tr>
 					      	  		<td><label>부서명</label></td>
 					      	  		<td><div class="col-xs-5">
-					      	  			<select name="dept_no" class="form-control" >
+					      	  			<select name="dept_no" class="form-control" id="dept_id">
 					      	  				<c:choose>
 					      	  					<c:when test="${empty list}">
 					      	  						<option>부서가 없습니다.</option>
@@ -102,7 +150,7 @@
 					      	  		
 								    <td>
 								    <div class="col-xs-5">
-					      	  			<input type="text" class="form-control" name="ad_name" />
+					      	  			<input type="text" class="form-control" name="ad_name" id="name_id"/>
 								    </div>
 					      	  		</td>
 					      	  </tr>
@@ -111,7 +159,7 @@
 					      	  		
 								    <td>
 								    <div class="col-xs-5">
-					      	  			<input type="password" placeholder="PASSWORD" class="form-control" name="ad_pwd" />
+					      	  			<input type="password" placeholder="PASSWORD" class="form-control" name="ad_pwd" id="pwd_id"/>
 								    </div>
 					      	  		</td>
 					      	  </tr>  
@@ -121,7 +169,7 @@
 			
 		      	  		</table>
 				    		
-				      <button type="submit" class="btn btn-info">입력하기</button>
+				      <button type="submit" class="btn btn-info" onclick="return goInsert()">입력하기</button>
 				      <button type="button" class="btn btn-info" onclick="goList()">리스트 가기</button>
 			
 				    </form>

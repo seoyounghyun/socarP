@@ -69,6 +69,84 @@
 		location.href="<c:url value='/ZONE/View.do?soz_code=${param.soz_code}'/>";
 	}
 	</script>
+	
+	<script>
+	function goZone() {
+		location.href="<c:url value='/ZONE/View.do?soz_code=${param.soz_code}'/>";
+	}
+	
+	
+	function carInsert(){
+		
+		if(document.getElementById("car_code_id").value == ""){
+			alert("차량 보유 코드를 입력해주세요");
+			document.getElementById("car_code_id").focus();
+			return false;
+		}
+		if(document.getElementById("car_code_id").value.length > 15){
+			alert("차량 보유 코드를 15자내로 입력해주세요");
+			document.getElementById("car_code_id").focus();
+			return false;
+		}
+		/* 차량등록이 있으면 주석풀어주세요.
+		
+		else if(document.getElementById("car_name_id").value == "차량이 없습니다 등록부터 하세요"){
+			alert("차량명 코드를 선택해주세요.");
+			document.getElementById("car_name_id").focus();
+			return false;
+		}
+		else if(document.getElementById("soz_code_id").value == "차량이 없습니다 등록부터 하세요"){
+			alert("차량명 코드를 선택해주세요.");
+			document.getElementById("soz_code_id").focus();
+			return false;
+		}
+		 */
+		else if(document.getElementById("car_num_id").value == ""){
+			alert("차량 번호를 입력해주세요");
+			document.getElementById("car_num_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_num_id").value.length == 9){
+			alert("차량번호를 9자리 이내로 적어주세요");
+			document.getElementById("car_num_id").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("car_safe_id").value == ""){
+			alert("차량 안전 옵션을 입력해주세요");
+			document.getElementById("car_safe_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_safe_id").value.length > 100){
+			alert("차량 안전 옵션은 100자이내로 해주세요");
+			document.getElementById("car_safe_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_add_id").value == ""){
+			alert("차량 부가 옵션을 입력해주세요");
+			document.getElementById("car_add_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_add_id").value.length > 100){
+			alert("차량 부가 옵션은 100자이내로 해주세요");
+			document.getElementById("car_add_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_nick_id").value == ""){
+			alert("차량별칭을 입력해주세요");
+			document.getElementById("car_nick_id").focus();
+			return false;
+		}
+		else if(document.getElementById("car_nick_id").value.length > 14){
+			alert("차량 별칭은 14자이내로 해주세요");
+			document.getElementById("car_nick_id").focus();
+			return false;
+		}
+		
+	}
+	
+	</script>
+	
   </head>
 
   <body>
@@ -94,7 +172,7 @@
 					      	  		<td><label>차량보유 코드</label></td>
 					      	  		<td>
 								      	<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="car_i_code"/>
+								        <input type="text" class="form-control" id="car_code_id" name="car_i_code"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -102,7 +180,7 @@
 					      	  		<td><label>차량명 코드</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-					      	  			<select class="form-control" name="car_name_code">
+					      	  			<select class="form-control" id="car_name_id" name="car_name_code">
 					      	  				<c:choose>
 					      	  					<c:when test="${empty car_list}">
 					      	  						<option>차량이 없습니다 등록부터 하세요</option>
@@ -121,7 +199,7 @@
 					      	  		<td><label>쏘카존 코드</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-					      	  			<select class="form-control" name="soz_code">
+					      	  			<select class="form-control" id="soz_code_id" name="soz_code">
 					      	  				<c:choose>
 					      	  					<c:when test="${empty zone_list}">
 					      	  						<option>차량이 없습니다 등록부터 하세요</option>
@@ -161,7 +239,7 @@
 					      	  		<td><label>차량 번호</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input style="font-size: 1em;" type="text" name="car_i_num"/>
+								        <input style="font-size: 1em;" id="car_num_id" type="text" name="car_i_num"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -169,7 +247,7 @@
 					      	  		<td><label>차량안전옵션</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input style="font-size: 1em;" type="text" name="car_i_safe_option"/>
+								        <input style="font-size: 1em;" id="car_safe_id" type="text" name="car_i_safe_option"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -177,7 +255,7 @@
 					      	  		<td><label>차량부가옵션</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input style="font-size: 1em;" type="text" name="car_i_add_option"/>
+								        <input style="font-size: 1em;" id="car_add_id" type="text" name="car_i_add_option"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -185,7 +263,7 @@
 					      	  		<td><label>차량별칭</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input style="font-size: 1em;" type="text" name="car_nick"/>
+								        <input style="font-size: 1em;" id="car_nick_id" type="text" name="car_nick"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>	  
@@ -193,7 +271,7 @@
 					    
 					       </table>
 				    
-				      	<button type="submit" class="btn btn-info">등록하기</button>				    
+				      	<button type="submit" class="btn btn-info" onclick="return carInsert()">등록하기</button>				    
 						<button type="button" class="btn btn-info" onclick="goZone()">취소</button>
 				    </form>
 				  </div><!-- /example -->

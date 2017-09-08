@@ -53,6 +53,45 @@
 		
 	</script>
 	
+	<script>
+
+function goListInsert(){
+	
+	if(document.getElementById("dept_id").value == ""){
+		alert("부서번호를 입력해주세요")
+		document.getElementById("dept_id").focus();
+		return false;
+	}
+	else if(document.getElementById("dept_id").value.length > 10){
+		alert("부서번호는 10자이내로 해주세요")
+		document.getElementById("dept_id").focus();
+		return false;
+	}
+	else if(document.getElementById("dept_name_id").value == ""){
+		alert("부서명을 입력해주세요")
+		document.getElementById("dept_name_id").focus();
+		return false;
+	}
+	else if(document.getElementById("dept_name_id").value.length > 15){
+		alert("부서명은 15자이내로 해주세요")
+		document.getElementById("dept_name_id").focus();
+		return false;
+	}
+	else if(document.getElementById("dept_desc_id").value == ""){
+		alert("부서 설명을 입력해주세요")
+		document.getElementById("dept_desc_id").focus();
+		return false;
+	}
+	else if(document.getElementById("dept_desc_id").value.length > 500){
+		alert("부서 설명은 500자이내로 해주세요")
+		document.getElementById("dept_desc_id").focus();
+		return false;
+	
+}
+}
+
+</script>
+	
   </head>
 
   <body>
@@ -77,21 +116,21 @@
 					      	  		<td><label>부서번호</label></td>
 					      	  		<td>
 								      	<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="dept_no" value="${dto.dept_no}"/>
+								        <input type="text" class="form-control" id="dept_id"  name="dept_no" value="${dto.dept_no}"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
 					      	  <tr>
 					      	  		<td><label>부서명</label></td>
 					      	  		<td><div class="col-xs-5">
-					      	  			<input type="text" class="form-control" name="dept_name" value="${dto.dept_name }" />
+					      	  			<input type="text" class="form-control" id="dept_name_id" name="dept_name" value="${dto.dept_name }" />
 								    </div></td>
 					      	  </tr>
 					      	  <tr>
 					      	  		<td><label>부서 설명</label></td>
 					      	  		
 								    <td>
-					      	  			<textarea name="dept_desc" rows="20" cols="80" class="form-control">${dto.dept_desc}</textarea>
+					      	  			<textarea name="dept_desc" id="dept_desc_id" rows="20" cols="80" class="form-control">${dto.dept_desc}</textarea>
 								    </td>
 					      	  </tr>
 					      	  
@@ -103,7 +142,7 @@
 			      	  	<tbody id="img"></tbody>
 		      	  		</table>
 				    		
-				      <button type="submit" class="btn btn-info">수정 완료</button>
+				      <button type="submit" class="btn btn-info" onclick="return goListInsert()">수정 완료</button>
 				      <button type="button" class="btn btn-info" onclick="goList()">뒤로가기</button>
 			
 				    </form>

@@ -52,6 +52,43 @@
 		
 	</script>
 	
+	<script>
+	
+	function adEditInsert(){
+		
+		//부서명있을시
+		/* if(document.getElementById("dept_id").value == "부서가 없습니다."){
+			alert("부서명을 선택해주세요");
+			document.getElementById("dept_id").focus();
+			return false;
+		} */
+		if(document.getElementById("name_id").value == ""){
+			alert("이름을 입력해주세요")
+			document.getElementById("name_id").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("name_id").value.length > 10){
+			alert("이름 10자이내로 입력해주세요")
+			document.getElementById("name_id").focus();
+			return false;
+		}
+		else if(document.getElementById("pwd_id").value == ""){
+			alert("비밀번호를 입력해주세요.")
+			document.getElementById("pwd_id").focus();
+			return false;
+		}
+		else if(document.getElementById("pwd_id").value.length > 15){
+			alert("비밀번호를 15자이내로 입력해주세요")
+			document.getElementById("pwd_id").focus();
+			return false;
+		}
+		
+		
+	}
+	
+	</script>
+	
   </head>
 
   <body>
@@ -82,7 +119,7 @@
 					      	  <tr>
 					      	  		<td><label>부서명</label></td>
 					      	  		<td><div class="col-xs-5">
-					      	  			<select name="dept_no" class="form-control" >
+					      	  			<select name="dept_no" class="form-control" id="dept_id">
 					      	  				<c:choose>
 					      	  					<c:when test="${empty list}">
 					      	  						<option>부서가 없습니다.</option>
@@ -101,7 +138,7 @@
 					      	  		
 								    <td>
 								    <div class="col-xs-5">
-								    	<input type="text" class="form-control" name="ad_name" value="${dto.ad_name}" />
+								    	<input type="text" class="form-control" name="ad_name" value="${dto.ad_name}" id="name_id"/>
 								    </div>
 					      	  		</td>
 					      	  </tr>
@@ -110,7 +147,7 @@
 					      	  		
 								    <td>
 								    <div class="col-xs-5">
-					      	  			<input type="password" placeholder="PASSWORD" class="form-control" value="${dto.ad_pwd }" name="ad_pwd" />
+					      	  			<input type="password" placeholder="PASSWORD" class="form-control" value="${dto.ad_pwd }" name="ad_pwd" id="pwd_id"/>
 								    </div>
 					      	  		</td>
 					      	  </tr>  
@@ -120,7 +157,7 @@
 			
 		      	  		</table>
 				    		
-				      <button type="submit" class="btn btn-info">입력하기</button>
+				      <button type="submit" class="btn btn-info" onclick="return adEditInsert()">입력하기</button>
 				      <button type="button" class="btn btn-info" onclick="exit()">닫기</button>
 			
 				    </form>

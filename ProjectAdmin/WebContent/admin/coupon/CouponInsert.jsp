@@ -80,6 +80,113 @@
 		};
 	</script>
 	
+	<script>
+	
+	function checkval(){
+
+		
+		if(document.getElementById("name_id").value == ""){
+			alert("쿠폰명을 입력해주세요");
+			document.getElementById("name_id").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("name_id").value.length >= 15){
+			alert("15자이내로 입력해주세요");
+			document.getElementById("name_id").focus();
+			return false;
+		}
+		else if(document.getElementById("desc_id").value == ""){
+			alert("부가설명을 입력해주세요");
+			document.getElementById("desc_id").focus();
+			return false;
+		}
+		else if(document.getElementById("desc_id").value.length >= 50){
+			alert("부가설명을 50이내로 입력해주세요");
+			document.getElementById("desc_id").focus();
+			return false;
+		}
+		else if(document.getElementById("sale_id").value == ""){
+			alert("할인금액을 입력해주세요");
+			document.getElementById("sale_id").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("sale_id").value < 10){
+			alert("할인금액을 10원이상으로 해주세요");
+			document.getElementById("sale_id").focus();
+			return false;
+		}	
+		
+		else if(document.getElementById("mintime_id").value == ""){
+			alert("최소 사용시간을 입력해주세요");
+			document.getElementById("mintime_id").focus();
+			return false;
+		}
+		else if(document.getElementById("mintime_id").value < 1){
+			alert("최소사용시간을 1시간이상으로해주셔야합니다");
+			document.getElementById("mintime_id").focus();
+			return false;
+		}
+		else if(document.getElementById("maxtime_id").value == ""){
+			alert("최대사용시간을 입력해주세요");
+			document.getElementById("maxtime_id").focus();
+			return false;
+		}
+		else if(document.getElementById("maxtime_id").value < 1){
+			alert("최대사용시간은 1시간이상으로해주셔야합니다");
+			document.getElementById("maxtime_id").focus();
+			return false;
+		}	
+		else if(document.getElementById("minage_id").value == ""){
+			alert("나이를 입력해주세요");
+			document.getElementById("minage_id").focus();
+			return false;
+		}
+		else if(document.getElementById("minage_id").value < 19){
+			alert("만19세 이상만가능합니다.");
+			document.getElementById("minage_id").focus();
+			return false;
+		}
+		else if(document.getElementById("minage_id").value > 150 || document.getElementById("minage_id").value < 0){
+			alert("나이를 제대로 입력해주세요.");
+			document.getElementById("minage_id").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("minuse_id").value == ""){
+			alert("최소탑승수를 입력해주세요.");
+			document.getElementById("minuse_id").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("minuse_id").value < 1){
+			alert("최소탑승수를 1명이상 입력하셔야합니다");
+			document.getElementById("minuse_id").focus();
+			return false;
+		}
+		else if(document.getElementById("minuse_id").value > 50){
+			alert("제대로 입력해주세요");
+			document.getElementById("minuse_id").focus();
+			return false;
+		}
+		
+		else if(document.getElementById("sqle_id").value == ""){
+			alert("할인률을 입력해주세요.");
+			document.getElementById("sqle_id").focus();
+			return false;
+		}
+		else if(document.getElementById("sqle_id").value > 100){
+			alert("100%를 넘어갈수없습니다.");
+			document.getElementById("sqle_id").focus();
+			return false;
+		}	
+		
+	}
+	
+	
+	</script>
+	
   </head>
 
   <body>

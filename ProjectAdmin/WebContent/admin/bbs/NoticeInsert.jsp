@@ -60,6 +60,37 @@
 		
 	</script>
 	
+	<script>
+	
+	function goNoticeInsert(){
+		
+		if(document.getElementById("title_id").value == ""){
+			alert("제목을 입력해주세요");
+			document.getElementById("title_id").focus();
+			return false;
+		}
+		else if(document.getElementById("title_id").value.length > 100){
+			alert("제목을 100자이내로 적어주세요");
+			document.getElementById("title_id").focus();
+			return false;
+		}
+		else if(document.getElementById("content_id").value == ""){
+			alert("내용을 입력해주세요");
+			document.getElementById("content_id").focus();
+			return false;
+		}
+		else if(document.getElementById("content_id").value.length > 2000){
+			alert("내용을 2000자로이내로 적어주세요");
+			document.getElementById("content_id").focus();
+			return false;
+		}
+		
+	}
+	
+	
+	</script>
+	
+	
   </head>
 
   <body>
@@ -84,14 +115,14 @@
 					      	  		<td><label>공지 제목</label></td>
 					      	  		<td>
 								      	<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="not_title"/>
+								        <input type="text" class="form-control"  name="not_title" id="title_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
 					      	  <tr>
 					      	  		<td><label>공지 내용</label></td>
 					      	  		<td>
-					      	  			<textarea name="not_content" rows="20" cols="80" class="form-control" style="margin-left: 15px;"></textarea>
+					      	  			<textarea name="not_content" id="content_id" rows="20" cols="80" class="form-control" style="margin-left: 15px;"></textarea>
 								        
 								    </td>
 					      	  </tr>
@@ -110,7 +141,7 @@
 			      	  	<tbody id="img"></tbody>
 		      	  		</table>
 				    		
-				      <button type="submit" class="btn btn-info">입력하기</button>
+				      <button type="submit" class="btn btn-info" onclick="return goNoticeInsert()">입력하기</button>
 				      <button type="button" class="btn btn-info" onclick="goNoticeList()">뒤로가기</button>
 			
 				    </form>
