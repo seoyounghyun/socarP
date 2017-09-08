@@ -27,6 +27,8 @@ public class CarTypeAddController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		
 		CarDAO dao = new CarDAO(req.getServletContext());
 		Car_ModelDto dto = new Car_ModelDto();
 		dto.setCar_type_code(req.getParameter("car_type_code"));

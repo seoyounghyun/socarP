@@ -49,12 +49,8 @@
 	
 function goInsert(){
 		
-		if(document.getElementById("car_type_code_id").value == ""){
-			alert("차량 코드를 입력해주세요");
-			document.getElementById("car_type_code_id").focus();
-			return false;
-		}
-		else if(document.getElementById("car_type_code_id").value.length > 15){
+
+		if(document.getElementById("car_type_code_id").value.length > 15){
 			alert("차량 코드를 15자이내로 적어주세요");
 			document.getElementById("car_type_code_id").focus();
 			return false;
@@ -118,14 +114,7 @@ function goInsert(){
 				      	  </thead>
 				      	  <tbody>
 					      	  
-					      	  <tr>
-					      	  		<td><label>차량타입 코드</label></td>
-					      	  		<td>
-								      	<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="car_type_code" id="car_type_code_id"/>
-								     	</div>
-					      	  		</td>
-					      	  </tr>
+					      	 
 					      	   <tr>
 					      	  		<td><label>차량타입</label></td>
 					      	  		<td>

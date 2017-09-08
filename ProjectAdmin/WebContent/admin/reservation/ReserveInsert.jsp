@@ -132,11 +132,24 @@
 			var startdate = new Date(rs_year.value+"-"+rs_month.value+"-"+rs_date.value+"T"+rs_time.value);
 			var enddate = new Date(re_year.value+"-"+re_month.value+"-"+re_date.value+"T"+re_time.value);
 			
-			var restime = (enddate-startdate)/600/1000;
+			var resminute = (enddate-startdate)/600000;
 			
-			price.value = restime*car_price_so_wd.value;
-			alert(startdate.getDay());
 			
+				if(document.getElementById("res_instype").value=="type_one"){
+					alert("one")
+					price.value = resminute*car_price_so_wd.value;
+					
+					
+				}
+				
+				price.value = resminute*car_price_so_we.value;
+				if(document.getElementById("res_instype").value=="type_two"){
+					alert("two")
+					price.value = resminute*car_price_so_wd.value;
+					
+				}
+				
+				
 		}
 
 	</script>
@@ -151,14 +164,14 @@
 				  <h2>예약 입력</h2><br/><br/>
 				    <form action="<c:url value='/Coupon/InsertCoupon.do'/>" method="post">
 				  
-				    <input type="text" Id="car_land_price"/>
-				    <input type="text" Id="car_jeju_price"/>
-				    <input type="text" Id="car_price_so_wd"/>
-				    <input type="text" Id="car_price_so_we"/>
-				    <input type="text" Id="car_insurance_one_hour"/>
-				    <input type="text" Id="car_insurance_one_day"/>
-				    <input type="text" Id="car_insurance_two_hour"/>
-				    <input type="text" Id="car_insurance_two_day"/>
+				    <input type="hidden" Id="car_land_price"/>
+				    <input type="hidden" Id="car_jeju_price"/>
+				    <input type="hidden" Id="car_price_so_wd"/>
+				    <input type="hidden" Id="car_price_so_we"/>
+				    <input type="hidden" Id="car_insurance_one_hour"/>
+				    <input type="hidden" Id="car_insurance_one_day"/>
+				    <input type="hidden" Id="car_insurance_two_hour"/>
+				    <input type="hidden" Id="car_insurance_two_day"/>
 				    
 				      	  <table class="table table-bordered table-striped">
 				      	  
@@ -265,7 +278,7 @@
 					      	  		<td><label>보험료</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-					      	  			<select name="res_instype" class="form-control" onchange="changePrice()">
+					      	  			<select name="res_instype" id="res_instype" class="form-control" onchange="changePrice()">
 					      	  				<option value="type_one">자기부담금 최대 30만원</option>
 					      	  				<option value="type_two">자기부담금 최대 70만원</option>
 					      	  			</select>

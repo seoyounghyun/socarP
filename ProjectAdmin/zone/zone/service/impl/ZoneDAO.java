@@ -59,16 +59,15 @@ public class ZoneDAO implements ZoneService{
 	}////////////////////////////////selectList()
 	
 	public int insert(ZoneDTO dto){
-		String sql = "INSERT INTO SO_ZONE VALUES(?,?,?,?,SYSDATE,?,?)";
+		String sql = "INSERT INTO SO_ZONE VALUES('SOZ_'||LPAD(SO_ZONE_SEQ.NEXTVAL,10,'0'),?,?,?,SYSDATE,?,?)";
 		int affected = 0;
 		try{
 		psmt = conn.prepareStatement(sql);
-		psmt.setString(1, dto.getSoz_code());
-		psmt.setString(2, dto.getSoz_name());
-		psmt.setString(3, dto.getSoz_loc());
-		psmt.setString(4, dto.getSoz_maxcar());
-		psmt.setString(5, dto.getSoz_latitude());
-		psmt.setString(6, dto.getSoz_longitude());
+		psmt.setString(1, dto.getSoz_name());
+		psmt.setString(2, dto.getSoz_loc());
+		psmt.setString(3, dto.getSoz_maxcar());
+		psmt.setString(4, dto.getSoz_latitude());
+		psmt.setString(5, dto.getSoz_longitude());
 		affected = psmt.executeUpdate();
 		}
 		catch(SQLException e){

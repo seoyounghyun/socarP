@@ -69,14 +69,7 @@
 				      	  </thead>
 				      	  <tbody>
 					      	  
-					      	  <tr>
-					      	  		<td><label>쏘카존 코드</label></td>
-					      	  		<td>
-								      	<div class="col-xs-5">
-								        <input type="text" class="form-control" name="soz_code"/>
-								     	</div>
-					      	  		</td>
-					      	  </tr>
+					      	 
 					      	  <tr>
 					      	  		<td><label>쏘카존명</label></td>
 					      	  		<td>

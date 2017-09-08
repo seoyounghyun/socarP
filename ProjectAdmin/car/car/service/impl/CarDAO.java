@@ -205,14 +205,14 @@ public class CarDAO implements CarService{
 	@Override
 	public int insert_type(Car_ModelDto dto) throws Exception {
 		
-		String sql="INSERT INTO CAR_MODEL VALUES(?,?,?,?,?,?)";
+		String sql="INSERT INTO CAR_MODEL VALUES('C_T_'||LPAD(CAR_TYPE_CODE_SEQ.NEXTVAL,10,'0'),?,?,?,?,?)";
 		psmt = conn.prepareStatement(sql);
-		psmt.setString(1, dto.getCar_type_code());
-		psmt.setString(2, dto.getCar_type());
-		psmt.setString(3, dto.getCar_insurance_one_hour());
-		psmt.setString(4, dto.getCar_insurance_one_day());
-		psmt.setString(5, dto.getCar_insurance_two_hour());
-		psmt.setString(6, dto.getCar_insurance_two_day());
+		
+		psmt.setString(1, dto.getCar_type());
+		psmt.setString(2, dto.getCar_insurance_one_hour());
+		psmt.setString(3, dto.getCar_insurance_one_day());
+		psmt.setString(4, dto.getCar_insurance_two_hour());
+		psmt.setString(5, dto.getCar_insurance_two_day());
 		
 		int affected = psmt.executeUpdate();
 		
