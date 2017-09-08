@@ -63,8 +63,7 @@
 			
 			var re_time = document.getElementById("re_time");
 			var rs_time = document.getElementById("rs_time");
-			
-			
+
 			var now = new Date();
 			var year = now.getFullYear();
 			var mon = now.getMonth()+1;
@@ -108,12 +107,38 @@
 			}
 			else{alert("우선 쏘카존을 선택하세요");}
 		}
-		function changeEndTime() {
-			alert("끝시간변경");
+		function changePrice() {
+			var price = document.getElementById("res_price");
+			
+			var rs_year = document.getElementById("rs_year");
+			var rs_month = document.getElementById("rs_month");
+			var rs_date = document.getElementById("rs_date");
+			var re_year = document.getElementById("re_year");
+			var re_month = document.getElementById("re_month");
+			var re_date = document.getElementById("re_date");
+			var re_time = document.getElementById("re_time");
+			var rs_time = document.getElementById("rs_time");
+			
+			var car_land_price = document.getElementById("car_land_price");
+			var car_jeju_price = document.getElementById("car_jeju_price");
+			var car_price_so_wd = document.getElementById("car_price_so_wd");
+			var car_price_so_we = document.getElementById("car_price_so_we");
+			var car_insurance_one_hour = document.getElementById("car_insurance_one_hour");
+			var car_insurance_one_day = document.getElementById("car_insurance_one_day");
+			var car_insurance_two_hour = document.getElementById("car_insurance_two_hour");
+			var car_insurance_two_day = document.getElementById("car_insurance_two_day");
+			
+			
+			var startdate = new Date(rs_year.value+"-"+rs_month.value+"-"+rs_date.value+"T"+rs_time.value);
+			var enddate = new Date(re_year.value+"-"+re_month.value+"-"+re_date.value+"T"+re_time.value);
+			
+			var restime = (enddate-startdate)/600/1000;
+			
+			price.value = restime*car_price_so_wd.value;
+			alert(startdate.getDay());
+			
 		}
-		function changeStartTime() {
-			alert("시작시간변경")
-		}
+
 	</script>
 	
   </head>
@@ -199,12 +224,12 @@
 								        </div>
 								        <p class="col-xs-1">월</p>
 								        <div class="col-xs-2">
-								        <select class="form-control" id="rs_date" name="rs_date">
+								        <select class="form-control" id="rs_date"  onchange="changePrice()" name="rs_date">
 								        </select> 
 								        </div>
 								        <p class="col-xs-1">일</p>
 								        <div class="col-xs-2">
-								        <select class="form-control" onchange="changeStartTime();" id="rs_time" name="rs_time">
+								        <select class="form-control" onchange="changePrice()" id="rs_time" name="rs_time">
 								        </select> 
 								        </div>
 					      	  			
@@ -224,12 +249,12 @@
 								        </div>
 								        <p class="col-xs-1">월</p>
 								        <div class="col-xs-2">
-									        <select class="form-control" id="re_date" name="re_date">
+									        <select class="form-control" id="re_date" onchange="changePrice()"  name="re_date">
 									        </select> 
 								        </div>
 								        <p class="col-xs-1">일</p>
 								        <div class="col-xs-2">
-									        <select class="form-control" onchange="changeEndTime();" id="re_time" name="re_time">
+									        <select class="form-control" onchange="changePrice()" id="re_time" name="re_time">
 									        </select> 
 								        </div>
 								        <br/>
@@ -240,7 +265,7 @@
 					      	  		<td><label>보험료</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-					      	  			<select name="res_instype" class="form-control">
+					      	  			<select name="res_instype" class="form-control" onchange="changePrice()">
 					      	  				<option value="type_one">자기부담금 최대 30만원</option>
 					      	  				<option value="type_two">자기부담금 최대 70만원</option>
 					      	  			</select>
@@ -261,7 +286,7 @@
 					      	  		<td><label>가격</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" value="0" class="form-control" disabled="disabled" name="res_price"/>
+								        <input type="text" value="0" class="form-control" disabled="disabled" id="res_price" name="res_price"/>
 								     	</div>
 								     	<p class="col-xs-1">원</p>
 					      	  		</td>
