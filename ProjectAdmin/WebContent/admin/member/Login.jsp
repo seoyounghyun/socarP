@@ -29,6 +29,36 @@
       <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/bootstrap/css/style.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/bootstrap/css/style-responsive.css" rel="stylesheet" />
+	
+	<script>
+/* 	
+ function adLogin(){
+	
+		
+		if(document.getElementById("admin_id").value == ""){
+			alert("아이디를 입력해주세요.");
+			document.getElementById("admin_id").focus();
+			return false;
+		}
+		else if(document.getElementById("admin_id").value.length > 15){
+			alert("아이디를 15자안으로 입력해주세요.");
+			document.getElementById("admin_id").focus();
+			return false;
+		}
+		else if(document.getElementById("admin_pwd").value == ""){
+			alert("비밀번호를 입력해주세요.");
+			document.getElementById("admin_pwd").focus();
+			return false;
+		}
+		else if(document.getElementById("admin_pwd").value.length > 15){
+			alert("비밀번호를 15자 안으로 입력해주세요.");
+			document.getElementById("admin_pwd").focus();
+			return false;
+		}
+		
+		
+}  */
+	</script>
 
   </head>
 
@@ -54,14 +84,14 @@
             <form class="form-signin wow fadeInUp" action="<c:url value='/MAIN/Login.do' />"  style="height:400px;" method="post" >
             <h2 class="form-signin-heading"><b>관리자 로그인</b></h2>
             <div class="login-wrap">
-                <input type="text" class="form-control" name="ad_id" placeholder="UserID" autofocus/>
-                <input type="password" class="form-control" name="ad_pwd"  placeholder="Password" style="margin-top: 30px;"/>
+                <input type="text" class="form-control" name="ad_id" id="admin_id" placeholder="UserID" autofocus/>
+                <input type="password" class="form-control" name="ad_pwd" id="admin_pwd"  placeholder="Password" style="margin-top: 30px;"/>
                 <label class="checkbox">
                     <span class="pull-right">
 							<p style="margin-top: 30px;">비밀번호 분실 시 <br/> 010 - 5626 - 0171 문의</p>
                     </span>
                 </label>
-                <button class="btn btn-lg btn-login btn-block" type="submit" style="margin-top: 100px;">로그인</button>
+                <button class="btn btn-lg btn-login btn-block" type="submit" style="margin-top: 100px;" onclick="return adLogin">로그인</button>
 
 				
 

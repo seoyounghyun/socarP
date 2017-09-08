@@ -52,6 +52,45 @@
     		}
 		}
     </script>
+    
+    <script>
+    
+		function memUpdate(){
+
+		
+		if(document.getElementById("one_pwd_id").value == ""){
+			alert("비밀번호를 입력해주세요");
+			document.getElementById("one_pwd_id").focus();
+			return false;
+		}
+		else if(document.getElementById("one_pwd_id").value.length > 15){
+			alert("비밀번호 15자안으로 입력해주세요");
+			document.getElementById("one_pwd_id").focus();
+			return false;
+		}	
+		else if(document.getElementById("two_pwd_id").value == ""){
+			alert("비밀번호 확인을 입력해주세요");
+			document.getElementById("two_pwd_id").focus();
+			return false;
+		}
+		else if(document.getElementById("two_pwd_id").value.length > 15){
+			alert("비밀번호 15자안으로 입력해주세요");
+			document.getElementById("two_pwd_id").focus();
+			return false;
+		}
+		else if(document.getElementById("one_pwd_id").value != document.getElementById("two_pwd_id").value){
+			alert("비밀번호와 비밀번호 확인이 다릅니다.");
+			document.getElementById("two_pwd_id").focus();
+			return false;
+		}
+		else if(document.getElementById("mem_addr_id").value == ""){
+			alert("주소를 입력해주세요");
+			document.getElementById("mem_addr_id").focus();
+			return false;
+		}
+		}
+    </script>
+    
   </head>
 
   <body>
@@ -82,7 +121,7 @@
 	                				<td><label>비밀번호</label></td>
 	                				<td>
 	                					<div class="col-xs-3">
-	                					<input type="password" class="form-control" value="${mem.smem_pwd}" placeholder="Password" name="smem_pwd"/>
+	                					<input type="password" class="form-control" value="${mem.smem_pwd}" placeholder="Password" name="smem_pwd" id="one_pwd_id"/>
 	                					</div>
 	                				</td>
 	                		</tr>
@@ -90,7 +129,7 @@
 	                				<td><label>비밀번호 확인</label></td>
 	                				<td>
 	                					<div class="col-xs-3"">
-	                					<input type="password" class="form-control" value="${mem.smem_pwd}" placeholder="Password" name="smem_pwd_confirm"/>
+	                					<input type="password" class="form-control" value="${mem.smem_pwd}" placeholder="Password" name="smem_pwd_confirm" id="two_pwd_id"/>
 	                					</div>
 	                				</td>
 	                		</tr>
@@ -108,7 +147,7 @@
 	                		</tr>
 	                		<tr>
 	                				<td><label>주소</label></td>
-	                				<td> <input type="text" name="mem_addr" class="form-control" value="${mem.mem_addr}"/></td>
+	                				<td> <input type="text" name="mem_addr" id="mem_addr_id" class="form-control" value="${mem.mem_addr}"/></td>
 	                		</tr>
 	                		<tr>
 	                				<td><label>주 사용 지역</label></td>
@@ -176,7 +215,7 @@
 
 				      
 				
-				      <button type="submit" class="btn btn-info">수정하기</button>
+				      <button type="submit" class="btn btn-info" onclick="return memUpdate()">수정하기</button>
 				      <button type="submit" class="btn btn-info">이용 내역 보기</button>
 				      <a href="<c:url value='/Member/MemberList.do' />"><button type="button" class="btn btn-info">뒤로가기</button></a>
 				      

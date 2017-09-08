@@ -81,18 +81,46 @@
 		function popSearchId() {
 			window.open("<c:url value='/Member/FindId.do'/>","get","height=500,width=1200,resizable=no");
 		}
-		function checkval() {
-			if(document.getElementById('card_code').value==""){
-				alert("코드가공백임");
-				return false;
-			}
-			
-		}
+		
 		function goback() {
 			history.back();
 		}
 	</script>
 	
+	<script>
+	
+function checkval(){
+	
+		
+		if(document.getElementById("card_code").value == ""){
+			alert("카드번호를 입력해주세요");
+			document.getElementById("card_code").focus();
+			return false;
+		}
+		if(document.getElementById("card_code").value.length > 15){
+			alert("카드번호는 15자리까지만 입력해주세요.");
+			document.getElementById("card_code").focus();
+			return false;
+		}
+		
+		/* else if(document.getElementById("smem").value == ""){
+			alert("아이디를 입력해주세요.");
+			document.getElementById("smem").focus();
+			return false;
+		} */
+		else if(document.getElementById("card_pwd_one_id").value == ""){
+			alert("카드 비밀번호 를입력해주세요.");
+			document.getElementById("card_pwd_one_id").focus();
+			return false;
+		}
+		else if(document.getElementById("card_pwd_two_id").value == ""){
+			alert("카드 비밀번호 를입력해주세요.");
+			document.getElementById("card_pwd_two_id").focus();
+			return false;
+		}
+	
+}
+	</script>
   </head>
 
   <body>
@@ -182,10 +210,10 @@
 					      	  		<td><label>카드 비밀번호 두자리</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-1">
-								        <input type="text" class="form-control" maxlength="1" size="1" name="card_pwd_one"/>
+								        <input type="text" class="form-control" maxlength="1" size="1" id="card_pwd_one_id" name="card_pwd_one"/>
 								     	</div>
 								    	<div class="col-xs-1">
-								        <input type="text" class="form-control" maxlength="1" name="card_pwd_two"/>
+								        <input type="text" class="form-control" maxlength="1" id="card_pwd_two_id" name="card_pwd_two"/>
 								     	</div>
 								     	<div class="col-xs-1">●</div>
 								     	<div class="col-xs-1">●</div>

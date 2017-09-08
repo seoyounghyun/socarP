@@ -211,14 +211,14 @@
 					      	  		<td><label>쿠폰명</label></td>
 					      	  		<td>
 								      	<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_name"/>
+								        <input type="text" class="form-control" id="name_id" name="cou_name"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
 					      	  <tr>
 					      	  		<td><label>쿠폰부가설명</label></td>
 					      	  		<td>
-					      	  			<textarea  name="cou_desc" rows="10" cols="80" class="form-control" style="margin-left: 15px;"></textarea>
+					      	  			<textarea  name="cou_desc" id="desc_id" rows="10" cols="80" class="form-control" style="margin-left: 15px;"></textarea>
 								        
 								    </td>
 					      	  </tr>
@@ -226,7 +226,7 @@
 					      	  		<td><label>할인금액</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_sale"/>
+								        <input type="text" class="form-control" id="sale_id" name="cou_sale"/>
 								     	</div>
 								     	<p class="col-xs-1">원</p>
 					      	  		</td>
@@ -235,7 +235,7 @@
 					      	  		<td><label>최소사용가능시간</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_mintime"/>
+								        <input type="text" class="form-control" id="mintime_id" name="cou_mintime"/>
 								     	</div>
 								     	<p class="col-xs-1">시간</p>
 					      	  		</td>
@@ -244,7 +244,7 @@
 					      	  		<td><label>최대사용가능시간</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_maxtime"/>
+								        <input type="text" class="form-control" id="maxtime_id" name="cou_maxtime"/>
 								     	</div>
 								     	<p class="col-xs-1">시간</p>
 					      	  		</td>
@@ -253,7 +253,7 @@
 					      	  		<td><label>최소나이</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_minage"/>
+								        <input type="text" class="form-control" id="minage_id"  name="cou_minage"/>
 								     	</div>
 								     	<p class="col-xs-1">살</p>
 					      	  		</td>
@@ -262,7 +262,7 @@
 					      	  		<td><label>최소탑승수</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control" name="cou_minuse"/>
+								        <input type="text" class="form-control" id="minuse_id" name="cou_minuse"/>
 								     	</div>
 								     	<p class="col-xs-1">번</p>
 					      	  		</td>
@@ -292,7 +292,7 @@
 					      	  		<td><label>최대할인율</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="max_sale_per"/>
+								        <input type="text" class="form-control" id="sqle_id" name="max_sale_per"/>
 								     	</div>
 								     	<p class="col-xs-1">%</p>
 					      	  		</td>
@@ -309,7 +309,7 @@
 					    
 					       </table>
 				    
-				      <button type="submit" class="btn btn-info">입력하기</button>
+				      <button type="submit" class="btn btn-info" onclick="return checkval()">입력하기</button>
 				      <button type="button" class="btn btn-info" onclick="goCouponList()">리스트 보기</button>
 			
 				    </form>
