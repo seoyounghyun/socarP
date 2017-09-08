@@ -59,6 +59,8 @@
 			
 			opener.document.getElementById("zone").value = name;
 			opener.document.getElementById("soz_code").value = id;
+			opener.document.getElementById("car_i_code").value = "none";
+			opener.document.getElementById("car_i").value = "";
 			window.close();
 		}
 	</script>

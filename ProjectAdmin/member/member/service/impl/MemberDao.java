@@ -138,7 +138,7 @@ public class MemberDao implements MemberService {
 			dto.setSmem_name(rs.getString(12));
 			dto.setSmem_tel(rs.getString(13));
 			dto.setSmem_pwd(rs.getString(14));
-			dto.setSmem_date(rs.getDate(15));
+			dto.setSmem_date(rs.getString(15));
 			
 			list.add(dto);
 		}
@@ -179,7 +179,7 @@ public class MemberDao implements MemberService {
 		dto.setSmem_name(rs.getString(12));
 		dto.setSmem_tel(rs.getString(13));
 		dto.setSmem_pwd(rs.getString(14));
-		dto.setSmem_date(rs.getDate(15));
+		dto.setSmem_date(rs.getString(15));
 		dto.setMs_change(rs.getInt(16));
 		
 		close();
@@ -328,7 +328,7 @@ public class MemberDao implements MemberService {
 			dto.setSmem_name(rs.getString(12));
 			dto.setSmem_tel(rs.getString(13));
 			dto.setSmem_pwd(rs.getString(14));
-			dto.setSmem_date(rs.getDate(15));
+			dto.setSmem_date(rs.getString(15));
 			list.add(dto);
 		}
 		

@@ -45,17 +45,24 @@
 
 
 	<script>
-		var goCouponList = function(){
+		var goList = function(){
 			
-			location.href="<c:url value='/Coupon/CouponList.do' />";
+			location.href="<c:url value='/Reserve/ReserveList.do' />";
 			
 		};
 		
 		window.onload = function(){
 			
-			var sel_year = document.getElementById("year");
-			var sel_month = document.getElementById("month");
-			var sel_date = document.getElementById("date");
+			var rs_year = document.getElementById("rs_year");
+			var rs_month = document.getElementById("rs_month");
+			var rs_date = document.getElementById("rs_date");
+			var re_year = document.getElementById("re_year");
+			var re_month = document.getElementById("re_month");
+			var re_date = document.getElementById("re_date");
+			
+			
+			var re_time = document.getElementById("re_time");
+			var rs_time = document.getElementById("rs_time");
 			
 			
 			var now = new Date();
@@ -63,15 +70,31 @@
 			var mon = now.getMonth()+1;
 			var date = now.getDate();
 			
-			for(var i=year+3;i>=year;i--){
-				sel_year.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+			for(var i=year;i<=year+1;i++){
+				rs_year.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+				re_year.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+				
 			}
 			for(var i=1;i<=12;i++){
-				sel_month.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+				rs_month.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+				re_month.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+				
 			}
 			for(var i=1;i<=31;i++){
-				sel_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+				rs_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+				re_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";
 			}
+			for(var i=0 ; i < 24 ; i++){
+					if(i<10){i = "0"+i;}
+				for(var j = 0 ; j<= 50 ; j += 10){
+					if(j==0){j = "0"+j;}
+					rs_time.innerHTML += "<option value='"+i+":"+j+"'>"+i+":"+j+"</option>";
+					re_time.innerHTML += "<option value='"+i+":"+j+"'>"+i+":"+j+"</option>";
+					if(j==00){j=0}
+				}
+			}
+			
+			
 		};
 		function findid(){
 			window.open("<c:url value='/Member/FindId.do'/>","get","height=500,width=1200,resizable=no");
@@ -81,7 +104,7 @@
 		}
 		function findcar() {
 			if(document.getElementById("soz_code").value != "none"){
-				window.open("<c:url value='/Car/FindCar.do'/>?soz_code="+document.getElementById("soz_id").value,"get","height=500,width=1200,resizable=no");
+				window.open("<c:url value='/Car/FindCar.do'/>?soz_code="+document.getElementById("soz_code").value,"get","height=500,width=1200,resizable=no");
 			}
 			else{alert("우선 쏘카존을 선택하세요");}
 			
@@ -124,7 +147,6 @@
 					      	  			<div class="col-xs-5">
 									        <input type="text" disabled="disabled" id="zone" name="zone" />
  									        <input type="hidden" value="none" id="soz_code" name="soz_code" />
-				     
 								     	</div>
 											<button type="button" onclick="findzone()" class="btn btn-info">검색</button>
 								    </td>
@@ -137,90 +159,119 @@
 									        <input type="text" disabled="disabled" id="car_i" name="car_i" />
  									        <input type="hidden" id="car_i_code" name="car_i_code" />
 				     
-								     	
 								        </div>
 											<button type="button" onclick="findcar()" class="btn btn-info">검색</button>		
 					      	  		</td>
 					      	  </tr>
 					      	  <tr>
 					      	  		<td><label>카드번호</label></td>
-					      	  		<td>
-					      	  			<select id="card_code" name="card_code">
+					      	  		<td><div class="col-xs-5">
+					      	  			<select id="card_code" name="card_code" class="form-control">
 					      	  				
 					      	  			</select>
-					      	  		</td>
+					      	  		</div></td>
 					      	  </tr>
 					      	  <tr>
-					      	  		<td><label>최대사용가능시간</label></td>
+					      	  		<td><label>렌트시작일</label></td>
 					      	  		<td>
-					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_maxtime"/>
-								     	</div>
-								     	<p class="col-xs-1">시간</p>
-					      	  		</td>
-					      	  </tr>
-					      	  <tr>
-					      	  		<td><label>최소나이</label></td>
-					      	  		<td>
-					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="cou_minage"/>
-								     	</div>
-								     	<p class="col-xs-1">살</p>
-					      	  		</td>
-					      	  </tr>
-					      	  <tr>
-					      	  		<td><label>최소탑승수</label></td>
-					      	  		<td>
-					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control" name="cou_minuse"/>
-								     	</div>
-								     	<p class="col-xs-1">번</p>
-					      	  		</td>
-					      	  </tr>
-					      	  <tr>
-					      	  		<td><label>쿠폰유효기간</label></td>
-					      	  		<td>
-					      	  			<div class="col-xs-3" >
-								        <select class="form-control" id="year" name="cou_exp_year">
+					      	  			<div class="col-xs-2" >
+								        <select class="form-control" id="rs_year" name="rs_year">
 								        </select>
 								        </div>
 								        <p class="col-xs-1">년</p>
 					      	  			<div class="col-xs-2" >
-								        <select class="form-control" id="month" name="cou_exp_month">
+								        <select class="form-control" id="rs_month" name="rs_month">
 								        </select> 
 								        </div>
 								        <p class="col-xs-1">월</p>
 								        <div class="col-xs-2">
-								        <select class="form-control" id="date" name="cou_exp_date">
+								        <select class="form-control" id="rs_date" name="rs_date">
 								        </select> 
 								        </div>
-								        <p class="col-xs-3">일</p>
+								        <p class="col-xs-1">일</p>
+								        <div class="col-xs-2">
+								        <select class="form-control" id="rs_time" name="rs_time">
+								        </select> 
+								        </div>
 					      	  			
- 					      	  		</td>
+					      	  		</td>
 					      	  </tr>
 					      	  <tr>
-					      	  		<td><label>최대할인율</label></td>
+					      	  		<td><label>렌트종료일</label></td>
+					      	  		<td>
+					      	  			<div class="col-xs-2" >
+									        <select class="form-control" id="re_year" name="re_year">
+									        </select>
+								        </div>
+								        <p class="col-xs-1">년</p>
+					      	  			<div class="col-xs-2" >
+									        <select class="form-control" id="re_month" name="re_month">
+									        </select> 
+								        </div>
+								        <p class="col-xs-1">월</p>
+								        <div class="col-xs-2">
+									        <select class="form-control" id="re_date" name="re_date">
+									        </select> 
+								        </div>
+								        <p class="col-xs-1">일</p>
+								        <div class="col-xs-2">
+									        <select class="form-control" id="re_time" name="re_time">
+									        </select> 
+								        </div>
+								        <br/>
+								        
+					      	  		</td>
+					      	  </tr>
+					      	  <tr>
+					      	  		<td><label>보험료</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control"  name="max_sale_per"/>
+					      	  			<select name="res_instype" class="form-control">
+					      	  				<option value="type_one">자기부담금 최대 30만원</option>
+					      	  				<option value="type_two">자기부담금 최대 70만원</option>
+					      	  			</select>
+					      	  			</div>
+ 					      	  		</td>
+					      	  </tr>
+					      	  
+					      	  <tr>
+					      	  		<td><label>할인 유형</label></td>
+					      	  		<td>
+					      	  		    <input type="radio" name="res_sale_type" style="margin-left: 20px;" value="c"> 쿠폰</input> 
+					        			<input type="radio" name="res_sale_type" style="margin-left: 50px;" value="p"> 포인트</input>
+								    	<input type="radio" name="res_sale_type" checked="checked" style="margin-left: 50px;" value="n"> 미사용</input>
+								    </td>
+					      	  </tr>
+					      	  
+					      	  <tr>
+					      	  		<td><label>가격</label></td>
+					      	  		<td>
+					      	  			<div class="col-xs-5">
+								        <input type="text" value="0" class="form-control" disabled="disabled" name="res_price"/>
 								     	</div>
-								     	<p class="col-xs-1">%</p>
+								     	<p class="col-xs-1">원</p>
 					      	  		</td>
 					      	  </tr>
 					      	  <tr>
-					      	  		<td><label>신규존 전용</label></td>
+					      	  		<td><label>카드키 사용</label></td>
 					      	  		<td>
 					      	  			
-					      	  			<input type="radio" name="cou_only_new" style="margin-left: 20px;" value="y">예</input> 
-					        			<input type="radio" name="cou_only_new" style="margin-left: 50px;" value="n">아니오</input>
+					      	  			<input type="radio" name="res_cardkey" style="margin-left: 20px;" value="y">예</input> 
+					        			<input type="radio" name="res_cardkey" checked="checked" style="margin-left: 50px;" value="n">아니오</input>
 					      	  		</td>
 					      	  </tr>	
+					      	  <tr>
+					      	  		<td><label>결제 특이사항</label></td>
+					      	  		<td>
+					      	  			<textarea rows="5" cols="80" class="form-control"></textarea>
+					      	  		</td>
+					      	  </tr>
 					      </tbody>
 					    
 					       </table>
 				    
 				      <button type="submit" class="btn btn-info">입력하기</button>
-				      <button type="button" class="btn btn-info" onclick="goCouponList()">리스트 보기</button>
+				      <button type="button" class="btn btn-info" onclick="goList()">리스트 보기</button>
 			
 				    </form>
 				  </div><!-- /example -->

@@ -32,6 +32,5 @@ public class FindCarController extends HttpServlet {
 		req.getRequestDispatcher("/admin/car/Car_I_Find.jsp").forward(req, resp);
 		
 	}
-	
-	
+
 }

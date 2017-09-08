@@ -18,7 +18,7 @@ public class MemDto {
 	private String smem_name;
 	private String smem_tel;
 	private String smem_pwd;
-	private java.util.Date smem_date;
+	private String smem_date;
 	
 	private int ms_change;
 
@@ -114,10 +114,10 @@ public class MemDto {
 	public void setSmem_pwd(String smem_pwd) {
 		this.smem_pwd = smem_pwd;
 	}
-	public java.util.Date getSmem_date() {
+	public String getSmem_date() {
 		return smem_date;
 	}
-	public void setSmem_date(java.util.Date smem_date) {
+	public void setSmem_date(String smem_date) {
 		this.smem_date = smem_date;
 	}
 

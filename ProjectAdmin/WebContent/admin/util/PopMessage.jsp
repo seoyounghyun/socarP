@@ -8,7 +8,11 @@
 		<c:set var="FAIL_MSG" value="수정 실패"/>
 		<c:set var="MSG" value="opener.location.reload(true)"/>
 	</c:when>
-	
+	<c:when test="${WHERE eq 'FIND_MEM'}">
+		<c:set var="SUC_MSG" value='확인되었습니다.'/>
+		<c:set var="FAIL_MSG" value=''/>
+	</c:when>
+
 </c:choose>
 
 <script>

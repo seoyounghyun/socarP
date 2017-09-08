@@ -55,10 +55,15 @@
 			var menu = document.getElementById("menu");
 			location.href="<c:url value='/Member/IdSearch.do'/>?where="+menu.value+"&mem="+document.getElementById("searchtext").value;
 		}
-		function pushparent(id) {
-			opener.document.getElementById("smem_id").value = id;
-			opener.document.getElementById("smem").value = id;
-			window.close();
+// 		function pushparent(id) {
+// 			opener.document.getElementById("smem_id").value = id;
+// 			opener.document.getElementById("smem").value = id;
+// 			window.close();
+// 		}
+		function inputsmem_id(smem_id,smem_name) {
+			document.getElementById("smem_id").value = smem_id;
+			document.getElementById("smem_name").value = smem_name;
+			
 		}
 	</script>
   </head>
@@ -72,6 +77,7 @@
  
 
           <div class="table-responsive">
+          <form action="<c:url value='/Member/FindId.do'/>" method="post">
             <table class="table table-bordered table-striped">
 
               <thead>
@@ -82,27 +88,34 @@
                   <th style="text-align: center; width: 15%">전화번호</th>
                   <th style="text-align: center; width: 15%">비밀번호</th>
                   <th style="text-align: center; width: 15%">가입일</th>
+                  <th style="text-align: center; width: 15%">선택</th>
+                  
                 </tr>
 
               </thead>
               <tbody>
                 
 				<c:if test="${empty list}" var="listSimpleMem">
-						<tr><td colspan="5">등록된 회원이 없습니다.</td></tr>
+						<tr><td colspan="6">등록된 회원이 없습니다.</td></tr>
 				</c:if>
                 <c:if test="${not listSimpleMem}">
                 		<c:forEach items="${list}" var="item">
+        				<input type="hidden" value="" id="smem_id" name="smem_id" ></input>
+                		<input type="hidden" value="" id="smem_name" name="smem_name" ></input>
+                		
 	                		<tr>
-	                				<td><a href="javascript:pushparent('${item.smem_id}')">${item.smem_id }</a></td>
+	                				<td>${item.smem_id }</td>
 	                				<td>${item.smem_name }</td>
 	                				<td>${item.smem_tel }</td>
 	                				<td>${item.smem_pwd }</td>
 	                				<td>${item.smem_date }</td>
+	                				<td style="text-align: center;"><button onclick="inputsmem_id('${item.smem_id}','${item.smem_name }')" type="submit" class="btn btn-default btn-sm">선택</button></td>
 	                		</tr>
                 		</c:forEach>
                 </c:if>
               </tbody>
             </table>
+        </form>
 
             
         </div>

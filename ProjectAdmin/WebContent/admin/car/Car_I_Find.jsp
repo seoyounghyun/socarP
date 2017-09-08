@@ -55,9 +55,9 @@
 			var menu = document.getElementById("menu");
 			location.href="<c:url value='/Member/IdSearch.do'/>?where="+menu.value+"&mem="+document.getElementById("searchtext").value;
 		}
-		function pushparent(id) {
-			opener.document.getElementById("smem_id").value = id;
-			opener.document.getElementById("smem").value = id;
+		function pushparent(id,name) {
+			opener.document.getElementById("car_i_code").value = id;
+			opener.document.getElementById("car_i").value = name;
 			window.close();
 		}
 	</script>
@@ -85,7 +85,7 @@
                   <th style="text-align: center; width: 20%">차량안전옵션</th>
                   <th style="text-align: center; width: 10%">차량부가옵션</th>
                   <th style="text-align: center; width: 10%">차량별칭</th>
-                  <th style="text-align: center; width: 10%">차량폐기</th>
+                  <th style="text-align: center; width: 10%">차량선택</th>
                 </tr>
 
               </thead>
@@ -105,36 +105,18 @@
 					                <td>${item.car_i_safe_option}</td>
 					                <td>${item.car_i_add_option}</td>
 					                <td>${item.car_nick}</td>
-	                		
+	                				<td style="text-align: center">
+	                					<button class="btn btn-default btn-sm" onclick="pushparent('${item.car_i_code}','${item.car_nick}')">선택</button>
+	                				</td>
 	                		
 	                		</tr>
                 		</c:forEach>
                 </c:if>
               </tbody>
             </table>
-
+</div>
             
         </div>
-
- 		<div class="col-xs-5 pull-right">
- 	    <div class="box-body">
-             <div class="input-group margin">
-                 <div class="input-group-btn">
-                     <button type="button" class="btn btn-info dropdown-toggle" value="smem_id" id="menu" data-toggle="dropdown">아이디검색<span class="fa fa-caret-down"></span></button>
-                     <ul class="dropdown-menu">
-                         <li><a onclick="find('id')">아이디검색</a></li>
-                         <li><a onclick="find('name')">이름검색</a></li>
-                     </ul>
-                 </div><!-- /btn-group -->
-                 <input type="text" class="form-control" id="searchtext" style="color: black;" />
-             <span class="input-group-btn">
-                     <button class="btn btn-success btn-info" onclick="search()" type="button">검색</button>
-             </span>
-             </div><!-- /input-group -->
-         </div><!-- /.box-body -->
-	   </div>
-          <p style="font-size: 1.3em">1 2 3 4 5 6 7 8 9</p>
- 		</div>
 
 
     <!-- js placed at the end of the document so the pages load faster
