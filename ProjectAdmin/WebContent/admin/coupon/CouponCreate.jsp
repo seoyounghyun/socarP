@@ -9,7 +9,7 @@
    <link rel="shortcut icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.png"/>
 	
     <title>
-      Acme | Home
+      Acme | Home 
     </title>
 
     <!-- Bootstrap core CSS -->
