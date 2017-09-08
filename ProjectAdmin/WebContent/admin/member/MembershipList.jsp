@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
    <link rel="shortcut icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.png"/>
-	
+	 
     <title>
       Acme | Home
     </title>
