@@ -107,7 +107,12 @@
 				window.open("<c:url value='/Car/FindCar.do'/>?soz_code="+document.getElementById("soz_code").value,"get","height=500,width=1200,resizable=no");
 			}
 			else{alert("우선 쏘카존을 선택하세요");}
-			
+		}
+		function changeEndTime() {
+			alert("끝시간변경");
+		}
+		function changeStartTime() {
+			alert("시작시간변경")
 		}
 	</script>
 	
@@ -120,6 +125,15 @@
    				  <div class="bs-example" style="font-size: 1.2em">
 				  <h2>예약 입력</h2><br/><br/>
 				    <form action="<c:url value='/Coupon/InsertCoupon.do'/>" method="post">
+				  
+				    <input type="text" Id="car_land_price"/>
+				    <input type="text" Id="car_jeju_price"/>
+				    <input type="text" Id="car_price_so_wd"/>
+				    <input type="text" Id="car_price_so_we"/>
+				    <input type="text" Id="car_insurance_one_hour"/>
+				    <input type="text" Id="car_insurance_one_day"/>
+				    <input type="text" Id="car_insurance_two_hour"/>
+				    <input type="text" Id="car_insurance_two_day"/>
 				    
 				      	  <table class="table table-bordered table-striped">
 				      	  
@@ -190,7 +204,7 @@
 								        </div>
 								        <p class="col-xs-1">일</p>
 								        <div class="col-xs-2">
-								        <select class="form-control" id="rs_time" name="rs_time">
+								        <select class="form-control" onchange="changeStartTime();" id="rs_time" name="rs_time">
 								        </select> 
 								        </div>
 					      	  			
@@ -215,7 +229,7 @@
 								        </div>
 								        <p class="col-xs-1">일</p>
 								        <div class="col-xs-2">
-									        <select class="form-control" id="re_time" name="re_time">
+									        <select class="form-control" onchange="changeEndTime();" id="re_time" name="re_time">
 									        </select> 
 								        </div>
 								        <br/>

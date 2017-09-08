@@ -241,7 +241,13 @@ public class CarDAO implements CarService{
 	@Override
 	public List<Car_IssueDTO> car_issue_view(String soz_code) throws Exception {
 		List<Car_IssueDTO> list = new Vector<Car_IssueDTO>();
-		String sql = "SELECT * FROM CAR_ISSUE C WHERE SOZ_CODE=? AND (SELECT COUNT(*) FROM CAR_WASTE CW WHERE CW.CAR_I_CODE=C.CAR_I_CODE)=0";
+		//String sql = "SELECT C.* FROM CAR_ISSUE C WHERE SOZ_CODE=? AND (SELECT COUNT(*) FROM CAR_WASTE CW WHERE CW.CAR_I_CODE=C.CAR_I_CODE)=0";
+		String sql = "SELECT CI.*,CA.CAR_LAND_PRICE,CA.CAR_JEJU_PRICE,CA.CAR_PRICE_SO_WD,CA.CAR_PRICE_SO_WE,"
+					+ "CM.CAR_INSURANCE_ONE_HOUR,CM.CAR_INSURANCE_ONE_DAY,CM.CAR_INSURANCE_TWO_HOUR,CM.CAR_INSURANCE_TWO_DAY FROM CAR_ISSUE CI "
+					+ " JOIN CAR CA ON CA.CAR_NAME_CODE=CI.CAR_NAME_CODE "
+					+ " JOIN CAR_MODEL CM ON CA.CAR_TYPE_CODE=CM.CAR_TYPE_CODE "
+					+ " WHERE SOZ_CODE=? AND (SELECT COUNT(*) FROM CAR_WASTE CW WHERE CW.CAR_I_CODE=CI.CAR_I_CODE)=0";
+		
 		psmt = conn.prepareStatement(sql);
 		psmt.setString(1, soz_code);
 		rs = psmt.executeQuery();
@@ -255,6 +261,15 @@ public class CarDAO implements CarService{
 			dto.setCar_i_safe_option(rs.getString(6));
 			dto.setCar_i_add_option(rs.getString(7));
 			dto.setCar_nick(rs.getString(8));
+			dto.setCar_land_price(rs.getString(9));
+			dto.setCar_jeju_price(rs.getString(10));
+			dto.setCar_price_so_wd(rs.getString(11));
+			dto.setCar_price_so_we(rs.getString(12));
+			dto.setCar_insurance_one_hour(rs.getString(13));
+			dto.setCar_insurance_one_day(rs.getString(14));
+			dto.setCar_insurance_two_hour(rs.getString(15));
+			dto.setCar_insurance_two_day(rs.getString(16));
+			
 			list.add(dto);
 		}
 		return list;

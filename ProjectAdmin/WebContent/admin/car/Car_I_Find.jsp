@@ -55,9 +55,20 @@
 			var menu = document.getElementById("menu");
 			location.href="<c:url value='/Member/IdSearch.do'/>?where="+menu.value+"&mem="+document.getElementById("searchtext").value;
 		}
-		function pushparent(id,name) {
+		function pushparent(id,name,car_land_price,car_jeju_price,car_price_so_wd,car_price_so_we,car_insurance_one_hour,car_insurance_one_day,car_insurance_two_hour,car_insurance_two_day) {
 			opener.document.getElementById("car_i_code").value = id;
 			opener.document.getElementById("car_i").value = name;
+			
+			opener.document.getElementById("car_land_price").value = car_land_price;
+			opener.document.getElementById("car_jeju_price").value = car_jeju_price;
+			opener.document.getElementById("car_price_so_wd").value = car_price_so_wd;
+			opener.document.getElementById("car_price_so_we").value = car_price_so_we;
+			opener.document.getElementById("car_insurance_one_hour").value = car_insurance_one_hour;
+			opener.document.getElementById("car_insurance_one_day").value = car_insurance_one_day;
+			opener.document.getElementById("car_insurance_two_hour").value = car_insurance_two_hour;
+			opener.document.getElementById("car_insurance_two_day").value = car_insurance_two_day;
+			
+			
 			window.close();
 		}
 	</script>
@@ -106,7 +117,9 @@
 					                <td>${item.car_i_add_option}</td>
 					                <td>${item.car_nick}</td>
 	                				<td style="text-align: center">
-	                					<button class="btn btn-default btn-sm" onclick="pushparent('${item.car_i_code}','${item.car_nick}')">선택</button>
+	                					<button class="btn btn-default btn-sm" onclick="pushparent('${item.car_i_code}','${item.car_nick}','${item.car_land_price}','${item.car_jeju_price}','${item.car_price_so_wd}','${item.car_price_so_we}','${item.car_insurance_one_hour}','${item.car_insurance_one_day}','${item.car_insurance_two_hour}','${item.car_insurance_two_day}')">
+	                					선택
+	                					</button>
 	                				</td>
 	                		
 	                		</tr>

@@ -11,6 +11,68 @@ public class Car_IssueDTO {
 	private String car_i_add_option;
 	private String car_nick;
 	
+	
+	//효율성을 위한 변수
+	private String car_land_price;
+	private String car_jeju_price;
+	private String car_price_so_wd;
+	private String car_price_so_we;
+	private String car_insurance_one_hour;
+	private String car_insurance_one_day;
+	private String car_insurance_two_hour;
+	private String car_insurance_two_day;
+	
+	
+	
+	
+	public String getCar_insurance_one_hour() {
+		return car_insurance_one_hour;
+	}
+	public void setCar_insurance_one_hour(String car_insurance_one_hour) {
+		this.car_insurance_one_hour = car_insurance_one_hour;
+	}
+	public String getCar_insurance_one_day() {
+		return car_insurance_one_day;
+	}
+	public void setCar_insurance_one_day(String car_insurance_one_day) {
+		this.car_insurance_one_day = car_insurance_one_day;
+	}
+	public String getCar_insurance_two_hour() {
+		return car_insurance_two_hour;
+	}
+	public void setCar_insurance_two_hour(String car_insurance_two_hour) {
+		this.car_insurance_two_hour = car_insurance_two_hour;
+	}
+	public String getCar_insurance_two_day() {
+		return car_insurance_two_day;
+	}
+	public void setCar_insurance_two_day(String car_insurance_two_day) {
+		this.car_insurance_two_day = car_insurance_two_day;
+	}
+	public String getCar_land_price() {
+		return car_land_price;
+	}
+	public void setCar_land_price(String car_land_price) {
+		this.car_land_price = car_land_price;
+	}
+	public String getCar_jeju_price() {
+		return car_jeju_price;
+	}
+	public void setCar_jeju_price(String car_jeju_price) {
+		this.car_jeju_price = car_jeju_price;
+	}
+	public String getCar_price_so_wd() {
+		return car_price_so_wd;
+	}
+	public void setCar_price_so_wd(String car_price_so_wd) {
+		this.car_price_so_wd = car_price_so_wd;
+	}
+	public String getCar_price_so_we() {
+		return car_price_so_we;
+	}
+	public void setCar_price_so_we(String car_price_so_we) {
+		this.car_price_so_we = car_price_so_we;
+	}
 	public String getCar_i_code() {
 		return car_i_code;
 	}
