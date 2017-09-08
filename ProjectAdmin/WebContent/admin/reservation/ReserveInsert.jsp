@@ -4,7 +4,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head> 
     <meta charset="utf-8"/>
    <link rel="shortcut icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.png"/>
 	
@@ -153,6 +153,30 @@
 		}
 
 	</script>
+	
+	
+	<script> 
+	
+	function goReserveInsert(){
+		
+		if(document.getElementById("di_id").value == ""){
+			alert("결제 특이사항을 입력해주세요.");
+			document.getElementById("di_id").focus();
+			return false;
+		}
+		if(document.getElementById("di_id").value.length > 100){
+			alert("결제 특이사항은 100자이내로 해주세요");
+			document.getElementById("di_id").focus();
+			return false;
+		}
+		
+	
+		
+		
+	}
+	
+	</script>
+	
 	
   </head>
 
@@ -315,14 +339,14 @@
 					      	  <tr>
 					      	  		<td><label>결제 특이사항</label></td>
 					      	  		<td>
-					      	  			<textarea rows="5" cols="80" class="form-control"></textarea>
+					      	  			<textarea rows="5" cols="80" class="form-control" id="di_id"></textarea>
 					      	  		</td>
 					      	  </tr>
 					      </tbody>
 					    
 					       </table>
 				    
-				      <button type="submit" class="btn btn-info">입력하기</button>
+				      <button type="submit" class="btn btn-info" onclick="return goReserveInsert()">입력하기</button>
 				      <button type="button" class="btn btn-info" onclick="goList()">리스트 보기</button>
 			
 				    </form>

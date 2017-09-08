@@ -7,11 +7,11 @@
 <head>
     <meta charset="utf-8"/>
    <link rel="shortcut icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.png"/>
-	
+	 
     <title>
       Acme | Home
     </title>
-
+ 
     <!-- Bootstrap core CSS -->
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/bootstrap/css/theme.css" rel="stylesheet"/>
@@ -40,6 +40,38 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/parallax-slider/modernizr.custom.28468.js">
     </script>
 
+	<script>
+	
+	function smemUpdate(){
+		if(document.getElementById("smem_one_id").value == ""){
+			alert("비밀번호를 입력해주세요");
+			document.getElementById("smem_one_id").focus();
+			return false;
+		}
+		else if(document.getElementById("smem_one_id").value.length > 15){
+			alert("비밀번호 15자안으로 입력해주세요");
+			document.getElementById("smem_one_id").focus();
+			return false;
+		}	
+		else if(document.getElementById("smem_two_id").value == ""){
+			alert("비밀번호 확인을 입력해주세요");
+			document.getElementById("smem_two_id").focus();
+			return false;
+		}
+		else if(document.getElementById("smem_two_id").value.length > 15){
+			alert("비밀번호 15자안으로 입력해주세요");
+			document.getElementById("smem_two_id").focus();
+			return false;
+		}
+		else if(document.getElementById("smem_one_id").value != document.getElementById("smem_two_id").value){
+			alert("비밀번호와 비밀번호 확인이 다릅니다.");
+			document.getElementById("smem_one_id").focus();
+			return false;
+		}
+	}
+	
+	
+	</script>
   </head>
 
   <body>
@@ -70,7 +102,7 @@
 	                				<td><label>비밀번호</label></td>
 	                				<td>
 	                					<div class="col-xs-3">
-	                					<input type="password" class="form-control" value="${smem.smem_pwd}" placeholder="Password" name="smem_pwd"/>
+	                					<input type="password" class="form-control" value="${smem.smem_pwd}" placeholder="Password" name="smem_pwd" id="smem_one_id"/>
 	                					</div>
 	                				</td>
 	                		</tr>
@@ -78,7 +110,7 @@
 	                				<td><label>비밀번호 확인</label></td>
 	                				<td>
 	                					<div class="col-xs-3"">
-	                					<input type="password" class="form-control" value="${smem.smem_pwd}" placeholder="Password" name="smem_pwd_confirm"/>
+	                					<input type="password" class="form-control" value="${smem.smem_pwd}" placeholder="Password" name="smem_pwd_confirm" id="smem_two_id"/>
 	                					</div>
 	                				</td>
 	                		</tr>
@@ -97,7 +129,7 @@
 			              </tbody>
 			              </table>
 			              <br/><br/><br/><br/><br/><br/><br/><br/>
-			         <button type="submit" class="btn btn-info">수정하기</button>
+			         <button type="submit" class="btn btn-info" onclick="return smemUpdate()">수정하기</button>
 				     <a href="<c:url value='/Member/SimpleMemberDetail.do'/>" ><button type="button" class="btn btn-info" onclick="history.back()">뒤로가기</button></a>
 				      
 				    </form>

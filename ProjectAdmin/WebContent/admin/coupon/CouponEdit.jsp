@@ -7,11 +7,11 @@
 <head>
     <meta charset="utf-8"/>
    <link rel="shortcut icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.png"/>
-	
+	 
     <title>
       Acme | Home
     </title>
-
+ 
     <!-- Bootstrap core CSS -->
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/bootstrap/css/theme.css" rel="stylesheet"/>

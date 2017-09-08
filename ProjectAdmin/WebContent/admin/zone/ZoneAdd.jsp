@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
    <link rel="shortcut icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.png"/>
-	
+	 
     <title>
       Acme | Home
     </title>
@@ -17,7 +17,7 @@
     <link href="${pageContext.request.contextPath}/bootstrap/css/theme.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-reset.css" rel="stylesheet"/>
     <!-- <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
-
+ 
     <!--external css-->
     <link href="${pageContext.request.contextPath}/bootstrap/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/flexslider.css"/>
@@ -47,6 +47,61 @@
 			history.back();
 		}
     </script>
+    
+    <script>
+    
+    function goInsert(){
+    	
+    	if(document.getElementById("soz_code_id").value == ""){
+			alert("쏘카존 코드를 입력해주세요");
+			document.getElementById("soz_code_id").focus();
+			return false;
+		}
+    	if(document.getElementById("soz_code_id").value.length > 15){
+			alert("쏘카존 코드를 15자이내로 입력해주세요");
+			document.getElementById("soz_code_id").focus();
+			return false;
+		}
+		else if(document.getElementById("soz_name_id").value == ""){
+			alert("쏘카존명을 입력해주세요");
+			document.getElementById("soz_name_id").focus();
+			return false;
+		}
+		else if(document.getElementById("soz_name_id").value.length > 30){
+			alert("쏘카존명을 30자이내로 입력해주세요");
+			document.getElementById("soz_name_id").focus();
+			return false;
+		}
+		else if(document.getElementById("soz_loc_id").value == ""){
+			alert("위치를 입력해주세요");
+			document.getElementById("soz_loc_id").focus();
+			return false;
+		}
+		else if(document.getElementById("soz_loc_id").value == ""){
+			alert("위치가 너무깁니다.30자이내로 써주세요.");
+			document.getElementById("soz_loc_id").focus();
+			return false;
+		}
+		else if(document.getElementById("maxcar_id").value == ""){
+			alert("최대 차량수를 입력해주세요");
+			document.getElementById("maxcar_id").focus();
+			return false;
+		}
+		else if(document.getElementById("latitude_id").value == ""){
+			alert("위도를 입력해주세요");
+			document.getElementById("latitude_id").focus();
+			return false;
+		}
+		else if(document.getElementById("longitude_id").value == ""){
+			alert("경도를 입력해주세요");
+			document.getElementById("longitude_id").focus();
+			return false;
+		}
+    }
+    
+    
+    </script>
+    
   </head>
 
   <body>
@@ -69,12 +124,23 @@
 				      	  </thead>
 				      	  <tbody>
 					      	  
+<<<<<<< HEAD
 					      	 
+=======
+					      	  <tr>
+					      	  		<td><label>쏘카존 코드</label></td>
+					      	  		<td>
+								      	<div class="col-xs-5">
+								        <input type="text" class="form-control" name="soz_code" id="soz_code_id"/>
+								     	</div>
+					      	  		</td>
+					      	  </tr>
+>>>>>>> branch 'master' of https://github.com/seoyounghyun/socarP.git
 					      	  <tr>
 					      	  		<td><label>쏘카존명</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-					      	  			 <input type="text" class="form-control" name="soz_name"/>
+					      	  			 <input type="text" class="form-control" name="soz_name" id="soz_name_id"/>
 								    	</div>
 								    </td>
 					      	  </tr>
@@ -82,7 +148,7 @@
 					      	  		<td><label>위치</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control" name="soz_loc"/>
+								        <input type="text" class="form-control" name="soz_loc" id="soz_loc_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -90,7 +156,7 @@
 					      	  		<td><label>최대 차량수 </label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control" name="soz_maxcar"/>
+								        <input type="text" class="form-control" name="soz_maxcar" id="maxcar_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -98,7 +164,7 @@
 					      	  		<td><label>위도</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control" name="soz_latitude"/>
+								        <input type="text" class="form-control" name="soz_latitude" id="latitude_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -106,7 +172,7 @@
 					      	  		<td><label>경도</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" class="form-control" name="soz_longitude"/>
+								        <input type="text" class="form-control" name="soz_longitude" id="longitude_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -115,7 +181,7 @@
 					    
 					       </table>
 				    	<br/><br/><br/><br/><br/><br/><br/><br/>
-				      <button type="submit" class="btn btn-info">등록완료</button>
+				      <button type="submit" class="btn btn-info" onclick="return goInsert()">등록완료</button>
 				      <button type="button" class="btn btn-info" onclick="goList()">돌아가기</button>
 				     
 				    </form>

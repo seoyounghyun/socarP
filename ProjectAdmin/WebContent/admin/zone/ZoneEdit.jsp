@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
    <link rel="shortcut icon" href="${pageContext.request.contextPath}/bootstrap/img/favicon.png"/>
-	
+	 
     <title>
       Acme | Home
     </title>
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/animate.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/assets/owlcarousel/owl.carousel.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/assets/owlcarousel/owl.theme.css"/>
-
+ 
     <link href="${pageContext.request.contextPath}/bootstrap/css/superfish.css" rel="stylesheet" media="screen"/>
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
@@ -39,6 +39,60 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/parallax-slider/parallax-slider.css" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/parallax-slider/modernizr.custom.28468.js">
     </script>
+
+	<script>
+	
+	function goUpdate(){
+		if(document.getElementById("esoz_code_id").value == ""){
+			alert("쏘카존 코드를 입력해주세요");
+			document.getElementById("esoz_code_id").focus();
+			return false;
+		}
+    	if(document.getElementById("esoz_code_id").value.length > 15){
+			alert("쏘카존 코드를 15자이내로 입력해주세요");
+			document.getElementById("esoz_code_id").focus();
+			return false;
+		}
+		else if(document.getElementById("esoz_name_id").value == ""){
+			alert("쏘카존명을 입력해주세요");
+			document.getElementById("esoz_name_id").focus();
+			return false;
+		}
+		else if(document.getElementById("esoz_name_id").value.length > 30){
+			alert("쏘카존명을 30자이내로 입력해주세요");
+			document.getElementById("esoz_name_id").focus();
+			return false;
+		}
+		else if(document.getElementById("esoz_loc_id").value == ""){
+			alert("위치를 입력해주세요");
+			document.getElementById("esoz_loc_id").focus();
+			return false;
+		}
+		else if(document.getElementById("esoz_loc_id").value == ""){
+			alert("위치가 너무깁니다.30자이내로 써주세요.");
+			document.getElementById("esoz_loc_id").focus();
+			return false;
+		}
+		else if(document.getElementById("emaxcar_id").value == ""){
+			alert("최대 차량수를 입력해주세요");
+			document.getElementById("emaxcar_id").focus();
+			return false;
+		}
+		else if(document.getElementById("elatitude_id").value == ""){
+			alert("위도를 입력해주세요");
+			document.getElementById("elatitude_id").focus();
+			return false;
+		}
+		else if(document.getElementById("elongitude_id").value == ""){
+			alert("경도를 입력해주세요");
+			document.getElementById("elongitude_id").focus();
+			return false;
+		}
+		
+	}
+	
+	
+	</script>
 
   </head>
 
@@ -65,7 +119,7 @@
 					      	  		<td><label>쏘카존 코드</label></td>
 					      	  		<td>
 								      	<div class="col-xs-5">
-								        <input type="text" class="form-control"  value="${dto.soz_code}" name="soz_code"/>
+								        <input type="text" class="form-control"  value="${dto.soz_code}" name="soz_code" id="esoz_code_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -73,7 +127,7 @@
 					      	  		<td><label>쏘카존명</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-					      	  			 <input type="text" class="form-control"  value="${dto.soz_name}" name="soz_name"/>
+					      	  			 <input type="text" class="form-control"  value="${dto.soz_name}" name="soz_name" id="esoz_name_id"/>
 								    	</div>
 								    </td>
 					      	  </tr>
@@ -81,7 +135,7 @@
 					      	  		<td><label>위치</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" value="${dto.soz_loc}" class="form-control" name="soz_loc"/>
+								        <input type="text" value="${dto.soz_loc}" class="form-control" name="soz_loc" id="esoz_loc_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -89,7 +143,7 @@
 					      	  		<td><label>최대 차량수 </label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text"  value="${dto.soz_maxcar}" class="form-control" name="soz_maxcar"/>
+								        <input type="text"  value="${dto.soz_maxcar}" class="form-control" name="soz_maxcar" id="emaxcar_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -97,7 +151,7 @@
 					      	  		<td><label>위도</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text"  value="${dto.soz_latitude}" class="form-control" name="soz_latitude"/>
+								        <input type="text"  value="${dto.soz_latitude}" class="form-control" name="soz_latitude" id="elatitude_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -105,7 +159,7 @@
 					      	  		<td><label>경도</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text"  value="${dto.soz_longitude}" class="form-control" name="soz_longitude"/>
+								        <input type="text"  value="${dto.soz_longitude}" class="form-control" name="soz_longitude" id="elongitude_id"/>
 								     	</div>
 					      	  		</td>
 					      	  </tr>
@@ -114,7 +168,7 @@
 					    
 					       </table>
 				    	<br/><br/><br/><br/><br/><br/><br/><br/>
-				      <button type="submit" class="btn btn-info">수정완료 </button>
+				      <button type="submit" class="btn btn-info" onclick="return goUpdate()">수정완료 </button>
 				      <button type="button" class="btn btn-info" onclick="goList()">돌아가기</button>
 				     
 				    </form>
