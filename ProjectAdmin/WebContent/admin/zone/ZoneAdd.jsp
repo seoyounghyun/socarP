@@ -102,18 +102,20 @@
     
     </script>
     
+    
+
   </head>
 
   <body>
     <c:import url="/template/Header.jsp" />
    
    
-   
      		<div class="container">
    				  <div class="bs-example" style="font-size: 1.2em">
 				  <h2>주차장 등록</h2><br/><br/>
 				    <form action="<c:url value='/ZONE/Add.do'/>" method="post">
-				    
+		   			<div id="map" style="width:100%;height:350px;"></div>
+				    	
 				      	  <table class="table table-bordered table-striped">
 				      	  
 				      	  <thead >
@@ -123,19 +125,7 @@
 				      	  		</tr>
 				      	  </thead>
 				      	  <tbody>
-					      	  
-<<<<<<< HEAD
-					      	 
-=======
-					      	  <tr>
-					      	  		<td><label>쏘카존 코드</label></td>
-					      	  		<td>
-								      	<div class="col-xs-5">
-								        <input type="text" class="form-control" name="soz_code" id="soz_code_id"/>
-								     	</div>
-					      	  		</td>
-					      	  </tr>
->>>>>>> branch 'master' of https://github.com/seoyounghyun/socarP.git
+					
 					      	  <tr>
 					      	  		<td><label>쏘카존명</label></td>
 					      	  		<td>
@@ -188,7 +178,22 @@
 				  </div><!-- /example -->
 
  		</div>
-   
+	    
+	    <!-- 지도 API 스크립트 -->
+	    
+	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3b0979573216988a82c1321345b2297a"></script>
+		<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = { 
+		        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };
+		var position = new daum.maps.LatLng(37.478711, 126.878647);
+	
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new daum.maps.Map(mapContainer, mapOption); 
+		</script>
+    
    
    
    

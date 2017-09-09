@@ -100,23 +100,23 @@ public class CarDAO implements CarService{
 	
 	public int insert(CarDTO dto) throws Exception{
 		int affected = 0;
-		String sql = "INSERT INTO CAR VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO CAR VALUES('CNC_'||LPAD(CAR_NAME_CODE_SEQ.NEXTVAL,5,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getCar_name_code());
-			psmt.setString(2, dto.getCar_type_code());
-			psmt.setString(3, dto.getCar_name());
-			psmt.setString(4, dto.getCar_img());
-			psmt.setString(5, dto.getCar_desc());
-			psmt.setString(6, dto.getCar_land_price());
-			psmt.setString(7, dto.getCar_jeju_price());
-			psmt.setString(8, dto.getCar_price_so_wd());
-			psmt.setString(9, dto.getCar_price_so_we());
-			psmt.setString(10, dto.getCar_drive_price());
-			psmt.setString(11, dto.getCar_com());
-			psmt.setString(12, dto.getCar_fuel());
-			psmt.setString(13, dto.getCar_trans());
-			psmt.setString(14, dto.getCar_max_per());
+			psmt.setString(1, dto.getCar_type_code());
+			psmt.setString(2, dto.getCar_name());
+			psmt.setString(3, dto.getCar_img());
+			psmt.setString(4, dto.getCar_desc());
+			psmt.setString(5, dto.getCar_land_price());
+			psmt.setString(6, dto.getCar_jeju_price());
+			psmt.setString(7, dto.getCar_price_so_wd());
+			psmt.setString(8, dto.getCar_price_so_we());
+			psmt.setString(9, dto.getCar_drive_price());
+			psmt.setString(10, dto.getCar_com());
+			psmt.setString(11, dto.getCar_fuel());
+			psmt.setString(12, dto.getCar_trans());
+			psmt.setString(13, dto.getCar_max_per());
 			
 			affected = psmt.executeUpdate();
 		}

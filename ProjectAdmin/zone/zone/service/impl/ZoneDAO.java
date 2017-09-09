@@ -59,7 +59,7 @@ public class ZoneDAO implements ZoneService{
 	}////////////////////////////////selectList()
 	
 	public int insert(ZoneDTO dto){
-		String sql = "INSERT INTO SO_ZONE VALUES('SOZ_'||LPAD(SO_ZONE_SEQ.NEXTVAL,10,'0'),?,?,?,SYSDATE,?,?)";
+		String sql = "INSERT INTO SO_ZONE VALUES('SOZ_'||LPAD(SO_ZONE_SEQ.NEXTVAL,5,'0'),?,?,?,SYSDATE,?,?)";
 		int affected = 0;
 		try{
 		psmt = conn.prepareStatement(sql);

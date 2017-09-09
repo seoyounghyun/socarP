@@ -43,7 +43,7 @@ public class CouponDao implements CouponService {
 	@Override
 	public int insertCoupon(CouponDto dto) throws Exception {
 		
-		String sql ="INSERT INTO COUPON VALUES(COU_CODE_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+		String sql ="INSERT INTO COUPON VALUES('C_C_'||LPAD(COU_CODE_SEQ.NEXTVAL,10,'0'),?,?,?,?,?,?,?,?,?,?)";
 		int affected = 0;
 		
 		psmt = conn.prepareStatement(sql);
@@ -173,7 +173,7 @@ public class CouponDao implements CouponService {
 	@Override
 	public int createCoupon(Cou_createDto dto) throws Exception {
 		
-		String sql = "INSERT INTO COU_CREATE VALUES(COU_C_CODE_SEQ.NEXTVAL,?,SYSDATE,?,?,?)";
+		String sql = "INSERT INTO COU_CREATE VALUES('C_CC_'||LPAD(COU_C_CODE_SEQ.NEXTVAL,10,'0'),?,SYSDATE,?,?,?)";
 		
 		conn.setAutoCommit(false);
 		
