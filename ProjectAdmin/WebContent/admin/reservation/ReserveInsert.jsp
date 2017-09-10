@@ -75,13 +75,29 @@
 				
 			}
 			for(var i=1;i<=12;i++){
-				rs_month.innerHTML += "<option value='"+i+"'>"+i+"</option>";
-				re_month.innerHTML += "<option value='"+i+"'>"+i+"</option>";
-				
+				if(i<10){i="0"+i}
+				if(i==mon){
+					rs_month.innerHTML += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+					re_month.innerHTML += "<option value='"+i+"' selected='selected'>"+i+"</option>";	
+				}
+				else{
+					rs_month.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+					re_month.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+				}
 			}
-			for(var i=1;i<=31;i++){
-				rs_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";
-				re_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+			var lastdate = new Date(year,1);
+			lastdate = new Date(lastdate-1);
+		
+			for(var i=1;i<=lastdate.getDate();i++){
+				if(i<10){i = "0"+i;}
+				if(i==date){
+					rs_date.innerHTML += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+					re_date.innerHTML += "<option value='"+i+"' selected='selected'>"+i+"</option>";					
+				}
+				else{
+					rs_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+					re_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";					
+				}
 			}
 			for(var i=0 ; i < 24 ; i++){
 					if(i<10){i = "0"+i;}
@@ -92,8 +108,6 @@
 					if(j==00){j=0}
 				}
 			}
-			
-			
 		};
 		function findid(){
 			window.open("<c:url value='/Member/FindId.do'/>","get","height=500,width=1200,resizable=no");
@@ -107,8 +121,33 @@
 			}
 			else{alert("우선 쏘카존을 선택하세요");}
 		}
+		
+		function changeSMonth(){
+			var rs_year = document.getElementById("rs_year");
+			var rs_month = document.getElementById("rs_month");
+			var mon = new Date(rs_year.value,rs_month.value);
+			mon = new Date(mon-1);
+			rs_date.innerHTML="";
+			for(var i=1;i<=mon.getDate();i++){
+				if(i<10){i = "0"+i;}
+				rs_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+			}
+		}
+		function changeEMonth(){
+			var re_year = document.getElementById("re_year");
+			var re_month = document.getElementById("re_month");
+			var mon = new Date(re_year.value,re_month.value);	
+			mon = new Date(mon-1);
+			re_date.innerHTML="";
+			for(var i=1;i<=mon.getDate();i++){
+				if(i<10){i = "0"+i;}
+				re_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+			}
+		}
+		
+		//가격 계산하는 메소드 /////////////////////////////////////////////////////////////
 		function changePrice() {
-			var price = document.getElementById("res_price");
+			var price = parseInt(document.getElementById("res_price").value);
 			
 			var rs_year = document.getElementById("rs_year");
 			var rs_month = document.getElementById("rs_month");
@@ -132,26 +171,100 @@
 			var startdate = new Date(rs_year.value+"-"+rs_month.value+"-"+rs_date.value+"T"+rs_time.value);
 			var enddate = new Date(re_year.value+"-"+re_month.value+"-"+re_date.value+"T"+re_time.value);
 			
-			var resminute = (enddate-startdate)/600000;
 			
-			
+			if(startdate.getDate()==enddate.getDate()){
+				alert("같은날");
+				if(startdate.getDay()==6||startdate.getDay()==0){
+					alert("주말")	;
+					price = (enddate - startdate)/600000 * car_price_so_we.value;
+					alert(price);
+				}
+				else{
+					alert("평일");
+					price = (enddate - startdate)/600000 * car_price_so_wd.value;
+					alert(price);
+				}
 				if(document.getElementById("res_instype").value=="type_one"){
-					alert("one")
-					price.value = resminute*car_price_so_wd.value;
-					
-					
+					alert("30")
+					price += (enddate.getHours()-startdate.getHours())*car_insurance_one_hour.value;
+					alert(price);
 				}
-				
-				price.value = resminute*car_price_so_we.value;
-				if(document.getElementById("res_instype").value=="type_two"){
-					alert("two")
-					price.value = resminute*car_price_so_wd.value;
-					
+				else{
+					alert("70")
+					price += (enddate.getHours()-startdate.getHours())*car_insurance_two_hour.value;
+					alert(price);
 				}
+			}/////같은날일 떄
+			else{
+				alert("다른날");
+				alert(((enddate-startdate)/(3600000*24)));
+				var d = new Date(startdate);
+				while(d.getTime()<=enddate.getTime()){
+					if(d.getDate()==startdate.getDate()){
+						alert("첫날");		
+						var sdtime = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate()).getTime()+(1000*60*60*24) - startdate;
+						alert(sdtime/600000);
+							if(d.getDay()==0||d.getDay()==6){
+								price += (sdtime/600000) * car_price_so_we.value;					
+							}
+							else{
+								price += (sdtime/600000) * car_price_so_we.value;					
+							}
+							if(document.getElementById("res_instype").value=="type_one"){
+								price += parseInt(sdtime/3600000) * car_insurance_one_hour.value;
+							}
+							else{
+								price += parseInt(sdtime/3600000) * car_insurance_two_hour.value;
+							}
+						
+					}
+					else if(d.getDate()==enddate.getDate()){
+						
+						alert("마지막날");
+					}
+					else{
+						alert("중간날");
+						if(d.getDay()==0||d.getDay()==6){
+							price += 24 * 6 * car_price_so_we.value;					
+						}
+						else{
+							price += 24 * 6 * car_price_so_we.value;					
+						}
+						if(document.getElementById("res_instype").value=="type_one"){
+							price += parseInt(sdtime/3600000) * car_insurance_one_hour.value;
+						}
+						else{
+							price += parseInt(sdtime/3600000) * car_insurance_two_hour.value;
+						}
+					}
+					
+				d = new Date(d.getTime() + (1000*60*60*24));
+				alert(d.getDate());
 				
+				}
+			}//////다른날일떄
+				document.getElementById("res_price").value = price;
+				document.getElementById("price").value = price;
 				
+		}////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		function saletype(type){
+			var st = document.getElementById("saletype");
+			st.innerHTML="";	
+			var que;
+			switch(type){
+				case 'c': que = "<td></td><td><button type='button' onclick='findcoupon()' style='margin-left:15px;color: #000000 !important;' class='btn btn-default btn-sm'/>검색</button></td>";break;
+				case 'p': que = "<td></td><td><div class='col-xs-3'><input type='text' class='form-control' name='point' /></div>최대 : "+parseInt(document.getElementById("res_price").value)/10+" 원 </td>";break;
+				case 'n': que = "";
+			}
+			st.innerHTML += que;
+			
 		}
-
+		
+		function findcoupon(){
+			alert("쿠폰찾기")
+		}
 	</script>
 	
 	
@@ -256,7 +369,7 @@
 								        </div>
 								        <p class="col-xs-1">년</p>
 					      	  			<div class="col-xs-2" >
-								        <select class="form-control" id="rs_month" name="rs_month">
+								        <select class="form-control" id="rs_month"  onchange="changeSMonth()" name="rs_month">
 								        </select> 
 								        </div>
 								        <p class="col-xs-1">월</p>
@@ -281,12 +394,12 @@
 								        </div>
 								        <p class="col-xs-1">년</p>
 					      	  			<div class="col-xs-2" >
-									        <select class="form-control" id="re_month" name="re_month">
+									        <select class="form-control" id="re_month" onchange="changeEMonth()" name="re_month">
 									        </select> 
 								        </div>
 								        <p class="col-xs-1">월</p>
 								        <div class="col-xs-2">
-									        <select class="form-control" id="re_date" onchange="changePrice()"  name="re_date">
+									        <select class="form-control" onchange="changePrice()"  id="re_date" name="re_date">
 									        </select> 
 								        </div>
 								        <p class="col-xs-1">일</p>
@@ -313,17 +426,19 @@
 					      	  <tr>
 					      	  		<td><label>할인 유형</label></td>
 					      	  		<td>
-					      	  		    <input type="radio" name="res_sale_type" style="margin-left: 20px;" value="c"> 쿠폰</input> 
-					        			<input type="radio" name="res_sale_type" style="margin-left: 50px;" value="p"> 포인트</input>
-								    	<input type="radio" name="res_sale_type" checked="checked" style="margin-left: 50px;" value="n"> 미사용</input>
+					      	  		    <input type="radio" onclick="saletype('c')" name="res_sale_type"  style="margin-left: 20px;" value="c"> 쿠폰</input> 
+					        			<input type="radio" onclick="saletype('p')" name="res_sale_type" style="margin-left: 50px;" value="p"> 포인트</input>
+								    	<input type="radio" onclick="saletype('n')" name="res_sale_type" checked="checked" style="margin-left: 50px;" value="n"> 미사용</input>
 								    </td>
 					      	  </tr>
-					      	  
+					      	  <tr id="saletype"></tr>
 					      	  <tr>
 					      	  		<td><label>가격</label></td>
 					      	  		<td>
 					      	  			<div class="col-xs-5">
-								        <input type="text" value="0" class="form-control" disabled="disabled" id="res_price" name="res_price"/>
+								        <input type="text" value="0" class="form-control" disabled="disabled" id="price" name="price"/>
+								     	<input type="hidden" value="0" class="form-control" id="res_price" name="res_price"/>
+								     	
 								     	</div>
 								     	<p class="col-xs-1">원</p>
 					      	  		</td>
