@@ -27,7 +27,7 @@ public interface MemberService {
 	
 	public List<MembershipDto> selectMembershipList() throws Exception;
 	
-	
+
 	//Card관련 메소드
 	public List<CardDto> selectCardList(String smem_id) throws Exception;	
 	

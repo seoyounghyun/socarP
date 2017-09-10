@@ -355,7 +355,8 @@ public class MemberDao implements MemberService {
 		
 		return affected;
 	}
-	
+
+
 	
 	
 	

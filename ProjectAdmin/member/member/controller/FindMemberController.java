@@ -11,6 +11,7 @@ import javax.smartcardio.Card;
 
 import member.service.CardDto;
 import member.service.MemDto;
+import member.service.MembershipDto;
 import member.service.impl.MemberDao;
 
 public class FindMemberController extends HttpServlet {
@@ -34,16 +35,18 @@ public class FindMemberController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		MemberDao dao = new MemberDao(req.getServletContext());
 		List<CardDto> list = null;
+		int point = 0;
 		String op = "";
 		
 		try {list = dao.selectCardList(req.getParameter("smem_id"));
+			point = dao.selectMemOne(req.getParameter("smem_id")).getMs_change();
 		} catch (Exception e) {e.printStackTrace();
 		e.getMessage();
 		}
 		op += "opener.document.getElementById(\"smem_id\").value ='"+req.getParameter("smem_id")+"';" 
 			+ "opener.document.getElementById(\"smem\").value ='"+req.getParameter("smem_name")+"';"
+			+ "opener.document.getElementById(\"point_h\").value="+point+";"
 			+ "opener.document.getElementById('card_code').innerHTML='";
-		
 		
 		for(CardDto dto : list) {
 			op += "<option value="+dto.getCard_code()+">"+dto.getCard_code()+"</option>";
