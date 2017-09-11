@@ -221,18 +221,17 @@ public class CarDAO implements CarService{
 
 	@Override
 	public int car_issue(Car_IssueDTO dto) throws Exception {
-		String sql="INSERT INTO CAR_ISSUE VALUES(?,?,?,?,?,?,?,?)";
+		String sql="INSERT INTO CAR_ISSUE VALUES('1',?,?,?,?,?,?,?)";
 		int affected=0;
 		
 		psmt = conn.prepareStatement(sql);
-		psmt.setString(1, dto.getCar_i_code());
-		psmt.setString(2, dto.getCar_name_code());
-		psmt.setString(3, dto.getSoz_code());
-		psmt.setDate(4, dto.getCar_i_date());
-		psmt.setString(5, dto.getCar_i_num());
-		psmt.setString(6, dto.getCar_i_safe_option());
-		psmt.setString(7, dto.getCar_i_add_option());
-		psmt.setString(8, dto.getCar_nick());
+		psmt.setString(1, dto.getCar_name_code());
+		psmt.setString(2, dto.getSoz_code());
+		psmt.setDate(3, dto.getCar_i_date());
+		psmt.setString(4, dto.getCar_i_num());
+		psmt.setString(5, dto.getCar_i_safe_option());
+		psmt.setString(6, dto.getCar_i_add_option());
+		psmt.setString(7, dto.getCar_nick());
 		affected = psmt.executeUpdate();
 		
 		return affected;

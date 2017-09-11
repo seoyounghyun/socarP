@@ -53,15 +53,31 @@
 		var mon = now.getMonth()+1;
 		var day = now.getDate();
 		
-		for(var i=year+3;i>=year;i--){
+		for(var i=year;i>=year-2;i--){
 			sel_year.innerHTML += "<option value='"+i+"'>"+i+"</option>";
 		}
 		for(var i=1;i<=12;i++){
-			sel_month.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+			if(i<10){i="0"+i}
+			if(i==mon){
+				sel_month.innerHTML += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+			}
+			else{
+				sel_month.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+			}
 		}
-		for(var i=1;i<=31;i++){
-			sel_day.innerHTML += "<option value='"+i+"'>"+i+"</option>";
+		var lastdate = new Date(year,1);
+		lastdate = new Date(lastdate-1);
+	
+		for(var i=1;i<=lastdate.getDate();i++){
+			if(i<10){i = "0"+i;}
+			if(i==day){
+				sel_day.innerHTML += "<option value='"+i+"' selected='selected'>"+i+"</option>";					
+			}
+			else{
+				sel_day.innerHTML += "<option value='"+i+"'>"+i+"</option>";					
+			}
 		}
+		
 	};
 	</script>
 	<script>
@@ -168,14 +184,7 @@
 				      	  </thead>
 				      	  <tbody>
 					      	  
-					      	  <tr>
-					      	  		<td><label>차량보유 코드</label></td>
-					      	  		<td>
-								      	<div class="col-xs-5">
-								        <input type="text" class="form-control" id="car_code_id" name="car_i_code"/>
-								     	</div>
-					      	  		</td>
-					      	  </tr>
+					      	 
 					      	  <tr>
 					      	  		<td><label>차량명 코드</label></td>
 					      	  		<td>

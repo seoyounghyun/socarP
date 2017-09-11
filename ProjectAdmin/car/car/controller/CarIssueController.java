@@ -39,7 +39,6 @@ public class CarIssueController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		CarDAO dao = new CarDAO(req.getServletContext());
 		Car_IssueDTO dto = new Car_IssueDTO();
-		dto.setCar_i_code(req.getParameter("car_i_code"));
 		dto.setCar_name_code(req.getParameter("car_name_code"));
 		dto.setSoz_code(req.getParameter("soz_code"));
 		
