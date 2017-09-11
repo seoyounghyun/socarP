@@ -79,7 +79,7 @@
 		};
 		
 		function popSearchId() {
-			window.open("<c:url value='/Member/FindId.do'/>","get","height=500,width=1200,resizable=no");
+			window.open("<c:url value='/Member/FindId.do'/>?f_case=input_card","get","height=500,width=1200,resizable=no");
 		}
 		
 		function goback() {
@@ -130,8 +130,7 @@ function checkval(){
    				  <div class="bs-example" style="font-size: 1.2em">
 				  <h2>쿠폰 입력</h2><br/><br/>
 				    <form action="<c:url value='/Member/CardInsert.do'/>" method="post">
-				    
-				      	  <table class="table table-bordered table-striped">
+				   		  <table class="table table-bordered table-striped">
 				      	  
 				      	  <thead >
 				      	  		<tr>

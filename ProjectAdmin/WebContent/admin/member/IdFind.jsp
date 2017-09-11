@@ -78,8 +78,8 @@
 
           <div class="table-responsive">
           <form action="<c:url value='/Member/FindId.do'/>" method="post">
+			<input type="text" name="f_case" value="${param.f_case}"/>
             <table class="table table-bordered table-striped">
-
               <thead>
 
                 <tr>

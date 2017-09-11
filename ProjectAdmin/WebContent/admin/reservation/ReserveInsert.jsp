@@ -110,7 +110,7 @@
 			}
 		};
 		function findid(){
-			window.open("<c:url value='/Member/FindId.do'/>","get","height=500,width=1200,resizable=no");
+			window.open("<c:url value='/Member/FindId.do'/>?f_case=reservation","get","height=500,width=1200,resizable=no");
 		}
 		function findzone() {
 			window.open("<c:url value='/Zone/FindZone.do'/>","get","height=500,width=1200,resizable=no");
@@ -439,8 +439,8 @@
 					      	  		<td>
 					      	  			<input type="hidden"/>
 					      	  		    <input type="radio" onclick="saletype('c')" name="res_sale_type"  style="margin-left: 20px;" value="c"> 쿠폰</input> 
-					        			<input type="radio" name="res_sale_type" style="margin-left: 50px;" value="p"> 포인트</input>
-								    	<input type="radio" name="res_sale_type" checked="checked" style="margin-left: 50px;" value="n"> 미사용</input>
+					        			<input type="radio" onclick="saletype('p')" name="res_sale_type" style="margin-left: 50px;" value="p"> 포인트</input>
+								    	<input type="radio" onclick="saletype('n')" name="res_sale_type" checked="checked" style="margin-left: 50px;" value="n"> 미사용</input>
 								    </td>
 					      	  </tr>
 					      	  <tr id="saletype"></tr>

@@ -17,10 +17,8 @@ import member.service.impl.MemberDao;
 public class FindMemberController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		MemberDao dao = new MemberDao(req.getServletContext());
 		List<MemDto> list = null;
-		
 		try {
 			list = dao.selectMemList();
 		} catch (Exception e) {e.printStackTrace();}
@@ -44,17 +42,21 @@ public class FindMemberController extends HttpServlet {
 		e.getMessage();
 		}
 		op += "opener.document.getElementById(\"smem_id\").value ='"+req.getParameter("smem_id")+"';" 
-			+ "opener.document.getElementById(\"smem\").value ='"+req.getParameter("smem_name")+"';"
-			+ "opener.document.getElementById(\"point_h\").value="+point+";"
-			+ "opener.document.getElementById('card_code').innerHTML='";
-		
-		for(CardDto dto : list) {
-			op += "<option value="+dto.getCard_code()+">"+dto.getCard_code()+"</option>";
-		}
-		
-		
-		op += "';";
-		
+			+ "opener.document.getElementById(\"smem\").value ='"+req.getParameter("smem_id")+"';";
+			
+		System.out.println(req.getParameter("f_case"));
+			///////////////예약일 때
+			if(req.getParameter("f_case").equals("reservation")) {
+						op += "opener.document.getElementById(\"point_h\").value="+point+";"
+							+ "opener.document.getElementById('card_code').innerHTML='";
+						
+						for(CardDto dto : list) {
+							op += "<option value="+dto.getCard_code()+">"+dto.getCard_code()+"</option>";
+						}
+						
+						op += "';";
+			}
+			
 		req.setAttribute("MSG", op);
 		req.setAttribute("WHERE", "FIND_MEM");
 		req.setAttribute("SUC_FAIL", 1);
