@@ -148,6 +148,7 @@
 		//가격 계산하는 메소드 /////////////////////////////////////////////////////////////
 		function changePrice() {
 			var price = 0;
+			var insprice = 0;
 			
 			var rs_year = document.getElementById("rs_year");
 			var rs_month = document.getElementById("rs_month");
@@ -183,12 +184,12 @@
 					alert(price);
 				}
 				if(document.getElementById("res_instype").value=="type_one"){
-					price += (enddate.getHours()-startdate.getHours())*car_insurance_one_hour.value;
-					alert(price);
+					insprice = parseInt(enddate.getHours()-startdate.getHours())*car_insurance_one_hour.value;
+					alert(insprice);
 				}
 				else{
-					price += (enddate.getHours()-startdate.getHours())*car_insurance_two_hour.value;
-					alert(price);
+					insprice = parseInt(enddate.getHours()-startdate.getHours())*car_insurance_two_hour.value;
+					alert(insprice);
 				}
 			}/////같은날일 떄
 			else{
@@ -207,10 +208,10 @@
 									price += (sdtime/600000) * car_price_so_wd.value;					
 								}
 								if(document.getElementById("res_instype").value=="type_one"){
-									price += parseInt(sdtime/3600000) * car_insurance_one_hour.value;
+									insprice += parseInt(sdtime/3600000) * car_insurance_one_hour.value;
 								}
 								else{
-									price += parseInt(sdtime/3600000) * car_insurance_two_hour.value;
+									insprice += parseInt(sdtime/3600000) * car_insurance_two_hour.value;
 								}
 						
 					}
@@ -225,26 +226,18 @@
 									price += (edtime/600000) * car_price_so_wd.value;					
 								}
 								if(document.getElementById("res_instype").value=="type_one"){
-									price += parseInt(edtime/3600000) * car_insurance_one_hour.value;
+									insprice += parseInt(edtime/3600000) * car_insurance_one_hour.value;
 								}
 								else{
-									price += parseInt(edtime/3600000) * car_insurance_two_hour.value;
+									insprice += parseInt(edtime/3600000) * car_insurance_two_hour.value;
 								}
 					}
 					else{
 								alert("중간날");
-								if(d.getDay()==0||d.getDay()==6){
-									price += 24 * 6 * car_price_so_we.value;					
-								}
-								else{
-									price += 24 * 6 * car_price_so_wd.value;					
-								}
-								if(document.getElementById("res_instype").value=="type_one"){
-									price += parseInt(car_insurance_one_day.value);
-								}
-								else{
-									price += parseInt(car_insurance_two_day.value);
-								}
+								if(d.getDay()==0||d.getDay()==6){price += 24 * 6 * car_price_so_we.value;}
+								else{price += 24 * 6 * car_price_so_wd.value;}
+								if(document.getElementById("res_instype").value=="type_one"){insprice += parseInt(car_insurance_one_day.value);}
+								else{insprice += parseInt(car_insurance_two_day.value);}
 					}
 					
 					d = new Date(d.getTime() + (1000*60*60*24));
@@ -252,9 +245,11 @@
 					
 				}
 			}//////다른날일떄
-			alert(price);
+			alert(insprice);
 				document.getElementById("res_price").value = price;
-				document.getElementById("price").value = price;
+				document.getElementById("price").value = parseInt(price)+parseInt(insprice);
+				document.getElementById("res_inscost").value = insprice;
+				
 				
 		}////////////////////////////////////////////////////////////////////////////////////
 		
@@ -265,7 +260,7 @@
 			var que;
 			switch(type){
 				case 'c': que = "<td></td><td><button type='button' onclick='findcoupon()' style='margin-left:15px;color: #000000 !important;' class='btn btn-default btn-sm'/>검색</button></td>";break;
-				case 'p': que = "<td></td><td><div class='col-xs-3'><input type='text' class='form-control' name='point' /></div> 보유 포인트 : "+document.getElementById("point_h").value+" 최대 : "+parseInt(document.getElementById("res_price").value)/10+" 원 </td>";break;
+				case 'p': que = "<td></td><td><div class='col-xs-3'><input type='text' class='form-control' name='point' /></div> 보유 포인트 : "+document.getElementById("point_h").value+"원, 최대 : "+parseInt(document.getElementById("res_price").value)/10+" 원 </td>";break;
 				case 'n': que = "";
 			}
 			st.innerHTML += que;
@@ -309,17 +304,17 @@
    		<div class="container">
    				  <div class="bs-example" style="font-size: 1.2em">
 				  <h2>예약 입력</h2><br/><br/>
-				    <form action="<c:url value='/Coupon/InsertCoupon.do'/>" method="post">
+				    <form action="<c:url value='/Reserve/InsertReserve.do'/>" method="post">
 				  
-				    <input type="hidden" Id="car_land_price"/>
-				    <input type="hidden" Id="car_jeju_price"/>
-				    <input type="hidden" Id="car_price_so_wd"/>
-				    <input type="hidden" Id="car_price_so_we"/>
-				    <input type="hidden" Id="car_insurance_one_hour"/>
-				    <input type="hidden" Id="car_insurance_one_day"/>
-				    <input type="hidden" Id="car_insurance_two_hour"/>
-				    <input type="hidden" Id="car_insurance_two_day"/>
-				    <input type="hidden" Id="point_h"/>
+				    <input type="hidden" value=0 Id="car_land_price"/>
+				    <input type="hidden" value=0  Id="car_jeju_price"/>
+				    <input type="hidden" value=0  Id="car_price_so_wd"/>
+				    <input type="hidden" value=0  Id="car_price_so_we"/>
+				    <input type="hidden" value=0  Id="car_insurance_one_hour"/>
+				    <input type="hidden" value=0  Id="car_insurance_one_day"/>
+				    <input type="hidden" value=0  Id="car_insurance_two_hour"/>
+				    <input type="hidden" value=0  Id="car_insurance_two_day"/>
+				    <input type="hidden" value=0  Id="point_h"/>
 				    
 				      	  <table class="table table-bordered table-striped">
 				      	  
@@ -430,6 +425,7 @@
 					      	  				<option value="type_one">자기부담금 최대 30만원</option>
 					      	  				<option value="type_two">자기부담금 최대 70만원</option>
 					      	  			</select>
+					      	  			<input type="hidden" value="" id="res_inscost" name="res_inscost" />
 					      	  			</div>
  					      	  		</td>
 					      	  </tr>
@@ -466,7 +462,7 @@
 					      	  <tr>
 					      	  		<td><label>결제 특이사항</label></td>
 					      	  		<td>
-					      	  			<textarea rows="5" cols="80" class="form-control" id="di_id"></textarea>
+					      	  			<textarea rows="5" cols="80" name="pay_article" class="form-control" id="di_id"></textarea>
 					      	  		</td>
 					      	  </tr>
 					      </tbody>

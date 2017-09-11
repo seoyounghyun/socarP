@@ -87,7 +87,7 @@
 
 	                              <ul class="dropdown-menu">
                                   <li>
-                                      <a href="<c:url value='/Reservation/ReserveInsert.do' />">예약 수동 등록</a>
+                                      <a href="<c:url value='/Reserve/InsertReserve.do' />">예약 수동 등록</a>
                                   </li>
                                   <li>
                                       <a href="<c:url value='/Reservation/ReserveList.do' />">예약 보기</a>

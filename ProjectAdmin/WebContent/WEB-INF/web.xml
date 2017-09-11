@@ -359,15 +359,7 @@
 		
 		
 <!-- 예약 관련 서블릿 등록 -->
-		<servlet>	
-			<servlet-name>RESERVEINSERT</servlet-name>
-			<servlet-class>reservation.controller.ReserveInsertController</servlet-class>
-		</servlet>
-		<servlet-mapping>
-			<servlet-name>RESERVEINSERT</servlet-name>
-			<url-pattern>/Reservation/ReserveInsert.do</url-pattern>
-		</servlet-mapping>
-		 
+
 		<servlet>
 		  	<servlet-name>RESERVELIST</servlet-name>
 		  	<servlet-class>reservation.controller.ReserveListController</servlet-class>
@@ -375,6 +367,15 @@
 		<servlet-mapping>
 		  	<servlet-name>RESERVELIST</servlet-name>
 		  	<url-pattern>/Reservation/ReserveList.do</url-pattern>
+		</servlet-mapping>
+		
+		<servlet>
+		  	<servlet-name>INSERTRESERVE</servlet-name>
+		  	<servlet-class>reservation.controller.ReserveInsertController</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		  	<servlet-name>INSERTRESERVE</servlet-name>
+		  	<url-pattern>/Reserve/InsertReserve.do</url-pattern>
 		</servlet-mapping>
 		
 		
