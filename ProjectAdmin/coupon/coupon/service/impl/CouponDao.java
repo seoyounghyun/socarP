@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 import coupon.service.Cou_createDto;
 import coupon.service.CouponDto;
 import coupon.service.CouponService;
+import member.service.MemDto;
 
 public class CouponDao implements CouponService {
 
@@ -191,7 +192,9 @@ public class CouponDao implements CouponService {
 		conn.commit();
 		close();
 		return count;
-	}
+	}///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 	

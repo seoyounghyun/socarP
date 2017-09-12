@@ -6,24 +6,37 @@ public class ReserveDto {
 	private String smem_id;
 	private String car_i_code;
 	private String card_code;
+	
 	private String res_price;
 	private java.util.Date res_date_start;
 	private java.util.Date res_date_end;
-	private String res_type;
+	private String reserve_type;
 	private java.util.Date res_date;
 	private String res_instype;
-	private String res_sale_type;
+	private String res_inscost;
+	
 	private String res_cardkey;
 	private String res_article;
 	
+	private String ms_code;
+	private String cou_c_code;
 	
+	private String sale_price;
 	
-	
+
 	
 	//게터 세터
+
+	
 	
 	public String getRes_code() {
 		return res_code;
+	}
+	public String getSale_price() {
+		return sale_price;
+	}
+	public void setSale_price(String sale_price) {
+		this.sale_price = sale_price;
 	}
 	public void setRes_code(String res_code) {
 		this.res_code = res_code;
@@ -64,11 +77,11 @@ public class ReserveDto {
 	public void setRes_date_end(java.util.Date res_date_end) {
 		this.res_date_end = res_date_end;
 	}
-	public String getRes_type() {
-		return res_type;
+	public String getReserve_type() {
+		return reserve_type;
 	}
-	public void setRes_type(String res_type) {
-		this.res_type = res_type;
+	public void setReserve_type(String reserve_type) {
+		this.reserve_type = reserve_type;
 	}
 	public java.util.Date getRes_date() {
 		return res_date;
@@ -82,11 +95,11 @@ public class ReserveDto {
 	public void setRes_instype(String res_instype) {
 		this.res_instype = res_instype;
 	}
-	public String getRes_sale_type() {
-		return res_sale_type;
+	public String getRes_inscost() {
+		return res_inscost;
 	}
-	public void setRes_sale_type(String res_sale_type) {
-		this.res_sale_type = res_sale_type;
+	public void setRes_inscost(String res_inscost) {
+		this.res_inscost = res_inscost;
 	}
 	public String getRes_cardkey() {
 		return res_cardkey;
@@ -100,6 +113,19 @@ public class ReserveDto {
 	public void setRes_article(String res_article) {
 		this.res_article = res_article;
 	}
+	public String getMs_code() {
+		return ms_code;
+	}
+	public void setMs_code(String ms_code) {
+		this.ms_code = ms_code;
+	}
+	public String getCou_c_code() {
+		return cou_c_code;
+	}
+	public void setCou_c_code(String cou_c_code) {
+		this.cou_c_code = cou_c_code;
+	}
+	
 	
 
 

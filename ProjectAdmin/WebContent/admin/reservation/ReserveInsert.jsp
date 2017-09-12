@@ -110,10 +110,10 @@
 			}
 		};
 		function findid(){
-			window.open("<c:url value='/Member/FindId.do'/>?f_case=reservation","get","height=500,width=1200,resizable=no");
+			window.open("<c:url value='/Member/FindId.do'/>?f_case=reservation","get","height=500,width=1200");
 		}
 		function findzone() {
-			window.open("<c:url value='/Zone/FindZone.do'/>","get","height=500,width=1200,resizable=no");
+			window.open("<c:url value='/Zone/FindZone.do'/>","get","height=500,width=1200");
 		}
 		function findcar() {
 			if(document.getElementById("soz_code").value != "none"){
@@ -286,13 +286,14 @@
 			}
 			else{
 				document.getElementById("pointwarning").innerHTML="";
+				document.getElementById("sale_price").value=document.getElementById("point").value;
 				return true;
 			}
 		}
 		
 		
 		function findcoupon(){
-			alert("쿠폰찾기")
+			window.open("<c:url value='/Coupon/CouponFind.do'/>?soz_code="+document.getElementById("soz_code"),"get","height=500,width=1200");
 		}
 	</script>
 	
@@ -339,6 +340,8 @@
 				    <input type="hidden" value=0  Id="car_insurance_two_hour"/>
 				    <input type="hidden" value=0  Id="car_insurance_two_day"/>
 				    <input type="hidden" value=0  Id="point_h"/>
+				    <input type="hidden" value=0  Id="sale_price" name="sale_price"/>
+				    
 				    
 				      	  <table class="table table-bordered table-striped">
 				      	  
