@@ -174,33 +174,33 @@
 			
 			
 			if(startdate.getDate()==enddate.getDate()){
-				alert("같은날");
+				//alert("같은날");
 				if(startdate.getDay()==6||startdate.getDay()==0){
 					price = (enddate - startdate)/600000 * car_price_so_we.value;
-					alert(price);
+					//alert(price);
 				}
 				else{
 					price = (enddate - startdate)/600000 * car_price_so_wd.value;
-					alert(price);
+					//alert(price);
 				}
 				if(document.getElementById("res_instype").value=="type_one"){
 					insprice = parseInt(enddate.getHours()-startdate.getHours())*car_insurance_one_hour.value;
-					alert(insprice);
+					//alert(insprice);
 				}
 				else{
 					insprice = parseInt(enddate.getHours()-startdate.getHours())*car_insurance_two_hour.value;
-					alert(insprice);
+					//alert(insprice);
 				}
 			}/////같은날일 떄
 			else{
-				alert("다른날");
-				alert(((enddate-startdate)/(3600000*24)));
+				//alert("다른날");
+				//alert(((enddate-startdate)/(3600000*24)));
 				var d = new Date(startdate);
 				while(d.getTime()<=enddate.getTime()){
 					if(d.getDate()==startdate.getDate()){
-							alert("첫날");		
+							//alert("첫날");		
 							var sdtime = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate()).getTime()+(1000*60*60*24) - startdate;
-							alert(sdtime/600000);
+							//alert(sdtime/600000);
 								if(d.getDay()==0||d.getDay()==6){
 									price += (sdtime/600000) * car_price_so_we.value;					
 								}
@@ -216,9 +216,9 @@
 						
 					}
 					else if(d.getDate()==enddate.getDate()){
-								alert("마지막날");
+								//alert("마지막날");
 								var edtime = enddate - new Date(enddate.getFullYear(),enddate.getMonth(),enddate.getDate()).getTime();
-								alert(edtime/600000);
+								//alert(edtime/600000);
 								if(d.getDay()==0||d.getDay()==6){
 									price += (edtime/600000) * car_price_so_we.value;					
 								}
@@ -233,7 +233,7 @@
 								}
 					}
 					else{
-								alert("중간날");
+								//alert("중간날");
 								if(d.getDay()==0||d.getDay()==6){price += 24 * 6 * car_price_so_we.value;}
 								else{price += 24 * 6 * car_price_so_wd.value;}
 								if(document.getElementById("res_instype").value=="type_one"){insprice += parseInt(car_insurance_one_day.value);}
@@ -241,13 +241,19 @@
 					}
 					
 					d = new Date(d.getTime() + (1000*60*60*24));
-					alert(d.getDate());
+					//alert(d.getDate());
 					
 				}
 			}//////다른날일떄
-			alert(insprice);
+			//alert(insprice);
+				if(document.getElementById("point")!=null){
+					document.getElementById("price").value = parseInt(price)+parseInt(insprice)-parseInt(document.getElementById("point").value==""?0:document.getElementById("point").value)
+				}
+				else{
+					document.getElementById("price").value = parseInt(price)+parseInt(insprice)
+				};
+				
 				document.getElementById("res_price").value = price;
-				document.getElementById("price").value = parseInt(price)+parseInt(insprice);
 				document.getElementById("res_inscost").value = insprice;
 				
 				
@@ -260,12 +266,30 @@
 			var que;
 			switch(type){
 				case 'c': que = "<td></td><td><button type='button' onclick='findcoupon()' style='margin-left:15px;color: #000000 !important;' class='btn btn-default btn-sm'/>검색</button></td>";break;
-				case 'p': que = "<td></td><td><div class='col-xs-3'><input type='text' class='form-control' name='point' /></div> 보유 포인트 : "+document.getElementById("point_h").value+"원, 최대 : "+parseInt(document.getElementById("res_price").value)/10+" 원 </td>";break;
+				case 'p': que = "<td></td><td><div class='col-xs-3'><input type='text' onkeyup='if(checkpoint())changePrice();' id='point' class='form-control' name='point' /></div> 보유 포인트 : "+document.getElementById("point_h").value+"원, 최대 : "+parseInt(document.getElementById("price").value)/10+" 원 <p id='pointwarning' value='' style='color:red !important'></p></td>";break;
 				case 'n': que = "";
 			}
 			st.innerHTML += que;
 			
 		}
+		
+		
+		function checkpoint(){
+			var val = (parseInt(document.getElementById("res_price").value)+parseInt(document.getElementById("res_inscost").value))/10;
+			if(val < document.getElementById("point").value){
+				document.getElementById("pointwarning").innerHTML="포인트 사용 불가 : 최대 사용 가능 금액 초과";
+				return false;
+			}
+			else if(document.getElementById("point").value > parseInt(document.getElementById("point_h").value)){
+				document.getElementById("pointwarning").innerHTML="포인트 사용 불가 : 보유 포인트 초과";
+				return false;
+			}
+			else{
+				document.getElementById("pointwarning").innerHTML="";
+				return true;
+			}
+		}
+		
 		
 		function findcoupon(){
 			alert("쿠폰찾기")
@@ -434,9 +458,9 @@
 					      	  		<td><label>할인 유형</label></td>
 					      	  		<td>
 					      	  			<input type="hidden"/>
-					      	  		    <input type="radio" onclick="saletype('c')" name="res_sale_type"  style="margin-left: 20px;" value="c"> 쿠폰</input> 
-					        			<input type="radio" onclick="saletype('p')" name="res_sale_type" style="margin-left: 50px;" value="p"> 포인트</input>
-								    	<input type="radio" onclick="saletype('n')" name="res_sale_type" checked="checked" style="margin-left: 50px;" value="n"> 미사용</input>
+					      	  		    <input type="radio" onclick="saletype('c');changePrice();" name="res_sale_type"  style="margin-left: 20px;" value="c"> 쿠폰</input> 
+					        			<input type="radio" onclick="saletype('p');changePrice();" name="res_sale_type" style="margin-left: 50px;" value="p"> 포인트</input>
+								    	<input type="radio" onclick="saletype('n');changePrice();" name="res_sale_type" checked="checked" style="margin-left: 50px;" value="n"> 미사용</input>
 								    </td>
 					      	  </tr>
 					      	  <tr id="saletype"></tr>

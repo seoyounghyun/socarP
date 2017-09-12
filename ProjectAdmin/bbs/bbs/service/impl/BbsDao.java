@@ -80,7 +80,7 @@ public class BbsDao implements NoticeService {
 	@Override
 	public int insertNotice(NoticeDto dto, String[] srcs) throws Exception {
 		conn.setAutoCommit(false);
-		String sql = "INSERT INTO NOTICE VALUES('NOT_'||LAPD(NOT_NO_SEQ.NEXTVAL,10,'0'),?,?,?,SYSDATE)";
+		String sql = "INSERT INTO NOTICE VALUES(NOT_NO_SEQ.NEXTVAL,?,?,?,SYSDATE)";
 		int affected = 0 ;
 		psmt = conn.prepareStatement(sql);
 		
@@ -91,7 +91,7 @@ public class BbsDao implements NoticeService {
 		affected = psmt.executeUpdate();
 		
 		if(affected == 1 && srcs != null) {
-				sql = "INSERT INTO NOTICE_IMG VALUES('N_I_'||(NOT_IMG_CODE_SEQ.NEXTVAL),'NOT_'||LAPD(NOT_NO_SEQ.CURRVAL,10,'0'),?)";
+				sql = "INSERT INTO NOTICE_IMG VALUES('N_I_'||(NOT_IMG_CODE_SEQ.NEXTVAL),NOT_NO_SEQ,?)";
 				psmt = conn.prepareStatement(sql);
 			for(String src :srcs) {
 				psmt.setString(1, src);
