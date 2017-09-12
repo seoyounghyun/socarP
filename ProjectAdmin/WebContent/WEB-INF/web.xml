@@ -219,8 +219,7 @@
 		  		<servlet-name>COUPONISSUE</servlet-name>
 		  		<url-pattern>/Coupon/CouponCreate.do</url-pattern>
 		  </servlet-mapping>
-<<<<<<< HEAD
-		  
+	  
 		  <servlet>
 		  		<servlet-name>COUPONFIND</servlet-name>
 		  		<servlet-class>coupon.controller.CouponFindController</servlet-class>
@@ -228,7 +227,7 @@
 		  <servlet-mapping>
 		  		<servlet-name>COUPONFIND</servlet-name>
 		  		<url-pattern>/Coupon/CouponFind.do</url-pattern>
-=======
+		  </servlet-mapping>
 		  <servlet>
 		  		<servlet-name>FINDCOUPON</servlet-name>
 		  		<servlet-class>coupon.controller.CouponCreateController</servlet-class>
@@ -236,7 +235,6 @@
 		  <servlet-mapping>
 		  		<servlet-name>FINDCOUPON</servlet-name>
 		  		<url-pattern>/Coupon/CouponCreate.do</url-pattern>
->>>>>>> branch 'master' of https://github.com/seoyounghyun/socarP.git
 		  </servlet-mapping>
 
 
