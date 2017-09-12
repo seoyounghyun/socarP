@@ -219,6 +219,14 @@
 		  		<servlet-name>COUPONISSUE</servlet-name>
 		  		<url-pattern>/Coupon/CouponCreate.do</url-pattern>
 		  </servlet-mapping>
+		  <servlet>
+		  		<servlet-name>FINDCOUPON</servlet-name>
+		  		<servlet-class>coupon.controller.CouponCreateController</servlet-class>
+		  </servlet>
+		  <servlet-mapping>
+		  		<servlet-name>FINDCOUPON</servlet-name>
+		  		<url-pattern>/Coupon/CouponCreate.do</url-pattern>
+		  </servlet-mapping>
 
 
 <!-- 어드민 관련 서블릿 -->
