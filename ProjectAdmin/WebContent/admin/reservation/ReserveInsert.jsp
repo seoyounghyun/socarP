@@ -98,7 +98,7 @@
 					rs_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";
 					re_date.innerHTML += "<option value='"+i+"'>"+i+"</option>";					
 				}
-			}
+	 		}
 			for(var i=0 ; i < 24 ; i++){
 					if(i<10){i = "0"+i;}
 				for(var j = 0 ; j<= 50 ; j += 10){
