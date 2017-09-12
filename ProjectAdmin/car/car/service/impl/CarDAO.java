@@ -221,7 +221,7 @@ public class CarDAO implements CarService{
 
 	@Override
 	public int car_issue(Car_IssueDTO dto) throws Exception {
-		String sql="INSERT INTO CAR_ISSUE VALUES('1',?,?,?,?,?,?,?)";
+		String sql="INSERT INTO CAR_ISSUE VALUES('C_T_'||LPAD(CAR_I_CODE_SEQ.NEXTVAL,10,'0'),?,?,?,?,?,?,?)";
 		int affected=0;
 		
 		psmt = conn.prepareStatement(sql);

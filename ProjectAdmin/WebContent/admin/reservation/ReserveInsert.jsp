@@ -149,6 +149,7 @@
 		function changePrice() {
 			var price = 0;
 			var insprice = 0;
+			var point = document.getElementById("point");
 			
 			var rs_year = document.getElementById("rs_year");
 			var rs_month = document.getElementById("rs_month");
@@ -158,6 +159,7 @@
 			var re_date = document.getElementById("re_date");
 			var re_time = document.getElementById("re_time");
 			var rs_time = document.getElementById("rs_time");
+			
 			
 			var car_land_price = document.getElementById("car_land_price");
 			var car_jeju_price = document.getElementById("car_jeju_price");
@@ -246,6 +248,7 @@
 				}
 			}//////다른날일떄
 			//alert(insprice);
+<<<<<<< HEAD
 				if(document.getElementById("point")!=null){
 					document.getElementById("price").value = parseInt(price)+parseInt(insprice)-parseInt(document.getElementById("point").value==""?0:document.getElementById("point").value)
 				}
@@ -255,7 +258,13 @@
 				
 				document.getElementById("res_price").value = price;
 				document.getElementById("res_inscost").value = insprice;
+=======
+>>>>>>> branch 'master' of https://github.com/seoyounghyun/socarP.git
 				
+				document.getElementById("res_price").value = price;
+				if(point!=null){document.getElementById("price").value = parseInt(price)+parseInt(insprice)-parseInt(point.value==""?0:point.value);}
+				else{document.getElementById("price").value = parseInt(price)+parseInt(insprice);}
+				document.getElementById("res_inscost").value = insprice;
 				
 		}////////////////////////////////////////////////////////////////////////////////////
 		
@@ -266,11 +275,31 @@
 			var que;
 			switch(type){
 				case 'c': que = "<td></td><td><button type='button' onclick='findcoupon()' style='margin-left:15px;color: #000000 !important;' class='btn btn-default btn-sm'/>검색</button></td>";break;
+<<<<<<< HEAD
 				case 'p': que = "<td></td><td><div class='col-xs-3'><input type='text' onkeyup='if(checkpoint())changePrice();' id='point' class='form-control' name='point' /></div> 보유 포인트 : "+document.getElementById("point_h").value+"원, 최대 : "+parseInt(document.getElementById("price").value)/10+" 원 <p id='pointwarning' value='' style='color:red !important'></p></td>";break;
+=======
+				case 'p': que = "<td></td><td><div class='col-xs-3'><input type='text' onkeyup='if(checkpoint())changePrice();' class='form-control' id='point' name='point' /></div> 보유 포인트 : "+document.getElementById("point_h").value+"원, 최대 : "+parseInt(document.getElementById("price").value)/10+" 원 <p id='checkpoint' value='' style='color:red !important;'></p> </td>";break;
+>>>>>>> branch 'master' of https://github.com/seoyounghyun/socarP.git
 				case 'n': que = "";
 			}
 			st.innerHTML += que;
 			
+		}
+		function checkpoint() {
+			
+			var val = (parseInt(document.getElementById("res_price").value)+parseInt(document.getElementById("res_inscost").value))/10;
+			if( val < parseInt(document.getElementById("point").value)){
+				document.getElementById("checkpoint").innerHTML="포인트 사용 불가 : 최대 사용가능값 초과";
+				return false;
+			}
+			else if( parseInt(document.getElementById("point_h").value) < parseInt(document.getElementById("point").value)){
+				document.getElementById("checkpoint").innerHTML="포인트 사용 불가 : 포인트 부족";
+				return false;
+			}
+			else{
+				document.getElementById("checkpoint").innerHTML="";
+				return true;
+			}
 		}
 		
 		
@@ -462,7 +491,11 @@
 					      	  		<td>
 					      	  			<input type="hidden"/>
 					      	  		    <input type="radio" onclick="saletype('c');changePrice();" name="res_sale_type"  style="margin-left: 20px;" value="c"> 쿠폰</input> 
+<<<<<<< HEAD
 					        			<input type="radio" onclick="saletype('p');changePrice();" name="res_sale_type" style="margin-left: 50px;" value="p"> 포인트</input>
+=======
+					        			<input type="radio" onclick="saletype('p')" name="res_sale_type" style="margin-left: 50px;" value="p"> 포인트</input>
+>>>>>>> branch 'master' of https://github.com/seoyounghyun/socarP.git
 								    	<input type="radio" onclick="saletype('n');changePrice();" name="res_sale_type" checked="checked" style="margin-left: 50px;" value="n"> 미사용</input>
 								    </td>
 					      	  </tr>
