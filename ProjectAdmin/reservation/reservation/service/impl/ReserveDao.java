@@ -12,6 +12,7 @@ import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import reservation.service.Canc_Dto;
+import reservation.service.Rent_E_Dto;
 import reservation.service.Rent_S_Dto;
 import reservation.service.ReserveDto;
 import reservation.service.ReserveService;
@@ -36,7 +37,7 @@ public class ReserveDao implements ReserveService{
 		
 		
 	
-	}
+	}/////////////////////////////////////////////////////////////
 	
 	@Override
 	public List<ReserveDto> selectReserveList() throws Exception {
@@ -72,7 +73,7 @@ public class ReserveDao implements ReserveService{
 			list.add(dto);
 		}
 		
-		
+		close();
 		return list;
 	}//////////////////////////////////////////////////////////////
 
@@ -129,6 +130,7 @@ public class ReserveDao implements ReserveService{
 		affected = psmt.executeUpdate();
 		
 		conn.commit();
+		close();
 		return affected;
 	}///////////////////////////////////////////////////////////////
 
@@ -144,11 +146,13 @@ public class ReserveDao implements ReserveService{
 			
 			affected = psmt.executeUpdate();
 			if(affected==0) {
+				close();
 				return affected;
 			}
 		}
 
 		conn.commit();
+		close();
 		return affected;
 	}///////////////////////////////////////////////////////////
 
@@ -171,7 +175,7 @@ public class ReserveDao implements ReserveService{
 			
 			list.add(dto);
 		}
-		
+		close();
 		return list;
 	}//////////////////////////////////////////////////////////////////
 
@@ -187,6 +191,7 @@ public class ReserveDao implements ReserveService{
 			affected = psmt.executeUpdate();
 			
 				if(affected==0) {
+					close();
 					return affected;
 				}
 				
@@ -212,6 +217,7 @@ public class ReserveDao implements ReserveService{
 		}
 		
 		conn.commit();
+		close();
 		return affected;
 	}
 
@@ -228,6 +234,51 @@ public class ReserveDao implements ReserveService{
 			dto.setCanc_price(rs.getString(2));
 			
 			list.add(dto);
+		}
+		close();
+		return list;
+	}/////////////////////////////////////////////////////////////
+
+	@Override
+	public int insertRent_E(Rent_E_Dto dto) throws Exception {
+		affected = 0;
+		String sql="INSERT INTO RENT_E VALUES(?,SYSDATE,?,?,?,?,?,?)";
+		psmt = conn.prepareStatement(sql);
+		psmt.setString(1, dto.getRes_code());
+		psmt.setString(2, dto.getRent_e_article());
+		psmt.setString(3, dto.getRent_e_km());
+		psmt.setString(4, dto.getRent_e_hipass());
+		psmt.setString(5, dto.getRent_e_panalty());
+		psmt.setString(6, dto.getRent_e_ectprice());
+		psmt.setString(7, dto.getRent_e_ectsale());
+		
+		affected = psmt.executeUpdate();
+		close();
+		return affected;
+	}/////////////////////////////////////////////////////////
+
+	@Override
+	public List<Rent_E_Dto> selectRent_EList() throws Exception {
+		List<Rent_E_Dto> list = new Vector<Rent_E_Dto>();
+		
+		String sql = "SELECT * FROM RENT_E";
+		
+		psmt = conn.prepareStatement(sql);
+		
+		rs = psmt.executeQuery();
+		while(rs.next()) {
+			Rent_E_Dto dto = new Rent_E_Dto();
+			
+			dto.setRes_code(rs.getString(1));
+			dto.setRent_e_date(rs.getDate(2));
+			dto.setRent_e_article(rs.getString(3));
+			dto.setRent_e_km(rs.getString(4));
+			dto.setRent_e_hipass(rs.getString(5));
+			dto.setRent_e_panalty(rs.getString(6));
+			dto.setRent_e_ectprice(rs.getString(7));
+			dto.setRent_e_ectsale(rs.getString(8));
+			list.add(dto);
+			
 		}
 		
 		return list;

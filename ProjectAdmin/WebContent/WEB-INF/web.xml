@@ -264,11 +264,11 @@
 		  </servlet-mapping>
 
 		   <servlet>
-		  		<servlet-name>COUPONISSUE</servlet-name>
+		  		<servlet-name>COUPONCREATE</servlet-name>
 		  		<servlet-class>coupon.controller.CouponCreateController</servlet-class>
 		  </servlet>
 		  <servlet-mapping>
-		  		<servlet-name>COUPONISSUE</servlet-name>
+		  		<servlet-name>COUPONCREATE</servlet-name>
 		  		<url-pattern>/Coupon/CouponCreate.do</url-pattern>
 		  </servlet-mapping>
 	  
@@ -281,6 +281,15 @@
 		  		<url-pattern>/Coupon/CouponFind.do</url-pattern>
 		  </servlet-mapping>
 
+
+		   <servlet>
+		  		<servlet-name>COUPONISSUE</servlet-name>
+		  		<servlet-class>coupon.controller.CouponIssueController</servlet-class>
+		  </servlet>
+		  <servlet-mapping>
+		  		<servlet-name>COUPONISSUE</servlet-name>
+		  		<url-pattern>/Coupon/CouponIssue.do</url-pattern>
+		  </servlet-mapping>
 
 
 <!-- 어드민 관련 서블릿 -->
@@ -458,6 +467,14 @@
 		  	<url-pattern>/Reserve/RentCancel.do</url-pattern>
 		</servlet-mapping>
 		
+		<servlet>
+		  	<servlet-name>RENTEND</servlet-name>
+		  	<servlet-class>reservation.controller.RentEndController</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		  	<servlet-name>RENTEND</servlet-name>
+		  	<url-pattern>/Reserve/RentEnd.do</url-pattern>
+		</servlet-mapping>
 		
 		
 <!-- 차량 관련 서블릿 등록 -->

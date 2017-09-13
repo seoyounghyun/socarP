@@ -95,7 +95,7 @@
 	                				<td>${item.cou_exp }</td>
 	                				<td>${item.cou_create_count}</td>
 	                				<td style="text-align: center;">
-	                					<button class="btn btn-default btn-sm" onclick="detailCoupon(${item.cou_code})">상세보기</button>
+	                					<button class="btn btn-default btn-sm" onclick="detailCoupon('${item.cou_code}')">상세보기</button>
 	                				</td>
 	                		</tr>
                 		</c:forEach>

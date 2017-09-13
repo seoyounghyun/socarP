@@ -46,27 +46,54 @@
 	
 	<script>
 		function urlChange(state) {
-			if(state=='rent_start'){
-				document.getElementById("f").action="<c:url value='/Reserve/RentStart.do'/>"
-			}
-			else{	
-				document.getElementById("f").action="<c:url value='/Reserve/RentCancel.do'/>"}
 			
-			document.getElementById("f").submit();
+			if(confirm("정말 변경하시겠습니까?")){
+						if(state=='rent_start'){
+							document.getElementById("f").action="<c:url value='/Reserve/RentStart.do'/>"
+							document.getElementById("f").submit();
+						}
+						else if(state=='rent_end'){
+							//document.getElementById("f").action="<c:url value='/Reserve/RentStart.do'/>"
+							window.open("<c:url value='/admin/reservation/RentEnd.jsp'/>?res_code="+document.getElementsByName("res_codes")[0].value,"get","height=500,width=1200");
+						}
+						else{	
+							document.getElementById("f").action="<c:url value='/Reserve/RentCancel.do'/>"
+							document.getElementById("f").submit();
+						}
+						
+			}
 			}//////////////////////////////////
 		
 			
 		function confirmstatus(state) {
 			var array = document.getElementsByName("res_codes");
-			var result = true;
-				for(var i=0 ; i<array.length;i++){
-						if(array[i].checked==true && array[i].id != "예약 전"){
-								alert(state+" 불가능한 항목이 포함되어 있습니다.");
-								result = false;
-								break;
+				
+			if(state=="반납완료"){
+					var check = 0;
+					for(var i=0 ; i<array.length;i++){
+						if(array[i].checked==true){
+									check ++;
+							
+								if(array[i].id != "렌트 시작"){
+									alert(state+" 불가능한 항목이 포함되어 있습니다.");
+									return false;
+								}
 						}
-				}
-			return result;
+					}
+					if(check != 1){
+						alert(state+"시에는 한 항목만 선택 가능합니다.");
+						return false;
+					}
+			}
+			else{
+					for(var i=0 ; i<array.length;i++){
+							if(array[i].checked==true && array[i].id != "렌트 전"){
+									alert(state+" 불가능한 항목이 포함되어 있습니다.");
+									return false;
+							}
+					}
+			}	
+			return true;
 			
 		}///////////////////////////////////////////
 		
@@ -81,8 +108,9 @@
              <h2 id="tables-contextual-classes">
             	예약 정보
           </h2><br/><br/>
-          <button type="button" onclick="if(confirmstatus('렌트시작'))urlChange('rent_start');" class="btn btn-info pull-right" >렌트 시작</button>
-          <button type="button" onclick="if(confirmstatus('취소'))urlChange('cancel');" class="btn btn-warning pull-right" style="margin-right:15px; margin-bottom: 5px;">취소</button>
+          <button type="button" onclick="if(confirmstatus('반납완료'))return urlChange('rent_end');" class="btn btn-warning pull-right" >렌트 종료</button>
+          <button type="button" onclick="if(confirmstatus('렌트시작'))return urlChange('rent_start');" class="btn btn-info pull-right" style="margin-right:15px;" >렌트 시작</button>
+          <button type="button" onclick="if(confirmstatus('취소'))return urlChange('cancel');" class="btn btn-warning pull-right" style="margin-right:15px; margin-bottom: 5px;">취소</button>
 
           <div class="table-responsive">
             <table class="table table-bordered table-striped">

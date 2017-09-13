@@ -131,6 +131,9 @@
                     	  <li>
                               <a href="<c:url value='/Coupon/CouponCreate.do' />">쿠폰 발급 </a>
                           </li>
+                    	  <li>
+                              <a href="<c:url value='/Coupon/CouponIssue.do' />">쿠폰 발급 </a>
+                          </li>
                    
                           
                           
