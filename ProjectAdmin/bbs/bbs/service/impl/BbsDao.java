@@ -12,11 +12,14 @@ import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
+import bbs.service.BBSService;
 import bbs.service.Not_imgDto;
 import bbs.service.NoticeDto;
 import bbs.service.NoticeService;
+import bbs.service.RqCarDTO;
+import bbs.service.RqLocDTO;
 
-public class BbsDao implements NoticeService {
+public class BbsDao implements BBSService {
 
 	Connection conn;
 	PreparedStatement psmt;
@@ -193,5 +196,82 @@ public class BbsDao implements NoticeService {
 				
 				return total;
 			}///////////////////getTotalRecordCount
+			@Override
+			public List<RqCarDTO> select_RqCarList() throws Exception {
+				List<RqCarDTO> list = new Vector<RqCarDTO>();
+				String sql = "SELECT R.*,(SELECT COUNT(*) FROM RQC_LIKE WHERE RQC_CODE=R.RQC_CODE) AS LIKE_COUNT,(SELECT COUNT(*) FROM RQC_DIS WHERE RQC_CODE=R.RQC_CODE) AS DIS_COUNT FROM RQ_CAR R ORDER BY RQC_CODE";
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				while(rs.next()){
+					RqCarDTO dto = new RqCarDTO();
+					dto.setRqc_code(rs.getString(1));
+					dto.setRqc_content(rs.getString(2));
+					dto.setRqc_loc(rs.getString(3));
+					dto.setSmem_id(rs.getString(4));
+					dto.setRqc_date(rs.getDate(5));
+					dto.setRqc_like_count(rs.getString(6));
+					dto.setRqc_dis_count(rs.getString(7));
+					list.add(dto);			
+				}
+				return list;
+			}
+
+
+
+
+			@Override
+			public List<RqLocDTO> select_RqLocList() throws Exception {
+				List<RqLocDTO> list = new Vector<RqLocDTO>();
+				String sql = "SELECT R.*,(SELECT COUNT(*) FROM RQL_LIKE WHERE RQL_CODE=R.RQL_CODE) AS LIKE_COUNT,(SELECT COUNT(*) FROM RQL_DIS WHERE RQL_CODE=R.RQL_CODE) AS DIS_COUNT FROM RQ_LOC R ORDER BY RQL_CODE";
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				while(rs.next()){
+					RqLocDTO dto = new RqLocDTO();
+					dto.setRql_code(rs.getString(1));
+					dto.setRql_content(rs.getString(2));
+					dto.setRql_loc(rs.getString(3));
+					dto.setSmem_id(rs.getString(4));
+					dto.setRql_date(rs.getDate(5));
+					dto.setRql_like_count(rs.getString(6));
+					dto.setRql_dis_count(rs.getString(7));
+					list.add(dto);
+				}
+				
+				return list;
+			}
+
+
+
+
+			@Override
+			public int delete_RqCarList(String rqc_code) throws Exception {
+				String sql ="DELETE RQ_CAR WHERE RQC_CODE=?";
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, rqc_code);
+				int affected = psmt.executeUpdate();
+				return affected;
+			}
+
+
+
+
+			@Override
+			public int delete_RqLocList(String rql_code) throws Exception {
+				String sql="DELETE RQ_LOC WHERE RQL_CODE=?";
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, rql_code);
+				int affected = psmt.executeUpdate();
+				return affected;
+			}
+
+
+
+
+			@Override
+			public List<NoticeDto> selectNoticeList() throws Exception {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
 	
 }

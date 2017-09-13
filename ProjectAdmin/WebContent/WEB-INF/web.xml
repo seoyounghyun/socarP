@@ -150,6 +150,40 @@
 		  		<url-pattern>/Bbs/NoticeEdit.do</url-pattern>
 		  </servlet-mapping>
 			
+		<servlet>
+    <servlet-name>RqCarController</servlet-name>
+    <servlet-class>bbs.controller.RqCarController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RqCarController</servlet-name>
+    <url-pattern>/Bbs/RqCar.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RqCarDeleteController</servlet-name>
+    <servlet-class>bbs.controller.RqCarDeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RqCarDeleteController</servlet-name>
+    <url-pattern>/Bbs/RqCarDelete.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RqLocController</servlet-name>
+    <servlet-class>bbs.controller.RqLocController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RqLocController</servlet-name>
+    <url-pattern>/Bbs/RqLoc.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RqLocDeleteController</servlet-name>
+    <servlet-class>bbs.controller.RqLocDeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RqLocDeleteController</servlet-name>
+    <url-pattern>/Bbs/RqLocDelete.do</url-pattern>
+  </servlet-mapping>	
+			
+			
 
 <!-- 포인트 관련 서블릿 등록 -->
 		  <servlet>
