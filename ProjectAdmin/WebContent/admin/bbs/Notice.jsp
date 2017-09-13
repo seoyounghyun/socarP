@@ -47,7 +47,13 @@
 		function insertNotice() {
 			location.href="<c:url value='/Bbs/InsertNotice.do'/>";
 		}
-	
+		function isDelete(not_no){
+			if(confirm("정말로 삭제 할래?")){
+				location.href="<c:url value='/Bbs/NoticeDelete.do'/>?not_no="+not_no;
+			}//////////////////			
+			
+		}/////////////////////	
+		
 	</script>
   </head>
 
@@ -68,7 +74,10 @@
                   <th>번호</th>
                   <th>제목</th>
                   <th>작성자</th>
-                  <th>작성일</th>                  
+                  <th>작성일</th> 
+                  <th>수정</th> 
+                  <th>삭제</th> 
+                                   
                 </tr>
               </thead>
               <tbody>
@@ -84,6 +93,8 @@
 	                		<td><a href="<c:url value='/Bbs/NoticeDetail.do' />?not_no=${dto.not_no}">${dto.not_title}</a></td>
 	                		<td>${dto.ad_id}</td>
 	                		<td>${dto.not_postdate}</td>
+	                		<td style="text-align: center;"><a href="<c:url value='/Bbs/NoticeEdit.do?not_no=${dto.not_no}'/>"><button class="btn btn-info btn-sm">수정하기</button></a></td>
+	                		<td style="text-align: center;"><a href='javascript:isDelete(${dto.not_no})'><button class="btn btn-warning btn-sm">삭제하기</button></a></td>
                 		</tr>
                 		</c:forEach>
                 	</c:otherwise>
@@ -116,8 +127,13 @@
 	             </div><!-- /input-group -->
 	         </div><!-- /.box-body -->
 		   </div>
-	    <p>1 2 3 4 5 6 7 8 9</p>
-          <!--// 검색창  -->
+	    <!-- <p>1 2 3 4 5 6 7 8 9</p> -->
+          <!-- 페이징 -->
+		                      <table width="100%">
+		                        <tr align="center">
+		                          <td>${pagingString}</td>
+		                        </tr>
+		                      </table>
         
  		</div>
  	

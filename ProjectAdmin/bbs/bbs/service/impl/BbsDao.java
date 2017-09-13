@@ -3,6 +3,7 @@ package bbs.service.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
@@ -34,26 +35,27 @@ public class BbsDao implements NoticeService {
 	
 	
 	@Override
-	public List<NoticeDto> selectNoticeList() throws Exception {
+	public List<NoticeDto> selectNoticeList(int start,int end){
+		/*String sql="SELECT * FROM NOTICE ORDER BY NOT_NO DESC" ;*/
 		
-		String sql="SELECT * FROM NOTICE ORDER BY NOT_NO DESC" ;
+		String sql="SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT * FROM NOTICE ORDER BY NOT_NO DESC) T) WHERE R BETWEEN ? AND ?";
 		List<NoticeDto> list = new Vector<NoticeDto>();
-		
-		psmt = conn.prepareStatement(sql);
-		
-		rs = psmt.executeQuery();
-	
-		while(rs.next()){
-			NoticeDto dto = new NoticeDto();
-			dto.setNot_no(rs.getString(1));
-			dto.setAd_id(rs.getString(2));
-			dto.setNot_title(rs.getString(3));
-			dto.setNot_content(rs.getString(4));
-			dto.setNot_postdate(rs.getDate(5));
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, start);
+			psmt.setInt(2, end);
+			rs = psmt.executeQuery();
 			
-			list.add(dto);
-		}
-		close();
+			while(rs.next()){
+				NoticeDto dto = new NoticeDto();
+				dto.setNot_no(rs.getString(1));
+				dto.setAd_id(rs.getString(2));
+				dto.setNot_title(rs.getString(3));
+				dto.setNot_content(rs.getString(4));
+				dto.setNot_postdate(rs.getDate(5));
+				list.add(dto);
+			}
+		} catch (Exception e) {e.printStackTrace();}
 		return list;
 	}
 
@@ -61,18 +63,15 @@ public class BbsDao implements NoticeService {
 
 
 	@Override
-	public void close() throws Exception {
-		if(rs != null){
-			rs.close();
-		}
-		if(psmt !=null){
-			psmt.close();
-		}
-		if(conn != null){
-			conn.close();
-		}
-		
-	}
+	public void close(){
+		try {
+			
+			if(rs !=null) rs.close();
+			if(psmt !=null) psmt.close();
+			if(conn !=null) conn.close();
+			
+		} catch (Exception e) {e.printStackTrace();}
+	}/////////////////close()
 
 
 
@@ -109,16 +108,36 @@ public class BbsDao implements NoticeService {
 	}
 
 
-
 	@Override
-	public NoticeDto selectNoticeOne(String not_no) throws Exception {
+	public NoticeDto selectNoticeOne(String no){
+
+		NoticeDto dto = null;
+		String sql="SELECT * FROM NOTICE WHERE NOT_NO=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+			dto = new NoticeDto();
+			dto.setNot_no(rs.getString(1));
+			dto.setAd_id(rs.getString(2));
+			dto.setNot_title(rs.getString(3));
+			dto.setNot_content(rs.getString(4).replace("\r\n", "<br/>"));
+			dto.setNot_postdate(rs.getDate(5));
+			}
+		} catch (Exception e) {e.printStackTrace();}
+		return dto;
+	}
+	
+	/*@Override
+	public NoticeDto selectNoticeOne(String no) throws Exception {
 
 		String sql="SELECT * FROM NOTICE WHERE NOT_NO=?";
 		NoticeDto dto = new NoticeDto();
 		
 		psmt = conn.prepareStatement(sql);
 		
-		psmt.setString(1, not_no);
+		psmt.setString(1, no);
 		
 		rs = psmt.executeQuery();
 		rs.next();
@@ -130,7 +149,49 @@ public class BbsDao implements NoticeService {
 		dto.setNot_postdate(rs.getDate(5));
 		close();
 		return dto;
-	}
+	}*/
 
+	//삭제용
+			public int delete(String no) {
+				int affected=0;
+				String sql="DELETE NOTICE WHERE NOT_NO=?";		
+				try {
+					psmt = conn.prepareStatement(sql);
+					psmt.setString(1, no);			
+					affected = psmt.executeUpdate();			
+				} catch (SQLException e) {e.printStackTrace();}		
+				return affected;
+			}
+	//수정용
+			public int update(NoticeDto dto) {
+				int affected=0;
+				String sql="UPDATE NOTICE "
+						+ "SET NOT_TITLE=?,NOT_CONTENT=?,WHERE NOT_NO=?";
+				
+				try {
+					psmt = conn.prepareStatement(sql);
+					psmt.setString(1, dto.getNot_title());
+					psmt.setString(2, dto.getNot_content());
+					psmt.setString(3, dto.getNot_no());
+					affected = psmt.executeUpdate();
+					
+				} catch (SQLException e) {e.printStackTrace();}
+				
+				return affected;
+			}////////////////////update
+			
+			//총 레코드 수 얻기용]
+			public int getTotalRecordCount(){
+				int total =0;
+				String sql="SELECT COUNT(*) FROM NOTICE";
+				try {
+					psmt = conn.prepareStatement(sql);
+					rs = psmt.executeQuery();
+					rs.next();
+					total = rs.getInt(1);
+				} catch (SQLException e) {e.printStackTrace();}
+				
+				return total;
+			}///////////////////getTotalRecordCount
 	
 }

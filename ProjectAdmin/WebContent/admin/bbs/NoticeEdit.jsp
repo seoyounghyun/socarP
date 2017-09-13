@@ -42,18 +42,54 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/parallax-slider/modernizr.custom.28468.js">
     </script>
 
-	<style>
-		tr td:first-child{text-align: center;}
-	</style>
+
 
 	<script>
 		var count = 1;
-		var goCouponList = function(){
+		var goNoticeList = function(){
 			
-			location.href="<c:url value='/Bbs/Notice.do' />";
-			
+			history.back();
 		};
+
+		function insertImg() {
+			var img = document.getElementById("img");
+			
+			img.innerHTML += "<tr><td><label>이미지"+count+"</label></td><td><input type='file' style='font-size:1em;' name='not_img_src'/></td></tr>";
+			count+=1;
+		}
+		
 	</script>
+	
+	<script>
+	
+	function goNoticeInsert(){
+		
+		if(document.getElementById("title_id").value == ""){
+			alert("제목을 입력해주세요");
+			document.getElementById("title_id").focus();
+			return false;
+		}
+		else if(document.getElementById("title_id").value.length > 100){
+			alert("제목을 100자이내로 적어주세요");
+			document.getElementById("title_id").focus();
+			return false;
+		}
+		else if(document.getElementById("content_id").value == ""){
+			alert("내용을 입력해주세요");
+			document.getElementById("content_id").focus();
+			return false;
+		}
+		else if(document.getElementById("content_id").value.length > 2000){
+			alert("내용을 2000자로이내로 적어주세요");
+			document.getElementById("content_id").focus();
+			return false;
+		}
+		
+	}
+	
+	
+	</script>
+	
 	
   </head>
 
@@ -62,13 +98,15 @@
    
    		<div class="container">
    				  <div class="bs-example" style="font-size: 1.2em">
-				  <h2>공지사항 상세보기</h2><br/><br/>
+				  <h2>공지 수정</h2><br/><br/>
+				    <input type="hidden" name="no" value="${dto.not_no}"/>
+				    <form action="<c:url value='/Bbs/InsertNotice.do'/>" method="post">
 				    
 				      	  <table class="table table-bordered table-striped">
 				      	  
 				      	  <thead >
 				      	  		<tr>
-				      	  			<th style="width: 30%;">항목</th>
+				      	  			<th>항목</th>
 				      	  			<th>내용</th>
 				      	  		</tr>
 				      	  </thead>
@@ -77,29 +115,24 @@
 					      	  <tr>
 					      	  		<td><label>공지 제목</label></td>
 					      	  		<td>
-								      	${dto.not_title}
-					      	  		</td>
-					      	  </tr>
-					      	  <tr>
-					      	  		<td><label>작성자</label></td>
-					      	  		<td>
-								      	${dto.ad_id}
-					      	  		</td>
-					      	  </tr>
-					      	  <tr>
-					      	  		<td><label>작성일</label></td>
-					      	  		<td>
-								      	${dto.not_postdate}
+								      	<div class="col-xs-5">
+								        <input type="text" class="form-control"  name="not_title" value="${dto.not_title}" id="title_id" />
+								     	</div>
 					      	  		</td>
 					      	  </tr>
 					      	  <tr>
 					      	  		<td><label>공지 내용</label></td>
 					      	  		<td>
-					      	  			${dto.not_content}
+					      	  			<textarea name="not_content" id="content_id" rows="20" cols="80" class="form-control" style="margin-left: 15px;">${dto.not_content}</textarea>
+								        
 								    </td>
 					      	  </tr>
-					      	  
-					      	  
+					      	  <tr>
+					      	  		<td><label>이미지 추가</label></td>
+					      	  		<td>
+					      	  			<input style="font-size: 1em;" type="button" class="btn btn-default btn-sm" onclick="insertImg()" value="이미지 추가(jpg,jpeg,png파일)" />
+								    </td>
+					      	  </tr>
 					      	  
 					      </tbody>
 					    	
@@ -109,10 +142,10 @@
 			      	  	<tbody id="img"></tbody>
 		      	  		</table>
 				    		
-				      <button type="button" class="btn btn-info">수정하기</button>
-				      <button type="button" class="btn btn-info" onclick="goCouponList()">리스트 보기</button>
+				      <button type="submit" class="btn btn-info" onclick="return goNoticeUpdate()">수정하기</button>
+				      <button type="button" class="btn btn-info" onclick="goNoticeList()">뒤로가기</button>
 			
-				    
+				    </form>
 				  </div><!-- /example -->
 
 
