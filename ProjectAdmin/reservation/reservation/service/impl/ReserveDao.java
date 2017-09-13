@@ -11,6 +11,8 @@ import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
+import reservation.service.Canc_Dto;
+import reservation.service.Rent_S_Dto;
 import reservation.service.ReserveDto;
 import reservation.service.ReserveService;
 
@@ -91,10 +93,10 @@ public class ReserveDao implements ReserveService{
 			psmt = conn.prepareStatement(sql);
 			
 			psmt.setString(1, dto.getSmem_id());
+			System.out.println(dto.getSale_price());
 			psmt.setString(2, "-"+dto.getSale_price());
 			
 			affected = psmt.executeUpdate();
-			
 				if(affected == 1) {
 					sql="SELECT LAST_NUMBER-1 FROM USER_SEQUENCES WHERE SEQUENCE_NAME='MS_CODE_SEQ'";
 					
@@ -129,6 +131,107 @@ public class ReserveDao implements ReserveService{
 		conn.commit();
 		return affected;
 	}///////////////////////////////////////////////////////////////
+
+	@Override
+	public int insertsRent_S(String[] res_codes) throws Exception {
+		affected = 0;
+		String sql = "INSERT INTO RENT_S VALUES(?,SYSDATE,'없음')";
+		conn.setAutoCommit(false);
+		
+			psmt = conn.prepareStatement(sql);
+		for(String res_code : res_codes) {
+			psmt.setString(1, res_code);
+			
+			affected = psmt.executeUpdate();
+			if(affected==0) {
+				return affected;
+			}
+		}
+
+		conn.commit();
+		return affected;
+	}///////////////////////////////////////////////////////////
+
+	@Override
+	public List<Rent_S_Dto> selectRent_SList() throws Exception {
+		String sql="SELECT * FROM RENT_S";
+		
+		psmt = conn.prepareStatement(sql);
+		
+		rs = psmt.executeQuery();
+		
+		List<Rent_S_Dto> list = new Vector<Rent_S_Dto>();
+		
+		while(rs.next()) {
+			Rent_S_Dto dto= new Rent_S_Dto();
+			
+			dto.setRes_code(rs.getString(1));
+			dto.setRes_s_date(rs.getDate(2));
+			dto.setRes_s_article(rs.getString(3));
+			
+			list.add(dto);
+		}
+		
+		return list;
+	}//////////////////////////////////////////////////////////////////
+
+	@Override
+	public int insertsCanc(String[] res_codes) throws Exception {
+		conn.setAutoCommit(false);
+		affected = 0;
+		
+		for(String res_code : res_codes) {
+			String sql="INSERT INTO CANC VALUES(?,sysdate)";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, res_code);
+			affected = psmt.executeUpdate();
+			
+				if(affected==0) {
+					return affected;
+				}
+				
+			sql = "SELECT * FROM RESERVE WHERE RES_CODE=?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, res_code);
+				
+			rs = psmt.executeQuery();
+			rs.next();
+				
+		
+				
+				if(rs.getString(14)!=null){
+						sql="INSERT INTO MEMBERSHIP VALUES(MS_CODE_SEQ.NEXTVAL,?,?,SYSDATE)";
+						psmt = conn.prepareStatement(sql);
+					
+						psmt.setString(1, rs.getString(2));
+						psmt.setString(2, rs.getString(16));
+						
+						affected = psmt.executeUpdate();
+				}
+				
+		}
+		
+		conn.commit();
+		return affected;
+	}
+
+	@Override
+	public List<Canc_Dto> selectCancList() throws Exception {
+		String sql = "SELECT * FROM CANC";
+		List<Canc_Dto> list = new Vector<Canc_Dto>();
+		psmt = conn.prepareStatement(sql);
+		rs = psmt.executeQuery();
+		while(rs.next()) {
+			Canc_Dto dto = new Canc_Dto();
+			
+			dto.setRes_code(rs.getString(1));
+			dto.setCanc_price(rs.getString(2));
+			
+			list.add(dto);
+		}
+		
+		return list;
+	}
 
 	
 }

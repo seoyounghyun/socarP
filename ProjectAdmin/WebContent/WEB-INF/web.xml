@@ -388,6 +388,24 @@
 		  	<url-pattern>/Reserve/InsertReserve.do</url-pattern>
 		</servlet-mapping>
 		
+		<servlet>
+		  	<servlet-name>RENTSTART</servlet-name>
+		  	<servlet-class>reservation.controller.RentStartController</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		  	<servlet-name>RENTSTART</servlet-name>
+		  	<url-pattern>/Reserve/RentStart.do</url-pattern>
+		</servlet-mapping>
+		
+		<servlet>
+		  	<servlet-name>RENTCANCEL</servlet-name>
+		  	<servlet-class>reservation.controller.RentCancelController</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		  	<servlet-name>RENTCANCEL</servlet-name>
+		  	<url-pattern>/Reserve/RentCancel.do</url-pattern>
+		</servlet-mapping>
+		
 		
 		
 <!-- 차량 관련 서블릿 등록 -->

@@ -274,7 +274,6 @@
 			switch(type){
 				case 'c': que = "<td></td><td><button type='button' onclick='findcoupon()' style='margin-left:15px;color: #000000 !important;' class='btn btn-default btn-sm'/>검색</button></td>";break;
 				case 'p': que = "<td></td><td><div class='col-xs-3'><input type='text' onkeyup='if(checkpoint())changePrice();' id='point' class='form-control' name='point' /></div> 보유 포인트 : "+document.getElementById("point_h").value+"원, 최대 : "+parseInt(document.getElementById("price").value)/10+" 원 <p id='pointwarning' value='' style='color:red !important'></p></td>";break;
-	
 				case 'n': que = "";
 			}
 			st.innerHTML += que;

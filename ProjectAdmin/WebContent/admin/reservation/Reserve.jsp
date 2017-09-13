@@ -43,16 +43,46 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/parallax-slider/parallax-slider.css" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/parallax-slider/modernizr.custom.28468.js">
     </script>
-
+	
+	<script>
+		function urlChange(state) {
+			if(state=='rent_start'){
+				document.getElementById("f").action="<c:url value='/Reserve/RentStart.do'/>"
+			}
+			else{	
+				document.getElementById("f").action="<c:url value='/Reserve/RentCancel.do'/>"}
+			
+			document.getElementById("f").submit();
+			}//////////////////////////////////
+		
+			
+		function confirmstatus(state) {
+			var array = document.getElementsByName("res_codes");
+			var result = true;
+				for(var i=0 ; i<array.length;i++){
+						if(array[i].checked==true && array[i].id != "예약 전"){
+								alert(state+" 불가능한 항목이 포함되어 있습니다.");
+								result = false;
+								break;
+						}
+				}
+			return result;
+			
+		}///////////////////////////////////////////
+		
+	</script>
+	
   </head>
 
   <body>
     <c:import url="/template/Header.jsp" />
-   
+   		<form action="#" id="f" method="post"/>
    		<div class="container">
              <h2 id="tables-contextual-classes">
             	예약 정보
           </h2><br/><br/>
+          <button type="button" onclick="if(confirmstatus('렌트시작'))urlChange('rent_start');" class="btn btn-info pull-right" >렌트 시작</button>
+          <button type="button" onclick="if(confirmstatus('취소'))urlChange('cancel');" class="btn btn-warning pull-right" style="margin-right:15px; margin-bottom: 5px;">취소</button>
 
           <div class="table-responsive">
             <table class="table table-bordered table-striped">
@@ -63,14 +93,17 @@
                   <th>예약일</th>
                   <th>시작예정일</th>
                   <th>반납예정일</th>
-                  <th>가격</th>                  
+                  <th>가격</th>
+                  <th>상태</th>
+                  <th>선택</th>      
+                  
                 </tr>
               </thead>
               <tbody>
                 
                   <c:choose>
                 	<c:when test="${empty list}">
-                		<tr><td colspan="6">등록된 예약이 없습니다</td></tr>
+                		<tr><td colspan="7">등록된 예약이 없습니다</td></tr>
                 	</c:when>
                 	<c:otherwise>
                 		<c:forEach var="dto" items="${list}">
@@ -81,6 +114,14 @@
 	                		<td>${dto.res_date_start}</td>
 	                		<td>${dto.res_date_end}</td>
 	                		<td>${dto.res_price+dto.res_inscost-dto.sale_price}</td>
+	                		<td>
+	                			<p style="color: ${dto.status_color} ; text-align: center;">
+	                				${dto.status}
+	                			</p>
+	                		</td>
+	                		<td style="text-align: center;">
+	                			<input type="checkbox" name="res_codes" id="${dto.status}" value="${dto.res_code}"/>
+	                		</td>
                 		</tr>
                 		</c:forEach>
                 	</c:otherwise>
@@ -89,6 +130,7 @@
                 
               </tbody>
             </table>
+            </form>
         </div>
           <!--// 검색창  -->
           

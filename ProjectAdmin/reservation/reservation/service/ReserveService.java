@@ -11,6 +11,17 @@ public interface ReserveService {
 	//예약 입력
 	public int insertReserve(ReserveDto dto) throws Exception;
 	
+	//예약 시작
+	public int insertsRent_S(String[] res_codes) throws Exception; 
+	//예약 시작 리스트
+	public List<Rent_S_Dto> selectRent_SList() throws Exception;
+	
+	
+	//예약 취소
+	public int insertsCanc(String[] res_codes) throws Exception;
+	//예약 취소 리스트
+	public List<Canc_Dto> selectCancList() throws Exception;
+	
 	//클로즈
 	public void close() throws Exception;
 }

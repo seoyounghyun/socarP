@@ -73,6 +73,7 @@ public class ReserveInsertController extends HttpServlet {
 				dto.setCou_c_code(cou_c_code);
 			}
 			else if(req.getParameter("res_sale_type").equals("p")) {
+				dto.setMs_code("입력");
 				dto.setSale_price(req.getParameter("sale_price"));
 			}
 			

@@ -116,9 +116,21 @@
 		<c:set var="SUC_URL" value="/ZONE/View.do?soz_code=${param.soz_code}"/>
 	</c:when>
 	
-		<c:when test="${WHERE eq 'RES_INSERT'}">
+	<c:when test="${WHERE eq 'RES_INSERT'}">
 		<c:set var="SUC_MSG" value="입력 성공"/>
 		<c:set var="FAIL_MSG" value="입력 실패"/>
+		<c:set var="SUC_URL" value="/Reservation/ReserveList.do"/>
+	</c:when>
+	
+	<c:when test="${WHERE eq 'INSERT_RENT_S'}">
+		<c:set var="SUC_MSG" value="변경 성공"/>
+		<c:set var="FAIL_MSG" value="변경 실패"/>
+		<c:set var="SUC_URL" value="/Reservation/ReserveList.do"/>
+	</c:when>
+	
+	<c:when test="${WHERE eq 'RES_CANC'}">
+		<c:set var="SUC_MSG" value="취소 성공"/>
+		<c:set var="FAIL_MSG" value="취소 실패"/>
 		<c:set var="SUC_URL" value="/Reservation/ReserveList.do"/>
 	</c:when>
 	

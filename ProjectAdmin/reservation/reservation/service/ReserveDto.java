@@ -23,12 +23,29 @@ public class ReserveDto {
 	
 	private String sale_price;
 	
+	
+	//효율성 위해
+	
+	private String status;
+	private String status_color;
 
 	
 	//게터 세터
 
 	
 	
+	public String getStatus() {
+		return status;
+	}
+	public String getStatus_color() {
+		return status_color;
+	}
+	public void setStatus_color(String status_color) {
+		this.status_color = status_color;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getRes_code() {
 		return res_code;
 	}
