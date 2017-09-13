@@ -15,6 +15,31 @@ import bbs.service.impl.BbsDao;
 
 public class NoticeEditController extends HttpServlet {
 
+	/*@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		BbsDao dao = new BbsDao(req.getServletContext());
+		NoticeDto dto = dao.selectNoticeOne(req.getParameter("not_no"));
+		req.setAttribute("dto", dto);
+		req.getRequestDispatcher("/admin/bbs/NoticeEdit.jsp").forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		BbsDao dao = new BbsDao(req.getServletContext());
+		NoticeDto dto = new NoticeDto();
+		dto.setNot_title(req.getParameter("not_title"));
+		dto.setNot_content(req.getParameter("not_content"));
+		dto.setNot_content(req.getParameter("not_img_src"));
+		
+		int sucorfail = dao.update(dto);
+		
+		req.setAttribute("SUC_FAIL", sucorfail);
+		req.setAttribute("WHERE", "UPDATENOTICE");
+
+		//6]포워드
+		req.getRequestDispatcher("/admin/util/Message.jsp").forward(req, resp);
+	}*/
 	
 	@Override
 	protected void service(
@@ -22,7 +47,7 @@ public class NoticeEditController extends HttpServlet {
 			HttpServletResponse resp) throws ServletException, IOException {
 		
 		if(req.getMethod().toUpperCase().equals("GET")){//수정폼으로 이동
-			String no = req.getParameter("nt_no");
+			String no = req.getParameter("not_no");
 			String nowPage = req.getParameter("nowPage");
 			//모델 호출 및 결과 값 받기]
 			BbsDao dao = new BbsDao(req.getServletContext());

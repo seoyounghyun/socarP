@@ -35,26 +35,27 @@ public class BbsDao implements NoticeService {
 	
 	
 	@Override
-	public List<NoticeDto> selectNoticeList() throws Exception {
+	public List<NoticeDto> selectNoticeList(int start,int end){
+		/*String sql="SELECT * FROM NOTICE ORDER BY NOT_NO DESC" ;*/
 		
-		String sql="SELECT * FROM NOTICE ORDER BY NOT_NO DESC" ;
+		String sql="SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT * FROM NOTICE ORDER BY NOT_NO DESC) T) WHERE R BETWEEN ? AND ?";
 		List<NoticeDto> list = new Vector<NoticeDto>();
-		
-		psmt = conn.prepareStatement(sql);
-		
-		rs = psmt.executeQuery();
-	
-		while(rs.next()){
-			NoticeDto dto = new NoticeDto();
-			dto.setNot_no(rs.getString(1));
-			dto.setAd_id(rs.getString(2));
-			dto.setNot_title(rs.getString(3));
-			dto.setNot_content(rs.getString(4));
-			dto.setNot_postdate(rs.getDate(5));
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, start);
+			psmt.setInt(2, end);
+			rs = psmt.executeQuery();
 			
-			list.add(dto);
-		}
-		close();
+			while(rs.next()){
+				NoticeDto dto = new NoticeDto();
+				dto.setNot_no(rs.getString(1));
+				dto.setAd_id(rs.getString(2));
+				dto.setNot_title(rs.getString(3));
+				dto.setNot_content(rs.getString(4));
+				dto.setNot_postdate(rs.getDate(5));
+				list.add(dto);
+			}
+		} catch (Exception e) {e.printStackTrace();}
 		return list;
 	}
 
@@ -178,5 +179,19 @@ public class BbsDao implements NoticeService {
 				
 				return affected;
 			}////////////////////update
+			
+			//총 레코드 수 얻기용]
+			public int getTotalRecordCount(){
+				int total =0;
+				String sql="SELECT COUNT(*) FROM NOTICE";
+				try {
+					psmt = conn.prepareStatement(sql);
+					rs = psmt.executeQuery();
+					rs.next();
+					total = rs.getInt(1);
+				} catch (SQLException e) {e.printStackTrace();}
+				
+				return total;
+			}///////////////////getTotalRecordCount
 	
 }

@@ -5,7 +5,7 @@ import java.util.List;
 public interface NoticeService {
 
 	//리스트 받아오기
-	public List<NoticeDto> selectNoticeList() throws Exception;
+	public List<NoticeDto> selectNoticeList(int start,int end) throws Exception;
 	
 	//dto받아오기
 	public NoticeDto selectNoticeOne(String not_no) throws Exception;
