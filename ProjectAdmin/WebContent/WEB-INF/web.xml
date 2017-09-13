@@ -123,13 +123,31 @@
 		  		<servlet-name>INSERTNOTICE</servlet-name>
 		  		<url-pattern>/Bbs/InsertNotice.do</url-pattern>
 		  </servlet-mapping>
-		   <servlet>
+		  <servlet>
 		  		<servlet-name>DETAILNOTICE</servlet-name>
 		  		<servlet-class>bbs.controller.NoticeDetailController</servlet-class>
 		  </servlet>
 		  <servlet-mapping>
 		  		<servlet-name>DETAILNOTICE</servlet-name>
 		  		<url-pattern>/Bbs/NoticeDetail.do</url-pattern>
+		  </servlet-mapping>
+		  <!-- NoticeDelete -->
+		  <servlet>
+		  		<servlet-name>DELETENOICE</servlet-name>
+		  		<servlet-class>bbs.controller.NoticeDeleteController</servlet-class>
+		  </servlet>
+		  <servlet-mapping>
+		  		<servlet-name>DELETENOICE</servlet-name>
+		  		<url-pattern>/Bbs/NoticeDelete.do</url-pattern>
+		  </servlet-mapping>
+		  <!-- NoticeEdit -->
+		   <servlet>
+		  		<servlet-name>EDITNOICE</servlet-name>
+		  		<servlet-class>bbs.controller.NoticeEditController</servlet-class>
+		  </servlet>
+		  <servlet-mapping>
+		  		<servlet-name>EDITNOICE</servlet-name>
+		  		<url-pattern>/Bbs/NoticeEdit.do</url-pattern>
 		  </servlet-mapping>
 			
 
