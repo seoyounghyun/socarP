@@ -3,6 +3,7 @@ package admin.service.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
@@ -53,14 +54,16 @@ public class AdminDao implements AdminService{
 	}
 
 	@Override
-	public List<DeptDto> selectDeptList() throws Exception {
+	public List<DeptDto> selectDeptList(int start,int end){
 		
 		List<DeptDto> list = new Vector<DeptDto>();
 		
-		String sql ="SELECT * FROM DEPT ORDER BY DEPT_REGIDATE DESC";
+		String sql ="SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT * FROM DEPT ORDER BY DEPT_REGIDATE DESC) T) WHERE R BETWEEN ? AND ?";
 		
+		try {
 		psmt = conn.prepareStatement(sql);
-		
+		psmt.setInt(1, start);
+		psmt.setInt(2, end);
 		rs = psmt.executeQuery();
 		
 		while(rs.next()) {
@@ -71,10 +74,24 @@ public class AdminDao implements AdminService{
 			dto.setDept_desc(rs.getString(4));
 			list.add(dto);
 		}
-		close();
+		}catch (Exception e) {e.printStackTrace();}
 		
 		return list;
 	}
+	
+	//총 레코드 수 얻기용]
+	public int getTotalRecordCount(){
+		int total =0;
+		String sql="SELECT COUNT(*) FROM DEPT";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {e.printStackTrace();}
+		
+		return total;
+	}///////////////////getTotalRecordCount
 
 	
 	@Override
@@ -169,19 +186,20 @@ public class AdminDao implements AdminService{
 
 
 	@Override
-	public List<AdminDto> selectAdminList() throws Exception {
+	public List<AdminDto> selectAdminList(int start,int end){
 
 		List<AdminDto> list = new Vector<AdminDto>();
 		
-		String sql="SELECT A.*,D.DEPT_NAME FROM AD A JOIN DEPT D ON A.DEPT_NO=D.DEPT_NO ORDER BY AD_REGIDATE DESC";
+		String sql="SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT A.*,D.DEPT_NAME FROM AD A JOIN DEPT D ON A.DEPT_NO=D.DEPT_NO ORDER BY AD_REGIDATE DESC) T) WHERE R BETWEEN ? AND ?";
 		
+		try {
 		psmt = conn.prepareStatement(sql);
-		
+		psmt.setInt(1, start);
+		psmt.setInt(2, end);
 		rs = psmt.executeQuery();
 		
 		while(rs.next()) {
 			AdminDto dto = new AdminDto();
-			
 			dto.setAd_id(rs.getString(1));
 			dto.setDept_no(rs.getString(2));
 			dto.setAd_name(rs.getString(3));
@@ -190,11 +208,23 @@ public class AdminDao implements AdminService{
 			dto.setDept_name(rs.getString(6));
 			list.add(dto);
 		}
-		close();
+		}catch (Exception e) {e.printStackTrace();}
 		return list;
 	}
-
-
+	
+	//총 레코드 수 얻기용]
+	public int getadminTotalRecordCount(){
+		int total =0;
+		String sql="SELECT COUNT(*) FROM (SELECT T.*,ROWNUM R FROM (SELECT A.*,D.DEPT_NAME FROM AD A JOIN DEPT D ON A.DEPT_NO=D.DEPT_NO ORDER BY AD_REGIDATE DESC) T)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {e.printStackTrace();}
+		
+		return total;
+	}///////////////////getTotalRecordCount
 
 	@Override
 	public AdminDto selectAdminOne(String ad_id) throws Exception {

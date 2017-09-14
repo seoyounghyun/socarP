@@ -128,8 +128,13 @@
 	             </div><!-- /input-group -->
 	         </div><!-- /.box-body -->
 		   </div>
-	    <p>1 2 3 4 5 6 7 8 9</p>
-          <!--// 검색창  -->
+	    <!-- <p>1 2 3 4 5 6 7 8 9</p> -->
+          <!-- 페이징 -->
+		                      <table width="100%">
+		                        <tr align="center">
+		                          <td>${pagingString}</td>
+		                        </tr>
+		                      </table>
         
  		</div>
  	

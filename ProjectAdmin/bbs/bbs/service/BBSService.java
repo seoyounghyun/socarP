@@ -5,7 +5,7 @@ import java.util.List;
 public interface BBSService {
 
 	//리스트 받아오기
-	public List<NoticeDto> selectNoticeList() throws Exception;
+	public List<NoticeDto> selectNoticeList(int start,int end) throws Exception;
 	
 	//dto받아오기
 	public NoticeDto selectNoticeOne(String not_no) throws Exception;
@@ -25,7 +25,5 @@ public interface BBSService {
 	public int delete_RqLocList(String rql_code) throws Exception;
 	
 	public void close() throws Exception;
-
-	List<NoticeDto> selectNoticeList(int start, int end);
 	
 }

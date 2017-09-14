@@ -267,11 +267,6 @@ public class BbsDao implements BBSService {
 
 
 
-			@Override
-			public List<NoticeDto> selectNoticeList() throws Exception {
-				// TODO Auto-generated method stub
-				return null;
-			}
 
 	
 }
