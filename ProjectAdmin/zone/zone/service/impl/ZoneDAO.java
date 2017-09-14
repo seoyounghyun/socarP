@@ -33,11 +33,18 @@ public class ZoneDAO implements ZoneService{
 		}
 	}/////////////////////////ZoneDAO()
 	
-	public List<ZoneDTO> selectList() throws Exception{
+	public List<ZoneDTO> selectList(int start,int end){
+		
+		/*String sql = "SELECT S.*,(SELECT COUNT(*) FROM CAR_ISSUE C WHERE C.SOZ_CODE=S.SOZ_CODE AND (SELECT COUNT(*) FROM CAR_WASTE CW WHERE CW.CAR_I_CODE=C.CAR_I_CODE)=0) AS COUNT FROM SO_ZONE S ORDER BY SOZ_CODE DESC";*/
+		String sql = "SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT S.*,"
+				+ "(SELECT COUNT(*) FROM CAR_ISSUE C WHERE C.SOZ_CODE=S.SOZ_CODE AND "
+				+ "(SELECT COUNT(*) FROM CAR_WASTE CW WHERE CW.CAR_I_CODE=C.CAR_I_CODE)=0)"
+				+ " AS COUNT FROM SO_ZONE S ORDER BY SOZ_CODE DESC) T) WHERE R BETWEEN ? AND ?";
 		List<ZoneDTO> list = new Vector<ZoneDTO>();
-		String sql = "SELECT S.*,(SELECT COUNT(*) FROM CAR_ISSUE C WHERE C.SOZ_CODE=S.SOZ_CODE AND (SELECT COUNT(*) FROM CAR_WASTE CW WHERE CW.CAR_I_CODE=C.CAR_I_CODE)=0) AS COUNT FROM SO_ZONE S ORDER BY SOZ_CODE DESC";
 		try{
 			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, start);
+			psmt.setInt(2, end);
 			rs = psmt.executeQuery();
 			while(rs.next()){
 				ZoneDTO dto = new ZoneDTO();
@@ -148,5 +155,19 @@ public class ZoneDAO implements ZoneService{
 		if(psmt!=null) psmt.close();
 		if(rs!=null) rs.close();
 	}
+	
+	//총 레코드 수 얻기용]
+		public int getTotalRecordCount(){
+			int total =0;
+			String sql="SELECT COUNT(*) FROM SO_ZONE";
+			try {
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				rs.next();
+				total = rs.getInt(1);
+			} catch (SQLException e) {e.printStackTrace();}
+			
+			return total;
+		}///////////////////getTotalRecordCount
 	
 }

@@ -9,7 +9,7 @@ public interface CouponService {
 	//쿠폰 관련 메소드
 	public int insertCoupon(CouponDto dto) throws Exception;
 	
-	public List<CouponDto> couponList() throws Exception;
+	public List<CouponDto> couponList(int start,int end) throws Exception;
 	
 	public CouponDto selectOneCoupon(String cou_code) throws Exception; 
 	

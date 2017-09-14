@@ -36,11 +36,13 @@ public class CarDAO implements CarService{
 		}
 	}/////////////////////////CarDAO()
 	
-	public List<CarDTO> selectList() throws Exception{
+	public List<CarDTO> selectList(int start,int end){
 		List<CarDTO> list = new Vector();
-		String sql = "SELECT * FROM CAR ORDER BY CAR_NAME_CODE DESC";
+		String sql = "SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT * FROM CAR ORDER BY CAR_NAME_CODE DESC) T) WHERE R BETWEEN ? AND ?";
 		try {
 		psmt = conn.prepareStatement(sql);
+		psmt.setInt(1, start);
+		psmt.setInt(2, end);
 		rs = psmt.executeQuery();
 		while(rs.next()){
 			CarDTO dto = new CarDTO();
@@ -67,6 +69,20 @@ public class CarDAO implements CarService{
 		
 		return list;
 	}/////////////////////////////////////////selectList()
+	
+	//총 레코드 수 얻기용]
+		public int getCarListTotalRecordCount(){
+			int total =0;
+			String sql="SELECT COUNT(*) FROM CAR";
+			try {
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				rs.next();
+				total = rs.getInt(1);
+			} catch (SQLException e) {e.printStackTrace();}
+			
+			return total;
+		}///////////////////getTotalRecordCount
 	
 	public CarDTO selectOne(String car_name_code) throws Exception {
 		CarDTO dto = new CarDTO();
@@ -174,26 +190,43 @@ public class CarDAO implements CarService{
 		return affected;
 	}
 	
-	public List<Car_ModelDto> selectCar_TypeList() throws Exception{
+	public List<Car_ModelDto> selectCar_TypeList(int start,int end){
 		
-		String sql = "SELECT * FROM CAR_MODEL";
+		String sql = "SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT * FROM CAR_MODEL) T) WHERE R BETWEEN ? AND ?";
 		List<Car_ModelDto> list = new Vector<Car_ModelDto>();
+		try {
 		psmt = conn.prepareStatement(sql);
+		psmt.setInt(1, start);
+		psmt.setInt(2, end);
 		rs = psmt.executeQuery();
+		
 		while(rs.next()) {
 			Car_ModelDto dto = new Car_ModelDto();
-			
 			dto.setCar_type_code(rs.getString(1));
 			dto.setCar_type(rs.getString(2));
 			dto.setCar_insurance_one_hour(rs.getString(3));
 			dto.setCar_insurance_one_day(rs.getString(4));
 			dto.setCar_insurance_two_hour(rs.getString(5));
 			dto.setCar_insurance_two_day(rs.getString(6));
-			
 			list.add(dto);
 		}
+		}catch (Exception e) {e.printStackTrace();}
 		return list;
 	}
+	
+	//총 레코드 수 얻기용]
+		public int getCarTyTotalRecordCount(){
+			int total =0;
+			String sql="SELECT COUNT(*) FROM CAR_MODEL";
+			try {
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				rs.next();
+				total = rs.getInt(1);
+			} catch (SQLException e) {e.printStackTrace();}
+			
+			return total;
+		}///////////////////getTotalRecordCount
 
 	@Override
 	public void close() throws Exception {
@@ -288,10 +321,13 @@ public class CarDAO implements CarService{
 	}
 
 	@Override
-	public List<Car_WasteDTO> car_waste_list() throws Exception {
+	public List<Car_WasteDTO> car_waste_list(int start,int end){
 		List<Car_WasteDTO> list = new Vector<Car_WasteDTO>();
-		String sql="SELECT * FROM CAR_WASTE";
+		String sql="SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT * FROM CAR_WASTE) T) WHERE R BETWEEN ? AND ?";
+		try {
 		psmt = conn.prepareStatement(sql);
+		psmt.setInt(1, start);
+		psmt.setInt(2, end);
 		rs = psmt.executeQuery();
 		while(rs.next()){
 			Car_WasteDTO dto = new Car_WasteDTO();
@@ -300,8 +336,24 @@ public class CarDAO implements CarService{
 			dto.setCar_w_reason(rs.getString(3));
 			list.add(dto);
 		}
+		}catch (Exception e) {e.printStackTrace();
+		}
 		return list;
 	}
+	
+	//총 레코드 수 얻기용]
+		public int getWasteTotalRecordCount(){
+			int total =0;
+			String sql="SELECT COUNT(*) FROM CAR_WASTE";
+			try {
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				rs.next();
+				total = rs.getInt(1);
+			} catch (SQLException e) {e.printStackTrace();}
+			
+			return total;
+		}///////////////////getTotalRecordCount
 
 	@Override
 	public Car_WasteDTO car_waste_view(String car_i_code) throws Exception {

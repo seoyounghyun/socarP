@@ -23,7 +23,7 @@ public class CouponCreateController extends HttpServlet {
 			CouponDao dao = new CouponDao(req.getServletContext());
 			List<CouponDto> list = null;
 			try {
-				list = dao.couponList();
+				list = dao.couponList(1,2);
 			} catch (Exception e) {e.printStackTrace();}
 		
 			req.setAttribute("list", list);

@@ -8,14 +8,14 @@ public interface MemberService {
 	public int login(AdDto dto) throws Exception;
 	
 	//SimpleMember관련 메소드들
-	public List<SimpleMemDto> selectSimpleMemlist() throws Exception;
+	public List<SimpleMemDto> selectSimpleMemlist(int start,int end) throws Exception;
 	
 	public SimpleMemDto selectSimpleMemOne(String smem_id) throws Exception;
 	
 	public int updateSmemPwd(String smem_id,String smem_pwd) throws Exception;
 	
 	//Member 관련 메소드들
-	public List<MemDto> selectMemList() throws Exception;
+	public List<MemDto> selectMemList(int start,int end) throws Exception;
 	
 	public MemDto selectMemOne(String smem_id) throws Exception;
 	
@@ -25,11 +25,11 @@ public interface MemberService {
 	//Membership관련 메소드
 	public int insertPoint(String smem_id,int point) throws Exception;
 	
-	public List<MembershipDto> selectMembershipList() throws Exception;
+	public List<MembershipDto> selectMembershipList(int start,int end) throws Exception;
 	
 
 	//Card관련 메소드
-	public List<CardDto> selectCardList(String smem_id) throws Exception;	
+	public List<CardDto> selectCardList(String smem_id,int start,int end) throws Exception;	
 	
 	public List<MemDto> searchCardList(String mem , String where) throws Exception;
 	

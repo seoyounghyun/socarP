@@ -3,6 +3,7 @@ package member.service.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
@@ -65,29 +66,46 @@ public class MemberDao implements MemberService {
 	}///////////////////////////////////////////////////////
 
 	@Override
-	public List<SimpleMemDto> selectSimpleMemlist() throws Exception {
+	public List<SimpleMemDto> selectSimpleMemlist(int start,int end){
+		/*String sql = "SELECT * FROM SIMPLE_MEM S WHERE NOT (SELECT COUNT(*) FROM MEM M WHERE M.SMEM_ID=S.SMEM_ID)=1";*/
+		String sql = "SELECT * FROM (SELECT T.*,ROWNUM R FROM "
+				+ "(SELECT * FROM SIMPLE_MEM S WHERE NOT "
+				+ "(SELECT COUNT(*) FROM MEM M WHERE M.SMEM_ID=S.SMEM_ID)=1) T) "
+				+ "WHERE R BETWEEN ? AND ?";
 		
-		String sql = "SELECT * FROM SIMPLE_MEM S WHERE NOT (SELECT COUNT(*) FROM MEM M WHERE M.SMEM_ID=S.SMEM_ID)=1";
-
 		List<SimpleMemDto> list = new Vector<SimpleMemDto>();
-		psmt = conn.prepareStatement(sql);
-		rs = psmt.executeQuery();
-		while(rs.next()){
-			SimpleMemDto dto = new SimpleMemDto();
-			dto.setSmem_id(rs.getString(1));
-			dto.setSmem_name(rs.getString(2));
-			dto.setSmem_tel(rs.getString(3));
-			dto.setSmem_pwd(rs.getString(4));
-			dto.setSmem_date(rs.getDate(5));			
-			
-			
-			list.add(dto);
-		}
-		
-		close();
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, start);
+			psmt.setInt(2, end);
+			rs = psmt.executeQuery();
+			while(rs.next()){
+				SimpleMemDto dto = new SimpleMemDto();
+				dto.setSmem_id(rs.getString(1));
+				dto.setSmem_name(rs.getString(2));
+				dto.setSmem_tel(rs.getString(3));
+				dto.setSmem_pwd(rs.getString(4));
+				dto.setSmem_date(rs.getDate(5));			
+				list.add(dto);
+			}
+		} catch (Exception e) {e.printStackTrace();}
 		
 		return list;
 	}/////////////////////////////////////////////////////////////
+	
+	//총 레코드 수 얻기용] 기본 회원관리
+		public int getMemTotalRecordCount(){
+			int total =0;
+			String sql="SELECT COUNT(*) FROM SIMPLE_MEM";
+			try {
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				rs.next();
+				total = rs.getInt(1);
+			} catch (SQLException e) {e.printStackTrace();}
+			
+			return total;
+		}///////////////////getTotalRecordCount
 	
 	@Override
 	public SimpleMemDto selectSimpleMemOne(String smem_id) throws Exception {
@@ -115,39 +133,52 @@ public class MemberDao implements MemberService {
 	}//////////////////////////////////////////////////////////////////////
 
 	@Override
-	public List<MemDto> selectMemList() throws Exception {
+	public List<MemDto> selectMemList(int start,int end){
 		List<MemDto> list = new Vector<MemDto>();
-		
-		String sql = "SELECT * FROM MEM M JOIN SIMPLE_MEM S ON M.SMEM_ID = S.SMEM_ID ";
-		
-		psmt = conn.prepareStatement(sql);
-		rs = psmt.executeQuery();
-		
-		while(rs.next()){
-			MemDto dto = new MemDto();
-			dto.setSmem_id(rs.getString(1));
-			dto.setMem_addr(rs.getString(2));
-			dto.setMem_mainarea(rs.getString(3));
-			dto.setMem_birth(rs.getString(4));
-			dto.setMem_gender(rs.getString(5));
-			dto.setMem_date(rs.getDate(6));
-			dto.setMem_c_type(rs.getString(7));
-			dto.setMem_c_num(rs.getString(8));
-			dto.setMem_c_expdate(rs.getDate(9));
-			dto.setMem_c_idate(rs.getDate(10));
-			dto.setSmem_name(rs.getString(12));
-			dto.setSmem_tel(rs.getString(13));
-			dto.setSmem_pwd(rs.getString(14));
-			dto.setSmem_date(rs.getString(15));
+		/*String sql = "SELECT * FROM MEM M JOIN SIMPLE_MEM S ON M.SMEM_ID = S.SMEM_ID ";*/
+		String sql = "SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT * FROM MEM M JOIN SIMPLE_MEM S ON M.SMEM_ID = S.SMEM_ID) T) WHERE R BETWEEN ? AND ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
 			
-			list.add(dto);
-		}
-		
-		close();
-		
-		return list;
+			while(rs.next()){
+				MemDto dto = new MemDto();
+				dto.setSmem_id(rs.getString(1));
+				dto.setMem_addr(rs.getString(2));
+				dto.setMem_mainarea(rs.getString(3));
+				dto.setMem_birth(rs.getString(4));
+				dto.setMem_gender(rs.getString(5));
+				dto.setMem_date(rs.getDate(6));
+				dto.setMem_c_type(rs.getString(7));
+				dto.setMem_c_num(rs.getString(8));
+				dto.setMem_c_expdate(rs.getDate(9));
+				dto.setMem_c_idate(rs.getDate(10));
+				dto.setSmem_name(rs.getString(12));
+				dto.setSmem_tel(rs.getString(13));
+				dto.setSmem_pwd(rs.getString(14));
+				dto.setSmem_date(rs.getString(15));
+				list.add(dto);
+			}
+			} catch (Exception e) {e.printStackTrace();
+			}
+			return list;
 	}////////////////////////////////////////////////////////////////////////
 
+	//총 레코드 수 얻기용] SO회원관리
+			public int getSOTotalRecordCount(){
+				int total =0;
+				String sql="SELECT COUNT(*) FROM MEM";
+				try {
+					psmt = conn.prepareStatement(sql);
+					rs = psmt.executeQuery();
+					rs.next();
+					total = rs.getInt(1);
+				} catch (SQLException e) {e.printStackTrace();}
+				
+				return total;
+			}///////////////////getTotalRecordCount
+	
+	
 	@Override
 	public MemDto selectMemOne(String smem_id) throws Exception {
 		
@@ -189,26 +220,40 @@ public class MemberDao implements MemberService {
 
 	
 	@Override
-	public List<MembershipDto> selectMembershipList() throws Exception {
-		String sql = "SELECT * FROM MEMBERSHIP ORDER BY MS_DATE DESC";
+	public List<MembershipDto> selectMembershipList(int start,int end){
+		//String sql = "SELECT * FROM MEMBERSHIP ORDER BY MS_DATE DESC";
+		String sql = "SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT * FROM MEMBERSHIP ORDER BY MS_DATE DESC) T) WHERE R BETWEEN ? AND ?";
 		List<MembershipDto> list = new Vector<MembershipDto>();
+		try {
 		psmt = conn.prepareStatement(sql);
-		
+		psmt.setInt(1, start);
+		psmt.setInt(2, end);
 		rs = psmt.executeQuery();
 		while(rs.next()){
-		MembershipDto dto = new MembershipDto();
-			
+			MembershipDto dto = new MembershipDto();
 			dto.setMs_code(rs.getString(1));
 			dto.setSmem_id(rs.getString(2));
 			dto.setMs_change(rs.getString(3));
 			dto.setMs_date(rs.getDate(4));
-			
 			list.add(dto);
 		}
-		close();
+		}catch (Exception e) {e.printStackTrace();}
 		return list;
 	}
 	
+	//총 레코드 수 얻기용]
+		public int getShipTotalRecordCount(){
+			int total =0;
+			String sql="SELECT COUNT(*) FROM MEMBERSHIP";
+			try {
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				rs.next();
+				total = rs.getInt(1);
+			} catch (SQLException e) {e.printStackTrace();}
+			
+			return total;
+		}///////////////////getTotalRecordCount
 	
 	@Override
 	public int insertPoint(String smem_id, int point) throws Exception {
@@ -276,17 +321,20 @@ public class MemberDao implements MemberService {
 	}//////////////////////////////////////////////멤버 정보 변경
 
 	@Override
-	public List<CardDto> selectCardList(String smem_id) throws Exception {
+	public List<CardDto> selectCardList(String smem_id,int start,int end){
 		
 		List<CardDto> list = new Vector<CardDto>();
-		String sql="SELECT * FROM CARD ";
+		String sql="SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT * FROM CARD ";
 		
 		if(smem_id!=null){
 			sql += " WHERE SMEM_ID='"+smem_id+"' ";
 		}
-		sql += "ORDER BY CARD_CREATEDATE DESC";
+		sql += "ORDER BY CARD_CREATEDATE DESC) T) WHERE R BETWEEN ? AND ?";
 		
+		try {
 		psmt = conn.prepareStatement(sql);
+		psmt.setInt(1, start);
+		psmt.setInt(2, end);
 		rs = psmt.executeQuery();
 		while(rs.next()){
 			CardDto dto = new CardDto();
@@ -299,10 +347,26 @@ public class MemberDao implements MemberService {
 			dto.setCard_createdate(rs.getDate(7));
 			list.add(dto);
 		}
+		}catch (Exception e) {e.printStackTrace();}
 		
 		return list;
 	}//////////////////selectCardList();
 
+	//총 레코드 수 얻기용]
+		public int getCardTotalRecordCount(){
+			int total =0;
+			String sql="SELECT COUNT(*) FROM CARD";
+			try {
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				rs.next();
+				total = rs.getInt(1);
+			} catch (SQLException e) {e.printStackTrace();}
+			
+			return total;
+		}///////////////////getTotalRecordCount
+	
+	
 	@Override
 	public List<MemDto> searchCardList(String mem, String where) throws Exception {
 		String sql= "SELECT * FROM MEM M JOIN SIMPLE_MEM S ON M.SMEM_ID = S.SMEM_ID WHERE S."+where+"='"+mem+"'";

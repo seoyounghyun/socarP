@@ -20,7 +20,7 @@ public class FindMemberController extends HttpServlet {
 		MemberDao dao = new MemberDao(req.getServletContext());
 		List<MemDto> list = null;
 		try {
-			list = dao.selectMemList();
+			list = dao.selectMemList(1,2);
 		} catch (Exception e) {e.printStackTrace();}
 		
 		req.setAttribute("list", list);
@@ -36,7 +36,7 @@ public class FindMemberController extends HttpServlet {
 		int point = 0;
 		String op = "";
 		
-		try {list = dao.selectCardList(req.getParameter("smem_id"));
+		try {list = dao.selectCardList(req.getParameter("smem_id"),1,2);
 			point = dao.selectMemOne(req.getParameter("smem_id")).getMs_change();
 		} catch (Exception e) {e.printStackTrace();
 		e.getMessage();

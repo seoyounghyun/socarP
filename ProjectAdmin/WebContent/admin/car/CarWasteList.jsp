@@ -47,7 +47,7 @@
    
    		<div class="container">
           <h2 id="tables-contextual-classes">
-            	차량 리스트
+            	폐기차량 리스트
           </h2><br/><br/>
           <div class="input-group-btn">
                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> -- <span class="fa fa-caret-down"></span></button>
@@ -111,7 +111,13 @@
              </div><!-- /input-group -->
          </div><!-- /.box-body -->
 	   </div>
-          <p style="font-size: 1.3em">1 2 3 4 5 6 7 8 9</p>
+           <!-- <p>1 2 3 4 5 6 7 8 9</p> -->
+          <!-- 페이징 -->
+		                      <table width="100%">
+		                        <tr align="center">
+		                          <td>${pagingString}</td>
+		                        </tr>
+		                      </table>
  		</div>
 
 
