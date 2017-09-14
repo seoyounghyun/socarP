@@ -4,7 +4,7 @@
 		<!-- header -->
 	<div id="header-wrapper">
 	<div id="header">
-		<h1><a href=https://www.socar.kr/><img width="80" src='//web-assets.socar.kr/template/asset/images/common/header_logo.png?v=20160823' alt="SOCAR" /></a></h1>
+		<h1><a href="<c:url value='/Main/Main.do' />"/><img width="80" src='//web-assets.socar.kr/template/asset/images/common/header_logo.png?v=20160823' alt="SOCAR" /></a></h1>
 
 		<ul class="gnb">
 		<li><a href=<c:url value='/Guide/Guide.do' /> class="gnb1" title="서비스안내">서비스안내</a></li>

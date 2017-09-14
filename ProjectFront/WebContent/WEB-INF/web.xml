@@ -67,7 +67,7 @@
 
   <welcome-file-list>
   	<!-- 답변형 게시판 이동용 시작 문서 설정 -->
-  	<welcome-file>/WEB-INF/view/main/Main.jsp</welcome-file>
+  	<welcome-file>/WEB-INF/index.jsp</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
