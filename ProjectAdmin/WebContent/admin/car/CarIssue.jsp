@@ -80,15 +80,13 @@
 		
 	};
 	</script>
+		
 	<script>
 	function goZone() {
 		location.href="<c:url value='/ZONE/View.do?soz_code=${param.soz_code}'/>";
 	}
-	</script>
-	
-	<script>
-	function goZone() {
-		location.href="<c:url value='/ZONE/View.do?soz_code=${param.soz_code}'/>";
+	function addCar(){
+		location.href="<c:url value='/CAR/CarAdd.do?soz_code=${param.soz_code}'/>"
 	}
 	
 	
@@ -202,6 +200,7 @@
 					      	  				</c:choose>
 					      	  			</select>
 								        </div>
+								        <button type="button" class="btn btn-info" onclick="addCar()">차량등록</button>
 								    </td>
 					      	  </tr>
 					      	  <tr>
