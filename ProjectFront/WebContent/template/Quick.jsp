@@ -27,5 +27,5 @@
 	}
 </style>
 
-<div class="aside_more"><img src='//web-assets.socar.kr/template/asset/images/common/banner_more.png' alt="더보기" />
+<div class="aside_more"><img src='${pageContext.request.contextPath}/template/image/banner_more.png' alt="더보기" />
 </div>

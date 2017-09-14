@@ -21,7 +21,7 @@
 		<div class="util">
 				
 					<ul>
-					<li><a href=https://www.socar.kr/user/login class="util1" title="로그인">로그인</a></li>
+					<li><a href="https://www.socar.kr/user/login" class="util1" title="로그인">로그인</a></li>
 					<li><a href=<c:url value="/Join/Join.do" /> class="util2" title="회원가입">회원가입</a></li>
 					</ul>
 				
